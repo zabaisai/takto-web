@@ -36,6 +36,7 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: site.name,
   alternates: { canonical: "/" },
+  // En beta: noindex + nofollow explícitos, sin excepciones.
   robots: allowIndexing
     ? { index: true, follow: true }
     : { index: false, follow: false, nocache: true },

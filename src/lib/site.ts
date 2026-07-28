@@ -36,10 +36,32 @@ export const crmOnboardingUrl =
   process.env.NEXT_PUBLIC_CRM_ONBOARDING_URL?.trim() || DEFAULT_ONBOARDING_URL;
 
 /**
- * En preview y staging debe emitirse `noindex`. Solo se indexa cuando la
- * variable vale explícitamente "true" (o no está definida en producción).
+ * Etapa del sitio.
+ *
+ * `beta` es el estado por defecto mientras falten datos societarios, canal
+ * comercial y paleta definitiva. En beta el sitio se ve y se navega igual,
+ * pero NO se indexa y lo declara discretamente en el pie.
+ *
+ * Pasar a producción es cambiar una variable: `NEXT_PUBLIC_SITE_STAGE=production`.
+ * Ningún componente necesita tocarse.
  */
-export const allowIndexing = process.env.NEXT_PUBLIC_ALLOW_INDEXING?.trim() !== "false";
+export type SiteStage = "beta" | "production";
+
+export const siteStage: SiteStage =
+  process.env.NEXT_PUBLIC_SITE_STAGE?.trim().toLowerCase() === "production"
+    ? "production"
+    : "beta";
+
+export const isBeta = siteStage === "beta";
+
+/**
+ * Solo se indexa en producción, y aun así se puede bloquear con
+ * `NEXT_PUBLIC_ALLOW_INDEXING=false` para previews.
+ *
+ * En beta nunca se indexa, pase lo que pase con la otra variable.
+ */
+export const allowIndexing =
+  siteStage === "production" && process.env.NEXT_PUBLIC_ALLOW_INDEXING?.trim() !== "false";
 
 export const brand = {
   /** Marca completa. */
