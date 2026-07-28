@@ -59,9 +59,11 @@ describe("WhatsappSection", () => {
     expect(text).not.toMatch(/cualquier número/i);
   });
 
-  it("condiciona la conservación del número a la modalidad de conexión", () => {
+  it("condiciona la conexión a la elegibilidad y configuración en Meta", () => {
     render(<WhatsappSection />);
-    expect(screen.getByText(/cuando la modalidad de conexión lo permita/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/dependen de la elegibilidad y configuración de la cuenta en Meta/i),
+    ).toBeInTheDocument();
   });
 });
 
