@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<title>Tehus CRM | Organiza WhatsApp, clientes y ventas</title>
+<meta name="description" content="Centraliza conversaciones de WhatsApp, organiza clientes, asigna asesores y administra el seguimiento comercial de tu empresa con Tehus CRM.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F8F5EF;color:#0B0E0F;font-family:'Instrument Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:#B7790B;text-decoration:none}
+a:hover{color:#0B0E0F}
+button,input,select,textarea{font:inherit}
+:focus-visible{outline:2px solid #B7790B;outline-offset:3px;border-radius:4px}
+@keyframes tRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes tPulse{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.9;transform:scale(1.35)}}
+@keyframes tSlideIn{0%{opacity:0;transform:translateX(14px)}12%,88%{opacity:1;transform:translateX(0)}100%{opacity:1;transform:translateX(0)}}
+@keyframes tStage{0%,22%{transform:translate(0,0)}33%,55%{transform:translate(0,0)}66%,100%{transform:translate(0,0)}}
+@keyframes tBell{0%,88%,100%{transform:rotate(0)}90%{transform:rotate(11deg)}94%{transform:rotate(-9deg)}97%{transform:rotate(4deg)}}
+@keyframes tSheen{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</helmet>
+
+<div style="max-width:100%;overflow:hidden">
+
+<header style="position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);background:rgba(248,245,239,.82);border-bottom:1px solid #E4E0D8">
+  <div style="max-width:1280px;margin:0 auto;padding:14px clamp(18px,4vw,44px);display:flex;align-items:center;gap:clamp(16px,3vw,40px)">
+    <a href="#top" style="display:flex;align-items:center;gap:10px;color:#0B0E0F">
+      <span style="width:32px;height:32px;border-radius:9px;background:linear-gradient(145deg,#1a1d1f,#0B0E0F);display:grid;place-items:center;box-shadow:0 2px 10px rgba(11,14,15,.28)">
+        <span style="width:13px;height:13px;border:2.5px solid #E5B94F;border-radius:50%;border-right-color:transparent;display:block"></span>
+      </span>
+      <span style="font:600 17px/1 Sora,sans-serif;letter-spacing:-.02em">Tehus<span style="color:#B7790B"> CRM</span></span>
+    </a>
+    <nav style="display:flex;flex-wrap:wrap;gap:clamp(10px,1.6vw,24px);margin-left:auto;font:500 14px/1 'Instrument Sans',sans-serif">
+      <a href="#producto" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">Producto</a>
+      <a href="#funciones" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">Funciones</a>
+      <a href="#whatsapp" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">WhatsApp</a>
+      <a href="#empresas" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">Empresas</a>
+      <a href="#seguridad" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">Seguridad</a>
+      <a href="#faq" style="color:#62676D;padding:8px 2px" style-hover="color:#0B0E0F">Preguntas frecuentes</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:12px">
+      <a href="#acceso" style="font:500 14px/1 'Instrument Sans',sans-serif;color:#0B0E0F;padding:10px 4px">Iniciar sesión</a>
+      <a href="#demo" style="font:600 14px/1 'Instrument Sans',sans-serif;color:#F8F5EF;background:#0B0E0F;padding:12px 18px;border-radius:10px;box-shadow:0 1px 0 rgba(229,185,79,.5) inset,0 6px 18px rgba(11,14,15,.18);transition:transform .18s ease,box-shadow .18s ease" style-hover="transform:translateY(-1px);box-shadow:0 1px 0 rgba(229,185,79,.9) inset,0 10px 26px rgba(11,14,15,.26);color:#FFFFFF">Solicitar demostración</a>
+    </div>
+  </div>
+</header>
+
+<section id="top" style="position:relative;padding:clamp(48px,6vw,92px) clamp(18px,4vw,44px) clamp(40px,5vw,72px);background:radial-gradient(1100px 520px at 78% -8%,rgba(229,185,79,.18),transparent 62%),radial-gradient(700px 420px at 8% 12%,rgba(255,255,255,.9),transparent 60%),#F8F5EF">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,4vw,56px);align-items:center">
+    <div style="animation:tRise .7s cubic-bezier(.2,.7,.2,1) both">
+      <span style="display:inline-flex;align-items:center;gap:8px;font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B;background:rgba(183,121,11,.09);border:1px solid rgba(183,121,11,.22);padding:8px 12px;border-radius:999px">
+        <span style="width:6px;height:6px;border-radius:50%;background:#25D366;display:block"></span>CRM para equipos que venden por WhatsApp
+      </span>
+      <h1 style="font:600 clamp(36px,5.2vw,66px)/1.04 Sora,sans-serif;letter-spacing:-.03em;margin:22px 0 0;text-wrap:balance">Convierte cada conversación en una <span style="color:#B7790B">oportunidad de venta</span></h1>
+      <p style="font:400 clamp(17px,1.35vw,20px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:20px 0 0;max-width:52ch;text-wrap:pretty">Centraliza WhatsApp, organiza tus clientes y ayuda a tu equipo comercial a hacer seguimiento desde un solo lugar.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:30px">
+        <a href="#demo" style="position:relative;overflow:hidden;font:600 15px/1 'Instrument Sans',sans-serif;color:#F8F5EF;background:#0B0E0F;padding:16px 26px;border-radius:12px;box-shadow:0 1px 0 rgba(229,185,79,.55) inset,0 10px 26px rgba(11,14,15,.2);transition:transform .18s ease" style-hover="transform:translateY(-2px);color:#FFFFFF">Solicitar una demostración</a>
+        <a href="#producto" style="font:600 15px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#FFFFFF;border:1px solid #E4E0D8;padding:16px 24px;border-radius:12px;transition:border-color .18s ease,transform .18s ease" style-hover="border-color:#B7790B;transform:translateY(-2px)">Ver cómo funciona</a>
+      </div>
+      <p style="font:500 13.5px/1.5 'Instrument Sans',sans-serif;color:#8A8F95;margin:18px 0 0">Configuración acompañada · Acceso por empresa · Soporte personalizado</p>
+    </div>
+
+    <div style="position:relative;min-height:clamp(380px,42vw,520px);animation:tRise .9s .12s cubic-bezier(.2,.7,.2,1) both">
+      <div style="position:absolute;inset:auto -2% 6% -2%;height:72%;background:radial-gradient(60% 60% at 50% 50%,rgba(183,121,11,.16),transparent 70%);filter:blur(6px)"></div>
+      <div style="position:relative;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:18px;box-shadow:0 30px 70px -24px rgba(11,14,15,.34),0 2px 6px rgba(11,14,15,.06);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid #EFEBE3;background:#FCFAF6">
+          <span style="width:9px;height:9px;border-radius:50%;background:#E4E0D8"></span>
+          <span style="width:9px;height:9px;border-radius:50%;background:#E4E0D8"></span>
+          <span style="width:9px;height:9px;border-radius:50%;background:#E4E0D8"></span>
+          <span style="margin-left:8px;font:500 11.5px/1 'JetBrains Mono',monospace;color:#8A8F95">app.tehuscrm.com / conversaciones</span>
+        </div>
+        <div style="display:grid;grid-template-columns:52px minmax(0,1fr) minmax(0,.9fr);min-height:clamp(300px,32vw,400px)">
+          <div style="background:#0B0E0F;display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px 0">
+            <span style="width:22px;height:22px;border-radius:7px;background:linear-gradient(145deg,#E5B94F,#B7790B)"></span>
+            <span style="width:20px;height:3px;border-radius:2px;background:#E5B94F"></span>
+            <span style="width:20px;height:3px;border-radius:2px;background:rgba(248,245,239,.28)"></span>
+            <span style="width:20px;height:3px;border-radius:2px;background:rgba(248,245,239,.28)"></span>
+            <span style="width:20px;height:3px;border-radius:2px;background:rgba(248,245,239,.28)"></span>
+            <span style="width:20px;height:3px;border-radius:2px;background:rgba(248,245,239,.28)"></span>
+          </div>
+          <div style="border-right:1px solid #EFEBE3;padding:14px 12px;display:flex;flex-direction:column;gap:9px;min-width:0">
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <span style="font:600 13px/1 Sora,sans-serif">Conversaciones</span>
+              <span style="font:600 10.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.16);padding:5px 8px;border-radius:999px">3 nuevas</span>
+            </div>
+            <div style="background:#FCFAF6;border:1px solid #E4E0D8;border-radius:11px;padding:10px;display:flex;gap:9px;box-shadow:0 6px 16px -10px rgba(11,14,15,.3)">
+              <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 11px/28px 'Instrument Sans',sans-serif;text-align:center">MG</span>
+              <span style="min-width:0;flex:1">
+                <span style="display:flex;justify-content:space-between;gap:6px"><b style="font:600 12.5px/1.2 'Instrument Sans',sans-serif">María Gómez</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">10:24</i></span>
+                <span style="display:block;font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">¿Me confirmas el precio de las 20 sillas?</span>
+                <span style="display:inline-block;margin-top:5px;font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:4px 6px;border-radius:5px">Asesor · Camilo R.</span>
+              </span>
+            </div>
+            <div style="border:1px solid #EFEBE3;border-radius:11px;padding:10px;display:flex;gap:9px">
+              <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 11px/28px 'Instrument Sans',sans-serif;text-align:center">JT</span>
+              <span style="min-width:0;flex:1">
+                <span style="display:flex;justify-content:space-between;gap:6px"><b style="font:600 12.5px/1.2 'Instrument Sans',sans-serif">Jorge Torres</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">09:58</i></span>
+                <span style="display:block;font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Quedo atento a la cotización</span>
+              </span>
+            </div>
+            <div style="border:1px solid #EFEBE3;border-radius:11px;padding:10px;display:flex;gap:9px;opacity:.75">
+              <span style="flex:none;width:28px;height:28px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 11px/28px 'Instrument Sans',sans-serif;text-align:center">AL</span>
+              <span style="min-width:0;flex:1">
+                <span style="display:flex;justify-content:space-between;gap:6px"><b style="font:600 12.5px/1.2 'Instrument Sans',sans-serif">Ana López</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">Ayer</i></span>
+                <span style="display:block;font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Gracias, lo reviso con el equipo</span>
+              </span>
+            </div>
+          </div>
+          <div style="padding:14px 13px;display:flex;flex-direction:column;gap:10px;min-width:0;background:#FCFAF6">
+            <div style="display:flex;align-items:center;gap:9px">
+              <span style="flex:none;width:30px;height:30px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 11px/30px 'Instrument Sans',sans-serif;text-align:center">MG</span>
+              <span style="min-width:0"><b style="display:block;font:600 13px/1.2 Sora,sans-serif">María Gómez</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Distribuciones del Valle</i></span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:11px;padding:11px">
+              <span style="display:block;font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Oportunidad</span>
+              <span style="display:block;font:600 13.5px/1.3 Sora,sans-serif;margin-top:6px">Dotación oficina · 20 sillas</span>
+              <span style="display:flex;align-items:center;justify-content:space-between;margin-top:9px">
+                <i style="font:600 12px/1 'JetBrains Mono',monospace;color:#0B0E0F;font-style:normal">$ 8.400.000</i>
+                <i style="font:600 10px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:5px 7px;border-radius:6px;font-style:normal">Cotización</i>
+              </span>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:11px;padding:11px">
+              <span style="display:block;font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Próxima tarea</span>
+              <span style="display:flex;align-items:center;gap:8px;margin-top:7px">
+                <span style="width:7px;height:7px;border-radius:50%;background:#B7790B;flex:none;animation:tPulse 2.6s ease-in-out infinite"></span>
+                <b style="font:500 12.5px/1.35 'Instrument Sans',sans-serif">Enviar cotización · hoy 4:00 p.m.</b>
+              </span>
+            </div>
+            <div style="margin-top:auto;display:flex;gap:5px;align-items:flex-end">
+              <span style="flex:1;height:26px;border-radius:5px 5px 0 0;background:#E4E0D8"></span>
+              <span style="flex:1;height:40px;border-radius:5px 5px 0 0;background:#E4E0D8"></span>
+              <span style="flex:1;height:33px;border-radius:5px 5px 0 0;background:#E5B94F"></span>
+              <span style="flex:1;height:52px;border-radius:5px 5px 0 0;background:#B7790B"></span>
+              <span style="flex:1;height:44px;border-radius:5px 5px 0 0;background:#E4E0D8"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:absolute;top:-3%;right:-1%;width:min(255px,72%);background:#FFFFFF;border:1px solid #E4E0D8;border-radius:14px;padding:12px;box-shadow:0 22px 46px -18px rgba(11,14,15,.36);animation:tFloat 6.5s ease-in-out infinite">
+        <div style="display:flex;align-items:center;gap:9px">
+          <span style="width:26px;height:26px;border-radius:8px;background:rgba(37,211,102,.14);display:grid;place-items:center"><span style="width:10px;height:10px;border-radius:50%;background:#25D366"></span></span>
+          <b style="font:600 12px/1.2 'Instrument Sans',sans-serif">Nueva conversación</b>
+        </div>
+        <p style="margin:8px 0 0;font:400 11.5px/1.45 'Instrument Sans',sans-serif;color:#62676D">WhatsApp Business · asignada a <b style="color:#0B0E0F">Camilo R.</b></p>
+      </div>
+
+      <div style="position:absolute;bottom:2%;left:-1%;width:min(230px,66%);background:#0B0E0F;color:#F8F5EF;border-radius:14px;padding:12px 13px;box-shadow:0 22px 46px -18px rgba(11,14,15,.5);animation:tFloat 7.8s .7s ease-in-out infinite">
+        <span style="display:block;font:600 9.5px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#E5B94F">Pipeline</span>
+        <div style="display:flex;gap:6px;margin-top:9px">
+          <span style="flex:1;height:5px;border-radius:3px;background:#E5B94F"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:#B7790B"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:rgba(248,245,239,.22)"></span>
+          <span style="flex:1;height:5px;border-radius:3px;background:rgba(248,245,239,.22)"></span>
+        </div>
+        <p style="margin:9px 0 0;font:500 11.5px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.72)">Oportunidad movida a <b style="color:#FFFFFF">Negociación</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ showValueStrip }}" hint-placeholder-val="{{ true }}">
+<section style="padding:0 clamp(18px,4vw,44px) clamp(48px,5vw,80px)">
+  <div style="max-width:1280px;margin:0 auto;border-top:1px solid #E4E0D8;border-bottom:1px solid #E4E0D8;padding:22px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:18px">
+    <div style="display:flex;align-items:center;gap:10px;padding:0 clamp(0px,1vw,14px)"><span style="width:8px;height:8px;border:2px solid #B7790B;border-radius:50%;flex:none"></span><b style="font:500 14.5px/1.3 'Instrument Sans',sans-serif;color:#0B0E0F">Conversaciones organizadas</b></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:0 clamp(0px,1vw,14px)"><span style="width:8px;height:8px;border:2px solid #B7790B;border-radius:50%;flex:none"></span><b style="font:500 14.5px/1.3 'Instrument Sans',sans-serif;color:#0B0E0F">Seguimiento comercial</b></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:0 clamp(0px,1vw,14px)"><span style="width:8px;height:8px;border:2px solid #B7790B;border-radius:50%;flex:none"></span><b style="font:500 14.5px/1.3 'Instrument Sans',sans-serif;color:#0B0E0F">Asesores coordinados</b></div>
+    <div style="display:flex;align-items:center;gap:10px;padding:0 clamp(0px,1vw,14px)"><span style="width:8px;height:8px;border:2px solid #B7790B;border-radius:50%;flex:none"></span><b style="font:500 14.5px/1.3 'Instrument Sans',sans-serif;color:#0B0E0F">Información centralizada</b></div>
+  </div>
+</section>
+</sc-if>
+
+<section id="producto" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-top:1px solid #E4E0D8;border-bottom:1px solid #E4E0D8">
+  <div style="max-width:1080px;margin:0 auto">
+    <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">El problema</span>
+    <h2 style="font:600 clamp(28px,3.7vw,50px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;max-width:24ch;text-wrap:balance">Vender por WhatsApp no debería significar trabajar en desorden</h2>
+  </div>
+  <div style="max-width:1240px;margin:clamp(34px,4vw,54px) auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px">
+    <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:16px;padding:22px;transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(11,14,15,.3)">
+      <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">01</span>
+      <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:12px 0 0">Conversaciones repartidas entre teléfonos</h3>
+      <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Cada asesor tiene su propio chat y la empresa no ve el historial completo.</p>
+    </div>
+    <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:16px;padding:22px;transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(11,14,15,.3)">
+      <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">02</span>
+      <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:12px 0 0">Clientes sin seguimiento</h3>
+      <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Un prospecto pregunta, nadie vuelve a escribirle y la venta se enfría.</p>
+    </div>
+    <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:16px;padding:22px;transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(11,14,15,.3)">
+      <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">03</span>
+      <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:12px 0 0">Asesores sin claridad</h3>
+      <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">No saben a quién deben atender primero ni cuál es el siguiente paso.</p>
+    </div>
+    <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:16px;padding:22px;transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:translateY(-3px);box-shadow:0 18px 34px -22px rgba(11,14,15,.3)">
+      <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">04</span>
+      <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:12px 0 0">Información difícil de consultar</h3>
+      <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Los datos comerciales viven en notas, hojas de cálculo y memoria.</p>
+    </div>
+  </div>
+
+  <div style="max-width:1240px;margin:clamp(32px,4vw,52px) auto 0;background:#0B0E0F;border-radius:20px;padding:clamp(24px,3vw,40px);color:#F8F5EF">
+    <p style="font:500 clamp(17px,1.7vw,23px)/1.5 Sora,sans-serif;margin:0;max-width:58ch;text-wrap:pretty">Tehus CRM reúne el proceso comercial para que cada contacto, mensaje, tarea y oportunidad tenga un <span style="color:#E5B94F">responsable</span> y un <span style="color:#E5B94F">siguiente paso</span>.</p>
+    <div style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:14px">
+      <div style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:18px">
+        <span style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,239,.5)">Antes</span>
+        <ul style="margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+          <li style="display:flex;gap:10px;align-items:center;font:400 14.5px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.62)"><span style="width:14px;height:1.5px;background:rgba(248,245,239,.35);flex:none"></span>Chats dispersos</li>
+          <li style="display:flex;gap:10px;align-items:center;font:400 14.5px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.62)"><span style="width:14px;height:1.5px;background:rgba(248,245,239,.35);flex:none"></span>Notas manuales</li>
+          <li style="display:flex;gap:10px;align-items:center;font:400 14.5px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.62)"><span style="width:14px;height:1.5px;background:rgba(248,245,239,.35);flex:none"></span>Prospectos olvidados</li>
+          <li style="display:flex;gap:10px;align-items:center;font:400 14.5px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.62)"><span style="width:14px;height:1.5px;background:rgba(248,245,239,.35);flex:none"></span>Poca visibilidad</li>
+        </ul>
+      </div>
+      <div style="border:1px solid rgba(229,185,79,.4);background:linear-gradient(160deg,rgba(229,185,79,.13),rgba(229,185,79,.02));border-radius:14px;padding:18px">
+        <span style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#E5B94F">Con Tehus CRM</span>
+        <ul style="margin:14px 0 0;padding:0;list-style:none;display:grid;gap:10px">
+          <li style="display:flex;gap:10px;align-items:center;font:500 14.5px/1.4 'Instrument Sans',sans-serif;color:#FFFFFF"><span style="width:16px;height:16px;border-radius:50%;background:rgba(229,185,79,.2);color:#E5B94F;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center;flex:none">✓</span>Conversaciones centralizadas</li>
+          <li style="display:flex;gap:10px;align-items:center;font:500 14.5px/1.4 'Instrument Sans',sans-serif;color:#FFFFFF"><span style="width:16px;height:16px;border-radius:50%;background:rgba(229,185,79,.2);color:#E5B94F;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center;flex:none">✓</span>Clientes organizados</li>
+          <li style="display:flex;gap:10px;align-items:center;font:500 14.5px/1.4 'Instrument Sans',sans-serif;color:#FFFFFF"><span style="width:16px;height:16px;border-radius:50%;background:rgba(229,185,79,.2);color:#E5B94F;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center;flex:none">✓</span>Tareas programadas</li>
+          <li style="display:flex;gap:10px;align-items:center;font:500 14.5px/1.4 'Instrument Sans',sans-serif;color:#FFFFFF"><span style="width:16px;height:16px;border-radius:50%;background:rgba(229,185,79,.2);color:#E5B94F;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center;flex:none">✓</span>Seguimiento visible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="funciones" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px)">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between">
+      <div style="max-width:620px">
+        <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Ecosistema</span>
+        <h2 style="font:600 clamp(28px,3.7vw,50px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Todo el proceso comercial en un solo espacio de trabajo</h2>
+      </div>
+      <p style="font:400 16px/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:0;max-width:34ch">Módulos que trabajan conectados: lo que pasa en una conversación se refleja en el cliente, la oportunidad y la tarea.</p>
+    </div>
+
+    <div style="margin-top:clamp(28px,3.4vw,46px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+      <div style="grid-column:span 1;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.4)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(37,211,102,.13);display:grid;place-items:center"><span style="width:12px;height:12px;border-radius:50%;background:#25D366;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Conversaciones y WhatsApp Business</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Atiende desde el CRM con el número comercial de tu empresa y sin perder el historial.</p>
+        <div style="margin-top:18px;border:1px solid #EFEBE3;border-radius:12px;background:#FCFAF6;padding:12px;display:grid;gap:8px">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif">Bandeja del equipo</b><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.18);padding:4px 6px;border-radius:5px;font-style:normal">En línea</i></span>
+          <span style="display:flex;gap:7px;align-items:center"><span style="width:20px;height:20px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 9px/20px 'Instrument Sans',sans-serif;text-align:center">MG</span><span style="height:6px;flex:1;border-radius:3px;background:#E4E0D8"></span></span>
+          <span style="display:flex;gap:7px;align-items:center"><span style="width:20px;height:20px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 9px/20px 'Instrument Sans',sans-serif;text-align:center">JT</span><span style="height:6px;flex:1;border-radius:3px;background:#E4E0D8;max-width:70%"></span></span>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.4)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(183,121,11,.12);display:grid;place-items:center"><span style="width:13px;height:13px;border:2px solid #B7790B;border-radius:3px;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Pipeline, leads y oportunidades</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Cada negocio avanza por etapas visibles, con responsable y valor asociado.</p>
+        <div style="margin-top:18px;display:flex;gap:8px">
+          <span style="flex:1;border:1px solid #EFEBE3;border-radius:10px;background:#FCFAF6;padding:8px 7px"><i style="display:block;font:600 8.5px/1 'Instrument Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8A8F95;font-style:normal">Lead</i><i style="display:block;height:22px;margin-top:6px;border-radius:6px;background:#E4E0D8"></i></span>
+          <span style="flex:1;border:1px solid #EFEBE3;border-radius:10px;background:#FCFAF6;padding:8px 7px"><i style="display:block;font:600 8.5px/1 'Instrument Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8A8F95;font-style:normal">Cotiza</i><i style="display:block;height:22px;margin-top:6px;border-radius:6px;background:#E5B94F"></i></span>
+          <span style="flex:1;border:1px solid #EFEBE3;border-radius:10px;background:#FCFAF6;padding:8px 7px"><i style="display:block;font:600 8.5px/1 'Instrument Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8A8F95;font-style:normal">Negocia</i><i style="display:block;height:22px;margin-top:6px;border-radius:6px;background:#B7790B"></i></span>
+          <span style="flex:1;border:1px solid #EFEBE3;border-radius:10px;background:#FCFAF6;padding:8px 7px"><i style="display:block;font:600 8.5px/1 'Instrument Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#8A8F95;font-style:normal">Ganado</i><i style="display:block;height:22px;margin-top:6px;border-radius:6px;background:#E4E0D8"></i></span>
+        </div>
+      </div>
+
+      <div style="background:#0B0E0F;color:#F8F5EF;border:1px solid #0B0E0F;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.6)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(229,185,79,.16);display:grid;place-items:center"><span style="width:12px;height:12px;border-radius:3px;background:#E5B94F;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Contactos y clientes</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:rgba(248,245,239,.66);margin:9px 0 0">Una ficha por cliente con datos, conversaciones, oportunidades y actividad.</p>
+        <div style="margin-top:18px;border:1px solid rgba(248,245,239,.14);border-radius:12px;padding:12px;display:grid;gap:9px">
+          <span style="display:flex;gap:8px;align-items:center"><span style="width:22px;height:22px;border-radius:50%;background:rgba(229,185,79,.18);color:#E5B94F;font:600 9.5px/22px 'Instrument Sans',sans-serif;text-align:center">DV</span><b style="font:600 12px/1 'Instrument Sans',sans-serif">Distribuciones del Valle</b></span>
+          <span style="height:5px;border-radius:3px;background:rgba(248,245,239,.16)"></span>
+          <span style="height:5px;border-radius:3px;background:rgba(248,245,239,.16);width:65%"></span>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.4)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(183,121,11,.12);display:grid;place-items:center"><span style="width:13px;height:13px;border-radius:50%;border:2px solid #B7790B;border-right-color:transparent;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Tareas y seguimiento</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Llamadas, mensajes y reuniones con fecha, responsable y recordatorio.</p>
+        <div style="margin-top:18px;display:grid;gap:8px">
+          <span style="display:flex;align-items:center;gap:9px;border:1px solid #EFEBE3;border-radius:10px;padding:9px 10px;background:#FCFAF6"><span style="width:13px;height:13px;border:2px solid #B7790B;border-radius:4px;flex:none"></span><b style="font:500 12px/1 'Instrument Sans',sans-serif">Llamar a Jorge Torres</b></span>
+          <span style="display:flex;align-items:center;gap:9px;border:1px solid #EFEBE3;border-radius:10px;padding:9px 10px;background:#FCFAF6;opacity:.7"><span style="width:13px;height:13px;border:2px solid #C9C4BA;border-radius:4px;flex:none"></span><b style="font:500 12px/1 'Instrument Sans',sans-serif">Enviar cotización</b></span>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.4)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(183,121,11,.12);display:grid;place-items:center"><span style="width:11px;height:14px;border:2px solid #B7790B;border-radius:2px;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Productos, cotizaciones y documentos</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Arma propuestas con tu catálogo y la identidad de tu empresa, listas para imprimir o enviar.</p>
+        <div style="margin-top:18px;border:1px solid #EFEBE3;border-radius:12px;background:#FCFAF6;padding:12px;display:grid;gap:7px">
+          <span style="display:flex;justify-content:space-between"><i style="font:500 11px/1 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Silla ejecutiva</i><i style="font:600 11px/1 'JetBrains Mono',monospace;font-style:normal">20 × $420.000</i></span>
+          <span style="height:1px;background:#E4E0D8"></span>
+          <span style="display:flex;justify-content:space-between"><i style="font:600 11px/1 'Instrument Sans',sans-serif;font-style:normal">Total</i><i style="font:600 11.5px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">$8.400.000</i></span>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:24px;transition:box-shadow .22s ease,transform .22s ease" style-hover="transform:translateY(-3px);box-shadow:0 26px 52px -30px rgba(11,14,15,.4)">
+        <span style="width:34px;height:34px;border-radius:10px;background:rgba(183,121,11,.12);display:grid;place-items:center"><span style="width:14px;height:10px;border-top:2px solid #B7790B;border-bottom:2px solid #B7790B;display:block"></span></span>
+        <h3 style="font:600 19px/1.25 Sora,sans-serif;margin:16px 0 0">Usuarios, asesores y administración</h3>
+        <p style="font:400 14.5px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Roles, permisos, asignación de clientes, actividad y sesiones activas por empresa.</p>
+        <div style="margin-top:18px;display:flex;gap:8px;flex-wrap:wrap">
+          <span style="font:600 11px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:7px 10px;border-radius:999px">Administrador</span>
+          <span style="font:600 11px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:7px 10px;border-radius:999px">Asesor</span>
+          <span style="font:600 11px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);border:1px solid rgba(183,121,11,.25);padding:7px 10px;border-radius:999px">Sesiones</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="whatsapp" style="position:relative;padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:radial-gradient(900px 500px at 85% 0%,rgba(37,211,102,.12),transparent 60%),#0B0E0F;color:#F8F5EF">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:clamp(30px,4vw,56px);align-items:center">
+    <div>
+      <span style="display:inline-flex;align-items:center;gap:8px;font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#25D366;background:rgba(37,211,102,.12);border:1px solid rgba(37,211,102,.3);padding:8px 12px;border-radius:999px">WhatsApp Business</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:20px 0 0;text-wrap:balance">Tu WhatsApp Business, ahora conectado con todo tu proceso comercial</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:rgba(248,245,239,.68);margin:18px 0 0;max-width:52ch;text-wrap:pretty">Conecta el número de tu empresa mediante el proceso oficial de Meta y permite que tu equipo atienda, organice y haga seguimiento sin perder el contexto de cada cliente.</p>
+      <ul style="margin:26px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px 22px">
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Conserva el número comercial cuando la modalidad de conexión lo permita</li>
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Organiza todas las conversaciones desde el CRM</li>
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Asigna clientes a asesores y consulta el historial</li>
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Relaciona conversaciones con contactos y oportunidades</li>
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Recibe notificaciones de lo que necesita respuesta</li>
+        <li style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.82)"><span style="flex:none;width:16px;height:16px;margin-top:2px;border-radius:50%;background:rgba(37,211,102,.18);color:#25D366;font:700 10px/16px 'Instrument Sans',sans-serif;text-align:center">✓</span>Mantén el control administrativo del canal</li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+        <a href="#demo" style="font:600 15px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:linear-gradient(160deg,#E5B94F,#B7790B);padding:15px 24px;border-radius:12px;transition:transform .18s ease,filter .18s ease" style-hover="transform:translateY(-2px);filter:brightness(1.06);color:#0B0E0F">Conectar mi empresa</a>
+        <a href="#conversaciones" style="font:600 15px/1 'Instrument Sans',sans-serif;color:#F8F5EF;border:1px solid rgba(248,245,239,.24);padding:15px 22px;border-radius:12px;transition:border-color .18s ease" style-hover="border-color:#E5B94F;color:#FFFFFF">Ver cómo funciona</a>
+      </div>
+      <p style="font:400 12.5px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.45);margin:20px 0 0;max-width:56ch">La disponibilidad de determinadas funciones depende de la configuración y aprobación de la cuenta de WhatsApp Business en Meta.</p>
+    </div>
+
+    <div style="position:relative;display:flex;gap:clamp(14px,2vw,26px);align-items:center;flex-wrap:wrap;justify-content:center">
+      <div style="flex:none;width:min(212px,44vw);border:8px solid #1a1d1f;border-radius:30px;background:#0f1214;box-shadow:0 30px 60px -24px rgba(0,0,0,.7);overflow:hidden">
+        <div style="height:20px;background:#0f1214;display:grid;place-items:center"><span style="width:44px;height:5px;border-radius:3px;background:#2a2e31"></span></div>
+        <div style="background:#075E54;padding:9px 11px;display:flex;align-items:center;gap:8px">
+          <span style="width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2)"></span>
+          <span><b style="display:block;font:600 11px/1.2 'Instrument Sans',sans-serif;color:#fff">María Gómez</b><i style="font:400 9px/1.2 'Instrument Sans',sans-serif;color:rgba(255,255,255,.65);font-style:normal">en línea</i></span>
+        </div>
+        <div style="background:#0b141a;padding:12px 10px;display:grid;gap:8px;min-height:180px;align-content:start">
+          <span style="justify-self:start;max-width:82%;background:#202c33;color:#e9edef;border-radius:9px 9px 9px 2px;padding:8px 10px;font:400 11px/1.4 'Instrument Sans',sans-serif">Hola, ¿tienen sillas ejecutivas disponibles?</span>
+          <span style="justify-self:end;max-width:82%;background:#005c4b;color:#e9edef;border-radius:9px 9px 2px 9px;padding:8px 10px;font:400 11px/1.4 'Instrument Sans',sans-serif">¡Claro! Te comparto opciones y precios.</span>
+          <span style="justify-self:start;max-width:82%;background:#202c33;color:#e9edef;border-radius:9px 9px 9px 2px;padding:8px 10px;font:400 11px/1.4 'Instrument Sans',sans-serif">Necesito 20 unidades</span>
+        </div>
+      </div>
+
+      <div style="flex:1;min-width:min(260px,100%);display:grid;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px;justify-content:center;color:rgba(248,245,239,.4);font:500 11px/1 'JetBrains Mono',monospace">
+          <span style="height:1px;flex:1;background:linear-gradient(90deg,transparent,rgba(37,211,102,.6))"></span>conectado<span style="height:1px;flex:1;background:linear-gradient(90deg,rgba(37,211,102,.6),transparent)"></span>
+        </div>
+        <div style="background:#12161a;border:1px solid rgba(248,245,239,.12);border-radius:14px;padding:14px;animation:tSlideIn 7s ease-in-out infinite">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#25D366;animation:tPulse 2.4s ease-in-out infinite"></span><b style="font:600 12px/1 'Instrument Sans',sans-serif;color:#F8F5EF">Conversación recibida en el CRM</b></span>
+          <p style="margin:8px 0 0;font:400 11.5px/1.45 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6)">María Gómez · WhatsApp Business</p>
+        </div>
+        <div style="background:#12161a;border:1px solid rgba(248,245,239,.12);border-radius:14px;padding:14px">
+          <span style="display:block;font:600 9.5px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#E5B94F">Asignada a</span>
+          <span style="display:flex;align-items:center;gap:8px;margin-top:8px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(229,185,79,.18);color:#E5B94F;font:600 10px/24px 'Instrument Sans',sans-serif;text-align:center">CR</span><b style="font:500 12.5px/1 'Instrument Sans',sans-serif;color:#F8F5EF">Camilo Restrepo · Asesor</b></span>
+        </div>
+        <div style="background:#12161a;border:1px solid rgba(229,185,79,.28);border-radius:14px;padding:14px">
+          <span style="display:block;font:600 9.5px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#E5B94F">Oportunidad relacionada</span>
+          <b style="display:block;font:600 13px/1.3 Sora,sans-serif;color:#FFFFFF;margin-top:7px">Dotación oficina · 20 sillas</b>
+          <span style="display:flex;justify-content:space-between;margin-top:8px"><i style="font:600 11.5px/1 'JetBrains Mono',monospace;color:rgba(248,245,239,.7);font-style:normal">$ 8.400.000</i><i style="font:600 10px/1 'Instrument Sans',sans-serif;color:#E5B94F;font-style:normal">Cotización</i></span>
+        </div>
+        <div style="background:#12161a;border:1px solid rgba(248,245,239,.12);border-radius:14px;padding:14px">
+          <span style="display:flex;align-items:center;gap:9px"><span style="width:14px;height:14px;border:2px solid #E5B94F;border-radius:4px;flex:none"></span><b style="font:500 12.5px/1.3 'Instrument Sans',sans-serif;color:#F8F5EF">Tarea creada: enviar cotización hoy 4:00 p.m.</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conversaciones" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-bottom:1px solid #E4E0D8">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="max-width:680px">
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Conversaciones</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Todas las conversaciones con contexto</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;text-wrap:pretty">Cada asesor puede entender quién es el cliente, qué necesita y cuál debe ser el siguiente paso sin buscar información en diferentes herramientas.</p>
+    </div>
+
+    <div style="margin-top:clamp(28px,3.4vw,44px);border:1px solid #E4E0D8;border-radius:18px;overflow:hidden;background:#FCFAF6;box-shadow:0 34px 70px -40px rgba(11,14,15,.45)">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#FFFFFF;border-bottom:1px solid #EFEBE3">
+        <b style="font:600 13px/1 Sora,sans-serif">Conversaciones</b>
+        <span style="font:600 10.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.16);padding:5px 8px;border-radius:999px">WhatsApp Business conectado</span>
+        <span style="margin-left:auto;display:flex;gap:6px"><span style="font:500 11px/1 'Instrument Sans',sans-serif;color:#62676D;border:1px solid #E4E0D8;padding:6px 10px;border-radius:8px">Todas</span><span style="font:600 11px/1 'Instrument Sans',sans-serif;color:#B7790B;border:1px solid rgba(183,121,11,.3);background:rgba(183,121,11,.08);padding:6px 10px;border-radius:8px">Sin responder</span></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))">
+        <div style="border-right:1px solid #EFEBE3;padding:12px;display:grid;gap:9px;align-content:start;background:#FFFFFF">
+          <div style="border:1px solid #B7790B;background:rgba(183,121,11,.05);border-radius:12px;padding:11px;display:flex;gap:10px">
+            <span style="flex:none;width:32px;height:32px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 12px/32px 'Instrument Sans',sans-serif;text-align:center">MG</span>
+            <span style="min-width:0;flex:1">
+              <span style="display:flex;justify-content:space-between;gap:8px"><b style="font:600 13px/1.2 'Instrument Sans',sans-serif">María Gómez</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">10:24</i></span>
+              <span style="display:block;font:400 12px/1.4 'Instrument Sans',sans-serif;color:#62676D;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">¿Me confirmas el precio de las 20 sillas?</span>
+              <span style="display:flex;gap:6px;margin-top:7px;flex-wrap:wrap"><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:4px 6px;border-radius:5px;font-style:normal">Camilo R.</i><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.16);padding:4px 6px;border-radius:5px;font-style:normal">Abierta</i></span>
+            </span>
+          </div>
+          <div style="border:1px solid #EFEBE3;border-radius:12px;padding:11px;display:flex;gap:10px;background:#FCFAF6">
+            <span style="flex:none;width:32px;height:32px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 12px/32px 'Instrument Sans',sans-serif;text-align:center">JT</span>
+            <span style="min-width:0;flex:1">
+              <span style="display:flex;justify-content:space-between;gap:8px"><b style="font:600 13px/1.2 'Instrument Sans',sans-serif">Jorge Torres</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">09:58</i></span>
+              <span style="display:block;font:400 12px/1.4 'Instrument Sans',sans-serif;color:#62676D;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Quedo atento a la cotización</span>
+              <span style="display:flex;gap:6px;margin-top:7px"><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#62676D;background:#EFEBE3;padding:4px 6px;border-radius:5px;font-style:normal">Sin asignar</i></span>
+            </span>
+          </div>
+          <div style="border:1px solid #EFEBE3;border-radius:12px;padding:11px;display:flex;gap:10px;background:#FCFAF6">
+            <span style="flex:none;width:32px;height:32px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 12px/32px 'Instrument Sans',sans-serif;text-align:center">AL</span>
+            <span style="min-width:0;flex:1">
+              <span style="display:flex;justify-content:space-between;gap:8px"><b style="font:600 13px/1.2 'Instrument Sans',sans-serif">Ana López</b><i style="font:400 10.5px/1.2 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">Ayer</i></span>
+              <span style="display:block;font:400 12px/1.4 'Instrument Sans',sans-serif;color:#62676D;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Gracias, lo reviso con el equipo</span>
+              <span style="display:flex;gap:6px;margin-top:7px"><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:4px 6px;border-radius:5px;font-style:normal">Laura M.</i></span>
+            </span>
+          </div>
+        </div>
+
+        <div style="padding:14px;display:flex;flex-direction:column;gap:10px;background:#FCFAF6;border-right:1px solid #EFEBE3">
+          <span style="display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid #EFEBE3">
+            <span style="width:30px;height:30px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 11px/30px 'Instrument Sans',sans-serif;text-align:center">MG</span>
+            <b style="font:600 13px/1 Sora,sans-serif">María Gómez</b>
+            <i style="margin-left:auto;font:600 9.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.16);padding:5px 7px;border-radius:5px;font-style:normal">WhatsApp</i>
+          </span>
+          <span style="align-self:flex-start;max-width:88%;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:12px 12px 12px 3px;padding:10px 12px;font:400 12.5px/1.5 'Instrument Sans',sans-serif;color:#0B0E0F">Hola, ¿tienen sillas ejecutivas disponibles?</span>
+          <span style="align-self:flex-end;max-width:88%;background:#0B0E0F;color:#F8F5EF;border-radius:12px 12px 3px 12px;padding:10px 12px;font:400 12.5px/1.5 'Instrument Sans',sans-serif">¡Claro! Te comparto opciones y precios.</span>
+          <span style="align-self:flex-start;max-width:88%;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:12px 12px 12px 3px;padding:10px 12px;font:400 12.5px/1.5 'Instrument Sans',sans-serif;color:#0B0E0F">¿Me confirmas el precio de las 20 sillas?</span>
+          <span style="margin-top:auto;display:flex;align-items:center;gap:8px;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:10px;padding:10px 12px">
+            <i style="font:400 12px/1 'Instrument Sans',sans-serif;color:#A6A29A;font-style:normal">Escribe un mensaje…</i>
+            <i style="margin-left:auto;width:24px;height:24px;border-radius:7px;background:rgba(37,211,102,.16);display:grid;place-items:center;font-style:normal"><i style="width:8px;height:8px;border-radius:50%;background:#25D366;display:block;font-style:normal"></i></i>
+          </span>
+        </div>
+
+        <div style="padding:14px;display:grid;gap:10px;align-content:start;background:#FFFFFF">
+          <span style="font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Ficha del cliente</span>
+          <div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px;display:grid;gap:7px">
+            <b style="font:600 13.5px/1.3 Sora,sans-serif">Distribuciones del Valle</b>
+            <i style="font:400 12px/1.4 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Contacto: María Gómez · Compras</i>
+            <i style="font:400 12px/1.4 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Cliente desde marzo</i>
+          </div>
+          <div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px">
+            <span style="display:block;font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Oportunidad</span>
+            <b style="display:block;font:600 13px/1.3 Sora,sans-serif;margin-top:6px">Dotación oficina · 20 sillas</b>
+            <span style="display:flex;justify-content:space-between;margin-top:8px"><i style="font:600 12px/1 'JetBrains Mono',monospace;font-style:normal">$ 8.400.000</i><i style="font:600 10px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:5px 7px;border-radius:6px;font-style:normal">Cotización</i></span>
+          </div>
+          <div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px">
+            <span style="display:block;font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Próxima tarea</span>
+            <span style="display:flex;align-items:center;gap:8px;margin-top:7px"><span style="width:13px;height:13px;border:2px solid #B7790B;border-radius:4px;flex:none"></span><b style="font:500 12.5px/1.35 'Instrument Sans',sans-serif">Enviar cotización · hoy 4:00 p.m.</b></span>
+          </div>
+          <div style="border:1px solid #E4E0D8;border-radius:12px;padding:12px">
+            <span style="display:block;font:600 10px/1 'Instrument Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8A8F95">Historial</span>
+            <span style="display:grid;gap:6px;margin-top:8px">
+              <i style="font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">· Conversación asignada a Camilo R.</i>
+              <i style="font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">· Oportunidad creada</i>
+              <i style="font:400 11.5px/1.4 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">· Cotización en preparación</i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px)">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;gap:22px;align-items:flex-end;justify-content:space-between">
+      <div style="max-width:600px">
+        <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Pipeline</span>
+        <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Visualiza cada oportunidad de principio a fin</h2>
+      </div>
+      <ul style="margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 20px;max-width:460px">
+        <li style="font:400 13.5px/1.4 'Instrument Sans',sans-serif;color:#62676D">Mueve oportunidades entre etapas</li>
+        <li style="font:400 13.5px/1.4 'Instrument Sans',sans-serif;color:#62676D">Asigna responsables</li>
+        <li style="font:400 13.5px/1.4 'Instrument Sans',sans-serif;color:#62676D">Consulta valor y avance</li>
+        <li style="font:400 13.5px/1.4 'Instrument Sans',sans-serif;color:#62676D">Identifica negocios detenidos</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:clamp(26px,3.2vw,42px);background:#FFFFFF;border:1px solid #E4E0D8;border-radius:18px;padding:clamp(14px,1.6vw,22px);box-shadow:0 34px 70px -44px rgba(11,14,15,.4);overflow-x:auto">
+      <div style="display:grid;grid-template-columns:repeat(6,minmax(168px,1fr));gap:12px;min-width:min(100%,1020px)">
+        <div style="background:#FCFAF6;border:1px solid #EFEBE3;border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Nuevo lead</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">4</i></span>
+          <span style="display:block;border:1px solid #E4E0D8;background:#FFFFFF;border-radius:10px;padding:10px"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Oficinas Andes</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#62676D;margin-top:6px;font-style:normal">$ 2.100.000</i></span>
+          <span style="display:block;border:1px solid #E4E0D8;background:#FFFFFF;border-radius:10px;padding:10px"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Hotel Marena</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#62676D;margin-top:6px;font-style:normal">$ 5.600.000</i></span>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFEBE3;border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Calificado</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">3</i></span>
+          <span style="display:block;border:1px solid #E4E0D8;background:#FFFFFF;border-radius:10px;padding:10px"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Café Bourbon</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#62676D;margin-top:6px;font-style:normal">$ 3.250.000</i><i style="display:inline-block;margin-top:7px;font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:4px 6px;border-radius:5px;font-style:normal">Laura M.</i></span>
+        </div>
+        <div style="background:rgba(183,121,11,.05);border:1px solid rgba(183,121,11,.28);border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#B7790B">Cotización</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">2</i></span>
+          <span style="display:block;border:1px solid #B7790B;background:#FFFFFF;border-radius:10px;padding:10px;box-shadow:0 12px 22px -14px rgba(183,121,11,.6);animation:tFloat 5.5s ease-in-out infinite"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Distribuciones del Valle</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#0B0E0F;margin-top:6px;font-style:normal">$ 8.400.000</i><i style="display:flex;gap:5px;margin-top:7px;font-style:normal"><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.12);padding:4px 6px;border-radius:5px;font-style:normal">Camilo R.</i><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;padding:4px 6px;border-radius:5px;font-style:normal">Tarea hoy</i></i></span>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFEBE3;border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Negociación</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">2</i></span>
+          <span style="display:block;border:1px solid #E4E0D8;background:#FFFFFF;border-radius:10px;padding:10px"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Clínica Sauce</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#62676D;margin-top:6px;font-style:normal">$ 12.900.000</i><i style="display:inline-block;margin-top:7px;font:600 9.5px/1 'Instrument Sans',sans-serif;color:#8A5A0A;background:rgba(229,185,79,.22);padding:4px 6px;border-radius:5px;font-style:normal">Sin movimiento 6 días</i></span>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFEBE3;border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Cerrado ganado</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">5</i></span>
+          <span style="display:block;border:1px solid rgba(37,211,102,.4);background:#FFFFFF;border-radius:10px;padding:10px"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Grupo Tarraza</b><i style="display:block;font:600 11px/1 'JetBrains Mono',monospace;color:#62676D;margin-top:6px;font-style:normal">$ 6.750.000</i></span>
+        </div>
+        <div style="background:#FCFAF6;border:1px solid #EFEBE3;border-radius:14px;padding:11px;display:grid;gap:9px;align-content:start">
+          <span style="display:flex;justify-content:space-between;align-items:center"><b style="font:600 11.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Cerrado perdido</b><i style="font:600 10px/1 'JetBrains Mono',monospace;color:#8A8F95;font-style:normal">1</i></span>
+          <span style="display:block;border:1px dashed #E4E0D8;background:#FFFFFF;border-radius:10px;padding:10px;opacity:.7"><b style="display:block;font:600 12px/1.3 'Instrument Sans',sans-serif">Textiles Norte</b><i style="display:block;font:400 10.5px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;margin-top:6px;font-style:normal">Motivo registrado</i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-top:1px solid #E4E0D8;border-bottom:1px solid #E4E0D8">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,3.5vw,52px);align-items:center">
+    <div>
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Tareas y seguimiento</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Que ningún cliente vuelva a quedarse sin respuesta</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;max-width:50ch;text-wrap:pretty">El equipo abre el CRM y sabe qué hacer hoy: a quién llamar, qué mensaje enviar, cuál cotización falta y qué quedó pendiente de ayer.</p>
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px">
+        <span style="font:500 13px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:10px 13px;border-radius:999px">Llamada pendiente</span>
+        <span style="font:500 13px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:10px 13px;border-radius:999px">Mensaje de seguimiento</span>
+        <span style="font:500 13px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:10px 13px;border-radius:999px">Reunión</span>
+        <span style="font:500 13px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:#F8F5EF;border:1px solid #E4E0D8;padding:10px 13px;border-radius:999px">Cotización por enviar</span>
+      </div>
+    </div>
+    <div style="background:#FCFAF6;border:1px solid #E4E0D8;border-radius:18px;padding:clamp(14px,1.6vw,20px);box-shadow:0 30px 60px -40px rgba(11,14,15,.4)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <b style="font:600 13px/1 Sora,sans-serif">Mis tareas · hoy</b>
+        <span style="font:600 10.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:5px 8px;border-radius:999px">1 vencida</span>
+      </div>
+      <div style="display:grid;gap:9px">
+        <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border:1px solid #C0392B33;border-left:3px solid #C0392B;border-radius:11px;padding:12px">
+          <span style="width:15px;height:15px;border:2px solid #C0392B;border-radius:4px;flex:none"></span>
+          <span style="min-width:0"><b style="display:block;font:600 13px/1.3 'Instrument Sans',sans-serif">Llamar a Jorge Torres</b><i style="font:400 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B;font-style:normal">Vencida ayer · Camilo R.</i></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border:1px solid #E4E0D8;border-left:3px solid #B7790B;border-radius:11px;padding:12px">
+          <span style="width:15px;height:15px;border:2px solid #B7790B;border-radius:4px;flex:none"></span>
+          <span style="min-width:0"><b style="display:block;font:600 13px/1.3 'Instrument Sans',sans-serif">Enviar cotización · Distribuciones del Valle</b><i style="font:400 11.5px/1.3 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Hoy 4:00 p.m.</i></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:11px;padding:12px">
+          <span style="width:15px;height:15px;border:2px solid #C9C4BA;border-radius:4px;flex:none"></span>
+          <span style="min-width:0"><b style="display:block;font:600 13px/1.3 'Instrument Sans',sans-serif">Mensaje de seguimiento · Café Bourbon</b><i style="font:400 11.5px/1.3 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Mañana 9:00 a.m.</i></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px;background:#FFFFFF;border:1px solid #E4E0D8;border-radius:11px;padding:12px;opacity:.62">
+          <span style="width:15px;height:15px;border:2px solid #25D366;background:#25D366;border-radius:4px;flex:none;color:#fff;font:700 9px/12px 'Instrument Sans',sans-serif;text-align:center">✓</span>
+          <span style="min-width:0"><b style="display:block;font:600 13px/1.3 'Instrument Sans',sans-serif;text-decoration:line-through">Reunión con Hotel Marena</b><i style="font:400 11.5px/1.3 'Instrument Sans',sans-serif;color:#62676D;font-style:normal">Completada 8:30 a.m.</i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px)">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,3.5vw,52px);align-items:center">
+    <div style="order:2">
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Cotizaciones</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Del interés a una propuesta comercial organizada</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;max-width:50ch;text-wrap:pretty">Crea propuestas con la información e identidad de cada empresa y mantenlas relacionadas con el cliente y la oportunidad.</p>
+      <div style="margin-top:24px;display:grid;gap:11px;max-width:440px">
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:rgba(183,121,11,.12);color:#B7790B;font:700 10px/18px 'Instrument Sans',sans-serif;text-align:center">1</span>Selecciona productos y cantidades de tu catálogo</span>
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:rgba(183,121,11,.12);color:#B7790B;font:700 10px/18px 'Instrument Sans',sans-serif;text-align:center">2</span>Se aplican los datos comerciales y fiscales de tu empresa</span>
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:rgba(183,121,11,.12);color:#B7790B;font:700 10px/18px 'Instrument Sans',sans-serif;text-align:center">3</span>Genera el documento con vista para impresión</span>
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:18px;height:18px;border-radius:6px;background:rgba(183,121,11,.12);color:#B7790B;font:700 10px/18px 'Instrument Sans',sans-serif;text-align:center">4</span>Sigue el estado de la cotización desde la oportunidad</span>
+      </div>
+    </div>
+    <div style="order:1;position:relative">
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:16px;padding:clamp(18px,2vw,26px);box-shadow:0 34px 66px -40px rgba(11,14,15,.45)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-bottom:14px;border-bottom:1px solid #EFEBE3">
+          <span><span style="display:flex;align-items:center;gap:8px"><span style="width:22px;height:22px;border-radius:6px;background:#0B0E0F"></span><b style="font:600 13px/1 Sora,sans-serif">Distribuidora Ejemplo S.A.S.</b></span><i style="display:block;font:400 11px/1.4 'Instrument Sans',sans-serif;color:#8A8F95;margin-top:6px;font-style:normal">NIT y datos fiscales de la empresa</i></span>
+          <span style="text-align:right"><b style="display:block;font:600 12px/1 'JetBrains Mono',monospace">COT-0184</b><i style="display:inline-block;margin-top:7px;font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:5px 7px;border-radius:5px;font-style:normal">Enviada</i></span>
+        </div>
+        <div style="padding:14px 0;display:grid;gap:9px">
+          <span style="display:grid;grid-template-columns:1fr 46px 88px;gap:8px;font:600 9.5px/1 'Instrument Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;color:#8A8F95"><i style="font-style:normal">Producto</i><i style="text-align:center;font-style:normal">Cant.</i><i style="text-align:right;font-style:normal">Valor</i></span>
+          <span style="display:grid;grid-template-columns:1fr 46px 88px;gap:8px;font:400 12.5px/1.4 'Instrument Sans',sans-serif;color:#0B0E0F;padding-top:8px;border-top:1px solid #EFEBE3"><i style="font-style:normal">Silla ejecutiva Roble</i><i style="text-align:center;font-style:normal">20</i><i style="text-align:right;font:500 12px/1.4 'JetBrains Mono',monospace;font-style:normal">$8.400.000</i></span>
+          <span style="display:grid;grid-template-columns:1fr 46px 88px;gap:8px;font:400 12.5px/1.4 'Instrument Sans',sans-serif;color:#0B0E0F;padding-top:8px;border-top:1px solid #EFEBE3"><i style="font-style:normal">Instalación en sitio</i><i style="text-align:center;font-style:normal">1</i><i style="text-align:right;font:500 12px/1.4 'JetBrains Mono',monospace;font-style:normal">$380.000</i></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid #0B0E0F">
+          <b style="font:600 13px/1 Sora,sans-serif">Total</b>
+          <b style="font:600 16px/1 'JetBrains Mono',monospace;color:#B7790B">$ 8.780.000</b>
+        </div>
+      </div>
+      <div style="position:absolute;right:-8px;bottom:-16px;background:#0B0E0F;color:#F8F5EF;border-radius:12px;padding:11px 14px;box-shadow:0 20px 40px -18px rgba(11,14,15,.6)">
+        <span style="font:600 11px/1.3 'Instrument Sans',sans-serif">Relacionada con la oportunidad</span>
+        <i style="display:block;font:400 10.5px/1.3 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:4px;font-style:normal">Dotación oficina · 20 sillas</i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-top:1px solid #E4E0D8">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="max-width:660px">
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Control del equipo</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Visibilidad para administrar sin perder cercanía</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;text-wrap:pretty">Cada persona ve lo que le corresponde. El administrador ve el panorama completo de su empresa: usuarios, asignaciones, actividad y sesiones abiertas.</p>
+    </div>
+
+    <div style="margin-top:clamp(26px,3.2vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px">
+      <div style="background:#0B0E0F;color:#F8F5EF;border-radius:18px;padding:22px">
+        <span style="font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.06em;color:#E5B94F">SUPER_ADMIN</span>
+        <h3 style="font:600 18px/1.25 Sora,sans-serif;margin:14px 0 0">Plataforma</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:rgba(248,245,239,.66);margin:9px 0 0">Administra la plataforma y las empresas que operan en ella.</p>
+      </div>
+      <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:18px;padding:22px">
+        <span style="font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.06em;color:#B7790B">ADMIN</span>
+        <h3 style="font:600 18px/1.25 Sora,sans-serif;margin:14px 0 0">Empresa</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Administra su empresa: asesores, configuración e información comercial.</p>
+      </div>
+      <div style="background:#F8F5EF;border:1px solid #E4E0D8;border-radius:18px;padding:22px">
+        <span style="font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.06em;color:#62676D">ASESOR</span>
+        <h3 style="font:600 18px/1.25 Sora,sans-serif;margin:14px 0 0">Atención</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:9px 0 0">Atiende clientes y gestiona el trabajo asignado según sus permisos.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px">
+      <div style="border:1px solid #E4E0D8;border-radius:18px;overflow:hidden">
+        <div style="padding:12px 16px;border-bottom:1px solid #EFEBE3;background:#FCFAF6;display:flex;justify-content:space-between;align-items:center">
+          <b style="font:600 12.5px/1 Sora,sans-serif">Usuarios de la empresa</b>
+          <span style="font:600 10.5px/1 'Instrument Sans',sans-serif;color:#62676D">4 activos</span>
+        </div>
+        <div style="display:grid">
+          <span style="display:flex;align-items:center;gap:11px;padding:12px 16px;border-bottom:1px solid #F3F0EA"><span style="width:28px;height:28px;border-radius:50%;background:#0B0E0F;color:#E5B94F;font:600 10.5px/28px 'Instrument Sans',sans-serif;text-align:center">CR</span><span style="min-width:0;flex:1"><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif">Camilo Restrepo</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Asesor · 12 clientes asignados</i></span><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:rgba(37,211,102,.16);padding:5px 7px;border-radius:5px;font-style:normal">Sesión activa</i></span>
+          <span style="display:flex;align-items:center;gap:11px;padding:12px 16px;border-bottom:1px solid #F3F0EA"><span style="width:28px;height:28px;border-radius:50%;background:#EFEBE3;color:#62676D;font:600 10.5px/28px 'Instrument Sans',sans-serif;text-align:center">LM</span><span style="min-width:0;flex:1"><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif">Laura Mejía</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Asesor · 9 clientes asignados</i></span><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#62676D;background:#F3F0EA;padding:5px 7px;border-radius:5px;font-style:normal">Hace 2 h</i></span>
+          <span style="display:flex;align-items:center;gap:11px;padding:12px 16px"><span style="width:28px;height:28px;border-radius:50%;background:rgba(183,121,11,.14);color:#B7790B;font:600 10.5px/28px 'Instrument Sans',sans-serif;text-align:center">DA</span><span style="min-width:0;flex:1"><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif">Diana Arias</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Administrador</i></span><i style="font:600 9.5px/1 'Instrument Sans',sans-serif;color:#B7790B;border:1px solid rgba(183,121,11,.3);padding:5px 7px;border-radius:5px;font-style:normal">Permisos</i></span>
+        </div>
+      </div>
+      <div style="border:1px solid #E4E0D8;border-radius:18px;padding:18px;background:#FCFAF6">
+        <b style="font:600 12.5px/1 Sora,sans-serif">Actividad y sesiones</b>
+        <div style="margin-top:14px;display:grid;gap:10px">
+          <span style="display:flex;gap:10px;align-items:flex-start"><span style="width:7px;height:7px;border-radius:50%;background:#B7790B;margin-top:5px;flex:none"></span><span><b style="display:block;font:500 12.5px/1.35 'Instrument Sans',sans-serif">Oportunidad asignada a Camilo R.</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Hoy 10:26 a.m.</i></span></span>
+          <span style="display:flex;gap:10px;align-items:flex-start"><span style="width:7px;height:7px;border-radius:50%;background:#E4E0D8;margin-top:5px;flex:none"></span><span><b style="display:block;font:500 12.5px/1.35 'Instrument Sans',sans-serif">Inicio de sesión · navegador de escritorio</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Hoy 8:02 a.m.</i></span></span>
+          <span style="display:flex;gap:10px;align-items:flex-start"><span style="width:7px;height:7px;border-radius:50%;background:#E4E0D8;margin-top:5px;flex:none"></span><span><b style="display:block;font:500 12.5px/1.35 'Instrument Sans',sans-serif">Cotización COT-0184 enviada</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Ayer 5:41 p.m.</i></span></span>
+        </div>
+        <span style="display:inline-block;margin-top:16px;font:600 11.5px/1 'Instrument Sans',sans-serif;color:#C0392B;border:1px solid rgba(192,57,43,.3);background:rgba(192,57,43,.05);padding:9px 12px;border-radius:9px">Revocar sesiones del usuario</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,3.5vw,52px);align-items:center">
+    <div>
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Notificaciones</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Lo importante aparece cuando necesitas atenderlo</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;max-width:48ch;text-wrap:pretty">Avisos dentro del CRM para conversaciones nuevas, tareas próximas o vencidas y cambios en oportunidades. Cada usuario elige qué quiere recibir.</p>
+      <div style="margin-top:22px;display:grid;gap:9px;max-width:400px">
+        <span style="display:flex;align-items:center;justify-content:space-between;border:1px solid #E4E0D8;border-radius:11px;padding:12px 14px;background:#FCFAF6"><b style="font:500 13px/1 'Instrument Sans',sans-serif">Conversaciones nuevas</b><i style="width:34px;height:19px;border-radius:999px;background:#B7790B;position:relative;display:block;font-style:normal"><i style="position:absolute;top:2.5px;right:2.5px;width:14px;height:14px;border-radius:50%;background:#fff;display:block;font-style:normal"></i></i></span>
+        <span style="display:flex;align-items:center;justify-content:space-between;border:1px solid #E4E0D8;border-radius:11px;padding:12px 14px;background:#FCFAF6"><b style="font:500 13px/1 'Instrument Sans',sans-serif">Tareas próximas y vencidas</b><i style="width:34px;height:19px;border-radius:999px;background:#B7790B;position:relative;display:block;font-style:normal"><i style="position:absolute;top:2.5px;right:2.5px;width:14px;height:14px;border-radius:50%;background:#fff;display:block;font-style:normal"></i></i></span>
+        <span style="display:flex;align-items:center;justify-content:space-between;border:1px solid #E4E0D8;border-radius:11px;padding:12px 14px;background:#FCFAF6"><b style="font:500 13px/1 'Instrument Sans',sans-serif">Cambios en oportunidades</b><i style="width:34px;height:19px;border-radius:999px;background:#E4E0D8;position:relative;display:block;font-style:normal"><i style="position:absolute;top:2.5px;left:2.5px;width:14px;height:14px;border-radius:50%;background:#fff;display:block;font-style:normal"></i></i></span>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:center">
+      <div style="width:min(400px,100%);background:#FCFAF6;border:1px solid #E4E0D8;border-radius:18px;box-shadow:0 30px 60px -38px rgba(11,14,15,.45);overflow:hidden">
+        <div style="display:flex;align-items:center;gap:10px;padding:13px 16px;background:#FFFFFF;border-bottom:1px solid #EFEBE3">
+          <span style="position:relative;width:26px;height:26px;display:grid;place-items:center;animation:tBell 6s ease-in-out infinite">
+            <span style="width:13px;height:13px;border:2px solid #0B0E0F;border-radius:5px 5px 3px 3px;display:block"></span>
+            <span style="position:absolute;top:-1px;right:-1px;width:9px;height:9px;border-radius:50%;background:#C0392B;border:2px solid #fff"></span>
+          </span>
+          <b style="font:600 13px/1 Sora,sans-serif">Notificaciones</b>
+          <span style="margin-left:auto;font:600 10.5px/1 'Instrument Sans',sans-serif;color:#B7790B">Marcar todas</span>
+        </div>
+        <div style="display:grid">
+          <span style="display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #F3F0EA;background:rgba(183,121,11,.04)"><span style="width:8px;height:8px;border-radius:50%;background:#25D366;margin-top:5px;flex:none"></span><span><b style="display:block;font:600 12.5px/1.35 'Instrument Sans',sans-serif">Nueva conversación de María Gómez</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">WhatsApp Business · hace 2 min</i></span></span>
+          <span style="display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #F3F0EA"><span style="width:8px;height:8px;border-radius:50%;background:#C0392B;margin-top:5px;flex:none"></span><span><b style="display:block;font:600 12.5px/1.35 'Instrument Sans',sans-serif">Tarea vencida: llamar a Jorge Torres</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Ayer 3:00 p.m.</i></span></span>
+          <span style="display:flex;gap:11px;padding:13px 16px;border-bottom:1px solid #F3F0EA"><span style="width:8px;height:8px;border-radius:50%;background:#B7790B;margin-top:5px;flex:none"></span><span><b style="display:block;font:600 12.5px/1.35 'Instrument Sans',sans-serif">Tarea próxima: enviar cotización</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Hoy 4:00 p.m.</i></span></span>
+          <span style="display:flex;gap:11px;padding:13px 16px"><span style="width:8px;height:8px;border-radius:50%;background:#E4E0D8;margin-top:5px;flex:none"></span><span><b style="display:block;font:600 12.5px/1.35 'Instrument Sans',sans-serif">Oportunidad asignada a Camilo R.</b><i style="font:400 11px/1.3 'Instrument Sans',sans-serif;color:#8A8F95;font-style:normal">Hoy 10:26 a.m.</i></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="empresas" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:radial-gradient(900px 460px at 20% 0%,rgba(229,185,79,.16),transparent 62%),#F8F5EF;border-top:1px solid #E4E0D8">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="max-width:680px">
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Personalización</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Un CRM que también se siente parte de tu empresa</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;text-wrap:pretty">Nombre, logotipo, colores, datos comerciales y fiscales, moneda, identidad de las cotizaciones y el pipeline inicial: cada empresa configura su propio espacio.</p>
+    </div>
+
+    <div style="margin-top:clamp(26px,3.2vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px">
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:18px;overflow:hidden;box-shadow:0 26px 52px -36px rgba(11,14,15,.4);transition:transform .22s ease" style-hover="transform:translateY(-4px)">
+        <div style="height:5px;background:#B7790B"></div>
+        <div style="padding:16px">
+          <span style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#B7790B"></span><b style="font:600 13px/1 Sora,sans-serif">Distribuidora Ejemplo</b></span>
+          <div style="margin-top:14px;display:grid;gap:8px">
+            <span style="height:8px;border-radius:4px;background:#F0EDE6"></span>
+            <span style="height:8px;border-radius:4px;background:#F0EDE6;width:72%"></span>
+            <span style="display:flex;gap:7px;margin-top:6px"><span style="flex:1;height:36px;border-radius:9px;background:rgba(183,121,11,.12)"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span></span>
+          </div>
+          <span style="display:inline-block;margin-top:14px;font:600 10px/1 'Instrument Sans',sans-serif;color:#B7790B;background:rgba(183,121,11,.1);padding:5px 8px;border-radius:5px">Ámbar · COP</span>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:18px;overflow:hidden;box-shadow:0 26px 52px -36px rgba(11,14,15,.4);transition:transform .22s ease" style-hover="transform:translateY(-4px)">
+        <div style="height:5px;background:#1F5C8B"></div>
+        <div style="padding:16px">
+          <span style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#1F5C8B"></span><b style="font:600 13px/1 Sora,sans-serif">Clínica Ejemplo</b></span>
+          <div style="margin-top:14px;display:grid;gap:8px">
+            <span style="height:8px;border-radius:4px;background:#F0EDE6"></span>
+            <span style="height:8px;border-radius:4px;background:#F0EDE6;width:64%"></span>
+            <span style="display:flex;gap:7px;margin-top:6px"><span style="flex:1;height:36px;border-radius:9px;background:rgba(31,92,139,.12)"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span></span>
+          </div>
+          <span style="display:inline-block;margin-top:14px;font:600 10px/1 'Instrument Sans',sans-serif;color:#1F5C8B;background:rgba(31,92,139,.1);padding:5px 8px;border-radius:5px">Azul · COP</span>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:18px;overflow:hidden;box-shadow:0 26px 52px -36px rgba(11,14,15,.4);transition:transform .22s ease" style-hover="transform:translateY(-4px)">
+        <div style="height:5px;background:#2F6B4F"></div>
+        <div style="padding:16px">
+          <span style="display:flex;align-items:center;gap:9px"><span style="width:26px;height:26px;border-radius:8px;background:#2F6B4F"></span><b style="font:600 13px/1 Sora,sans-serif">Agroservicios Ejemplo</b></span>
+          <div style="margin-top:14px;display:grid;gap:8px">
+            <span style="height:8px;border-radius:4px;background:#F0EDE6"></span>
+            <span style="height:8px;border-radius:4px;background:#F0EDE6;width:80%"></span>
+            <span style="display:flex;gap:7px;margin-top:6px"><span style="flex:1;height:36px;border-radius:9px;background:rgba(47,107,79,.12)"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span><span style="flex:1;height:36px;border-radius:9px;background:#F6F3ED"></span></span>
+          </div>
+          <span style="display:inline-block;margin-top:14px;font:600 10px/1 'Instrument Sans',sans-serif;color:#2F6B4F;background:rgba(47,107,79,.1);padding:5px 8px;border-radius:5px">Verde · COP</span>
+        </div>
+      </div>
+    </div>
+    <p style="font:400 12.5px/1.5 'Instrument Sans',sans-serif;color:#8A8F95;margin:14px 0 0">Ejemplos ilustrativos. Las empresas mostradas son ficticias.</p>
+
+    <div style="margin-top:clamp(30px,3.6vw,48px);background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:clamp(20px,2.4vw,32px)">
+      <b style="font:600 clamp(17px,1.7vw,21px)/1.3 Sora,sans-serif">Incorporación guiada de tu empresa</b>
+      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:12px">
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">01</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Código de invitación</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">02</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Datos de la empresa</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">03</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Identidad visual</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">04</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Configuración comercial</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">05</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Pipeline</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">06</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Administrador</b></span>
+        <span style="border:1px solid #E4E0D8;border-radius:12px;padding:13px;background:#FCFAF6"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">07</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Asesores</b></span>
+        <span style="border:1px solid #B7790B;border-radius:12px;padding:13px;background:rgba(183,121,11,.06)"><i style="display:block;font:600 10px/1 'JetBrains Mono',monospace;color:#B7790B;font-style:normal">08</i><b style="display:block;font:600 12.5px/1.3 'Instrument Sans',sans-serif;margin-top:8px">Confirmación</b></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="seguridad" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#0B0E0F;color:#F8F5EF">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,3.5vw,52px)">
+    <div>
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#E5B94F">Seguridad</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">La información de cada empresa permanece separada</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:rgba(248,245,239,.66);margin:16px 0 0;max-width:48ch;text-wrap:pretty">Cada empresa trabaja en su propio espacio y cada usuario accede solo a lo que su rol permite.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px">
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Acceso por rol y permisos</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">Cada persona ve lo que necesita para su trabajo.</i></span>
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Separación entre empresas</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">La información de una empresa no se cruza con otra.</i></span>
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Sesiones controladas</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">El administrador revisa y revoca accesos cuando lo necesita.</i></span>
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Protección de credenciales</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">Las contraseñas no se almacenan en texto legible.</i></span>
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Registro de actividad</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">Queda trazabilidad de las acciones relevantes.</i></span>
+      <span style="border:1px solid rgba(248,245,239,.14);border-radius:14px;padding:16px"><b style="display:block;font:600 13.5px/1.3 Sora,sans-serif">Conexiones oficiales</b><i style="display:block;font:400 13px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.6);margin-top:7px;font-style:normal">La integración con WhatsApp usa los canales oficiales del proveedor.</i></span>
+    </div>
+  </div>
+</section>
+
+<section id="comenzar" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-bottom:1px solid #E4E0D8">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="max-width:620px">
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Cómo comenzar</span>
+      <h2 style="font:600 clamp(28px,3.6vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Implementación acompañada, paso a paso</h2>
+    </div>
+    <div style="margin-top:clamp(26px,3.2vw,42px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:14px">
+      <div style="border-top:2px solid #0B0E0F;padding-top:16px">
+        <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">Paso 01</span>
+        <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:11px 0 0">Solicitas una demostración</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:8px 0 0">Agendamos una sesión para mostrarte el CRM funcionando.</p>
+      </div>
+      <div style="border-top:2px solid #E4E0D8;padding-top:16px">
+        <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">Paso 02</span>
+        <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:11px 0 0">Conocemos tu proceso comercial</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:8px 0 0">Revisamos cómo vende tu equipo hoy y qué necesita ordenar.</p>
+      </div>
+      <div style="border-top:2px solid #E4E0D8;padding-top:16px">
+        <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">Paso 03</span>
+        <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:11px 0 0">Configuramos el espacio y los usuarios</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:8px 0 0">Identidad, pipeline, asesores y conexión de WhatsApp Business.</p>
+      </div>
+      <div style="border-top:2px solid #E4E0D8;padding-top:16px">
+        <span style="font:600 11px/1 'JetBrains Mono',monospace;color:#B7790B">Paso 04</span>
+        <h3 style="font:600 17px/1.3 Sora,sans-serif;margin:11px 0 0">Tu equipo empieza a trabajar con orden</h3>
+        <p style="font:400 14px/1.55 'Instrument Sans',sans-serif;color:#62676D;margin:8px 0 0">Con acompañamiento durante los primeros días de uso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="demo" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px)">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(28px,3.5vw,52px);align-items:start">
+    <div>
+      <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Demostración</span>
+      <h2 style="font:600 clamp(28px,3.6vw,46px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0;text-wrap:balance">Veamos Tehus CRM con el proceso de tu empresa</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:#62676D;margin:16px 0 0;max-width:46ch;text-wrap:pretty">Cuéntanos cómo vende tu equipo y preparamos una demostración enfocada en tu caso. Sin compromiso.</p>
+      <div style="margin-top:26px;display:grid;gap:12px;max-width:420px">
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:17px;height:17px;margin-top:2px;border-radius:50%;background:rgba(183,121,11,.13);color:#B7790B;font:700 10px/17px 'Instrument Sans',sans-serif;text-align:center">✓</span>Sesión guiada de aproximadamente 30 minutos</span>
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:17px;height:17px;margin-top:2px;border-radius:50%;background:rgba(183,121,11,.13);color:#B7790B;font:700 10px/17px 'Instrument Sans',sans-serif;text-align:center">✓</span>Revisión de la conexión de WhatsApp Business en tu caso</span>
+        <span style="display:flex;gap:10px;font:400 14.5px/1.45 'Instrument Sans',sans-serif;color:#0B0E0F"><span style="flex:none;width:17px;height:17px;margin-top:2px;border-radius:50%;background:rgba(183,121,11,.13);color:#B7790B;font:700 10px/17px 'Instrument Sans',sans-serif;text-align:center">✓</span>Propuesta de configuración para tu equipo</span>
+      </div>
+      <a href="#contacto" style="display:inline-block;margin-top:24px;font:600 14.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;border:1px solid #E4E0D8;background:#FFFFFF;padding:14px 20px;border-radius:11px;transition:border-color .18s ease" style-hover="border-color:#B7790B">Hablar con un asesor</a>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E4E0D8;border-radius:20px;padding:clamp(20px,2.4vw,32px);box-shadow:0 34px 70px -46px rgba(11,14,15,.5)">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" noValidate="{{ true }}" style="display:grid;gap:16px">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:14px">
+            <label style="display:grid;gap:7px">
+              <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Nombre</span>
+              <input type="text" name="nombre" autoComplete="name" placeholder="Tu nombre" value="{{ f.nombre }}" onChange="{{ onNombre }}" style="width:100%;padding:13px 14px;border-radius:11px;border:{{ bd_nombre }};background:#FCFAF6;font:400 14px/1.2 'Instrument Sans',sans-serif;color:#0B0E0F;transition:border-color .16s ease" style-focus="border-color:#B7790B;background:#FFFFFF">
+              <sc-if value="{{ has_nombre }}" hint-placeholder-val="{{ false }}"><span style="font:500 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B">{{ e_nombre }}</span></sc-if>
+            </label>
+            <label style="display:grid;gap:7px">
+              <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Empresa</span>
+              <input type="text" name="empresa" autoComplete="organization" placeholder="Nombre de tu empresa" value="{{ f.empresa }}" onChange="{{ onEmpresa }}" style="width:100%;padding:13px 14px;border-radius:11px;border:{{ bd_empresa }};background:#FCFAF6;font:400 14px/1.2 'Instrument Sans',sans-serif;color:#0B0E0F;transition:border-color .16s ease" style-focus="border-color:#B7790B;background:#FFFFFF">
+              <sc-if value="{{ has_empresa }}" hint-placeholder-val="{{ false }}"><span style="font:500 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B">{{ e_empresa }}</span></sc-if>
+            </label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:14px">
+            <label style="display:grid;gap:7px">
+              <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Correo corporativo</span>
+              <input type="email" name="correo" autoComplete="email" placeholder="nombre@empresa.com" value="{{ f.correo }}" onChange="{{ onCorreo }}" style="width:100%;padding:13px 14px;border-radius:11px;border:{{ bd_correo }};background:#FCFAF6;font:400 14px/1.2 'Instrument Sans',sans-serif;color:#0B0E0F;transition:border-color .16s ease" style-focus="border-color:#B7790B;background:#FFFFFF">
+              <sc-if value="{{ has_correo }}" hint-placeholder-val="{{ false }}"><span style="font:500 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B">{{ e_correo }}</span></sc-if>
+            </label>
+            <label style="display:grid;gap:7px">
+              <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Teléfono</span>
+              <input type="tel" name="telefono" autoComplete="tel" placeholder="Número de contacto" value="{{ f.telefono }}" onChange="{{ onTelefono }}" style="width:100%;padding:13px 14px;border-radius:11px;border:{{ bd_telefono }};background:#FCFAF6;font:400 14px/1.2 'Instrument Sans',sans-serif;color:#0B0E0F;transition:border-color .16s ease" style-focus="border-color:#B7790B;background:#FFFFFF">
+              <sc-if value="{{ has_telefono }}" hint-placeholder-val="{{ false }}"><span style="font:500 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B">{{ e_telefono }}</span></sc-if>
+            </label>
+          </div>
+          <label style="display:grid;gap:7px">
+            <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Cantidad aproximada de asesores</span>
+            <select name="asesores" value="{{ f.asesores }}" onChange="{{ onAsesores }}" style="width:100%;padding:13px 14px;border-radius:11px;border:1px solid #E4E0D8;background:#FCFAF6;font:400 14px/1.2 'Instrument Sans',sans-serif;color:#0B0E0F" style-focus="border-color:#B7790B;background:#FFFFFF">
+              <option value="">Selecciona una opción</option>
+              <option value="1-3">1 a 3</option>
+              <option value="4-10">4 a 10</option>
+              <option value="11-25">11 a 25</option>
+              <option value="25+">Más de 25</option>
+            </select>
+          </label>
+          <label style="display:grid;gap:7px">
+            <span style="font:600 12.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F">Principal necesidad</span>
+            <textarea name="necesidad" rows="3" placeholder="Ej.: organizar las conversaciones de WhatsApp y no perder seguimientos" value="{{ f.necesidad }}" onChange="{{ onNecesidad }}" style="width:100%;padding:13px 14px;border-radius:11px;border:1px solid #E4E0D8;background:#FCFAF6;font:400 14px/1.5 'Instrument Sans',sans-serif;color:#0B0E0F;resize:vertical" style-focus="border-color:#B7790B;background:#FFFFFF"></textarea>
+          </label>
+          <label style="display:flex;gap:11px;align-items:flex-start;cursor:pointer">
+            <input type="checkbox" name="consent" checked="{{ f.consent }}" onChange="{{ onConsent }}" style="width:18px;height:18px;margin-top:2px;accent-color:#B7790B;flex:none">
+            <span style="font:400 12.5px/1.5 'Instrument Sans',sans-serif;color:#62676D">Autorizo el tratamiento de mis datos para ser contactado sobre esta solicitud, según la política de tratamiento de datos.</span>
+          </label>
+          <sc-if value="{{ has_consent }}" hint-placeholder-val="{{ false }}"><span style="font:500 11.5px/1.3 'Instrument Sans',sans-serif;color:#C0392B;margin-top:-8px">{{ e_consent }}</span></sc-if>
+          <sc-if value="{{ hasError }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid rgba(192,57,43,.3);background:rgba(192,57,43,.05);border-radius:11px;padding:12px 14px;font:500 12.5px/1.45 'Instrument Sans',sans-serif;color:#C0392B">Revisa los campos marcados para poder enviar tu solicitud.</div>
+          </sc-if>
+          <button type="submit" disabled="{{ isSending }}" style="position:relative;overflow:hidden;width:100%;border:0;cursor:pointer;background:#0B0E0F;color:#F8F5EF;font:600 15px/1 'Instrument Sans',sans-serif;padding:17px 22px;border-radius:12px;box-shadow:0 1px 0 rgba(229,185,79,.55) inset,0 12px 26px -12px rgba(11,14,15,.6);transition:transform .18s ease" style-hover="transform:translateY(-2px)">{{ submitLabel }}</button>
+          <p style="margin:0;font:400 12px/1.5 'Instrument Sans',sans-serif;color:#8A8F95;text-align:center">Te responderemos con horarios disponibles para la demostración.</p>
+        </form>
+      </sc-if>
+      <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:14px;justify-items:center;text-align:center;padding:26px 6px">
+          <span style="width:52px;height:52px;border-radius:50%;background:rgba(37,211,102,.14);color:#1a9e51;font:700 22px/52px 'Instrument Sans',sans-serif">✓</span>
+          <b style="font:600 22px/1.25 Sora,sans-serif">Solicitud enviada</b>
+          <p style="margin:0;font:400 14.5px/1.6 'Instrument Sans',sans-serif;color:#62676D;max-width:36ch">Gracias. Un asesor de Tehus CRM te contactará para agendar la demostración.</p>
+          <button type="button" onClick="{{ reset }}" style="border:1px solid #E4E0D8;background:#FFFFFF;cursor:pointer;font:600 13.5px/1 'Instrument Sans',sans-serif;color:#0B0E0F;padding:13px 18px;border-radius:11px" style-hover="border-color:#B7790B">Enviar otra solicitud</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding:clamp(56px,6vw,104px) clamp(18px,4vw,44px);background:#FFFFFF;border-top:1px solid #E4E0D8;border-bottom:1px solid #E4E0D8">
+  <div style="max-width:900px;margin:0 auto">
+    <span style="font:600 12px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#B7790B">Preguntas frecuentes</span>
+    <h2 style="font:600 clamp(28px,3.6vw,46px)/1.08 Sora,sans-serif;letter-spacing:-.025em;margin:16px 0 0">Respuestas claras antes de empezar</h2>
+    <div style="margin-top:clamp(24px,3vw,40px);border-top:1px solid #E4E0D8">
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg1 }}">
+        <button type="button" onClick="{{ t1 }}" aria-expanded="{{ o1 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Tehus CRM reemplaza WhatsApp Business?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r1 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o1 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">No. Lo complementa: tu empresa sigue usando su cuenta de WhatsApp Business y el CRM organiza esas conversaciones junto con clientes, oportunidades y tareas.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg2 }}">
+        <button type="button" onClick="{{ t2 }}" aria-expanded="{{ o2 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Puedo conservar mi número actual?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r2 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Dependiendo de la elegibilidad del número y de las opciones habilitadas por Meta, es posible utilizar modalidades que permiten conservar el número en WhatsApp Business. Durante la configuración verificamos cada caso.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg3 }}">
+        <button type="button" onClick="{{ t3 }}" aria-expanded="{{ o3 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Cuántos asesores pueden utilizar el CRM?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r3 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Se configura según el tamaño de tu equipo comercial. En la demostración definimos cuántos usuarios necesita tu empresa y cómo se organizarán.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg4 }}">
+        <button type="button" onClick="{{ t4 }}" aria-expanded="{{ o4 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Cada empresa tiene su propio espacio?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r4 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o4 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Sí. Cada empresa trabaja en su propio espacio, con sus usuarios, su información comercial y su configuración; los datos no se comparten entre empresas.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg5 }}">
+        <button type="button" onClick="{{ t5 }}" aria-expanded="{{ o5 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Puedo personalizar el CRM con mi marca?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r5 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Puedes configurar nombre, logotipo, colores principal y secundario, datos comerciales y fiscales, moneda y la identidad de tus cotizaciones.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg6 }}">
+        <button type="button" onClick="{{ t6 }}" aria-expanded="{{ o6 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Cómo se protegen los datos?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r6 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o6 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Con acceso por roles y permisos, separación de la información entre empresas, control de sesiones, protección de credenciales y registro de actividad.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg7 }}">
+        <button type="button" onClick="{{ t7 }}" aria-expanded="{{ o7 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Puedo administrar permisos de mi equipo?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r7 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o7 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Sí. El administrador de la empresa define qué puede ver y hacer cada asesor, asigna clientes y puede revocar accesos cuando lo necesite.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg8 }}">
+        <button type="button" onClick="{{ t8 }}" aria-expanded="{{ o8 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Necesito conocimientos técnicos?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r8 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o8 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">No. La configuración inicial es acompañada y el uso diario está pensado para equipos comerciales, no para perfiles técnicos.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg9 }}">
+        <button type="button" onClick="{{ t9 }}" aria-expanded="{{ o9 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿La conexión con WhatsApp depende de Meta?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r9 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o9 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Sí. La conexión se realiza por los canales oficiales, y la disponibilidad de algunas funciones depende de la configuración y aprobación de la cuenta de WhatsApp Business en Meta.</p></sc-if>
+      </div>
+      <div style="border-bottom:1px solid #E4E0D8;background:{{ bg10 }}">
+        <button type="button" onClick="{{ t10 }}" aria-expanded="{{ o10 }}" style="width:100%;display:flex;gap:16px;align-items:center;text-align:left;background:transparent;border:0;cursor:pointer;padding:20px 4px;font:600 clamp(15px,1.3vw,17.5px)/1.4 Sora,sans-serif;color:#0B0E0F"><span style="flex:1">¿Cómo solicito una demostración?</span><span style="flex:none;width:22px;height:22px;display:grid;place-items:center;color:#B7790B;font:400 19px/1 'Instrument Sans',sans-serif;transform:{{ r10 }};transition:transform .22s ease">+</span></button>
+        <sc-if value="{{ o10 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;padding:0 42px 22px 4px;font:400 15px/1.65 'Instrument Sans',sans-serif;color:#62676D">Completa el formulario de esta página con los datos de tu empresa y te contactamos para agendar la sesión.</p></sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="position:relative;padding:clamp(60px,7vw,120px) clamp(18px,4vw,44px);background:radial-gradient(900px 480px at 78% 10%,rgba(183,121,11,.22),transparent 62%),#0B0E0F;color:#F8F5EF;overflow:hidden">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(30px,4vw,56px);align-items:center">
+    <div>
+      <h2 style="font:600 clamp(28px,3.6vw,46px)/1.12 Sora,sans-serif;letter-spacing:-.025em;margin:0;max-width:26ch;text-wrap:balance">Tu equipo ya tiene conversaciones. Ahora necesita un sistema para convertirlas en ventas.</h2>
+      <p style="font:400 clamp(16px,1.3vw,18px)/1.6 'Instrument Sans',sans-serif;color:rgba(248,245,239,.68);margin:18px 0 0;max-width:46ch">Conoce cómo Tehus CRM puede adaptarse al proceso comercial de tu empresa.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+        <a href="#demo" style="font:600 15px/1 'Instrument Sans',sans-serif;color:#0B0E0F;background:linear-gradient(160deg,#E5B94F,#B7790B);padding:16px 26px;border-radius:12px;transition:transform .18s ease,filter .18s ease" style-hover="transform:translateY(-2px);filter:brightness(1.06);color:#0B0E0F">Solicitar una demostración</a>
+        <a href="#contacto" style="font:600 15px/1 'Instrument Sans',sans-serif;color:#F8F5EF;border:1px solid rgba(248,245,239,.24);padding:16px 24px;border-radius:12px;transition:border-color .18s ease" style-hover="border-color:#E5B94F;color:#FFFFFF">Hablar con un asesor</a>
+      </div>
+    </div>
+    <div style="display:grid;gap:12px">
+      <div style="background:#12161a;border:1px solid rgba(248,245,239,.12);border-radius:14px;padding:14px;display:flex;gap:11px;align-items:center;animation:tFloat 7s ease-in-out infinite">
+        <span style="width:9px;height:9px;border-radius:50%;background:#25D366;flex:none;animation:tPulse 2.6s ease-in-out infinite"></span>
+        <b style="font:600 12.5px/1.3 'Instrument Sans',sans-serif">Nueva conversación · WhatsApp Business</b>
+      </div>
+      <div style="background:#12161a;border:1px solid rgba(248,245,239,.12);border-radius:14px;padding:14px">
+        <span style="display:flex;gap:7px">
+          <span style="flex:1;height:6px;border-radius:3px;background:#E5B94F"></span>
+          <span style="flex:1;height:6px;border-radius:3px;background:#B7790B"></span>
+          <span style="flex:1;height:6px;border-radius:3px;background:rgba(248,245,239,.18)"></span>
+          <span style="flex:1;height:6px;border-radius:3px;background:rgba(248,245,239,.18)"></span>
+        </span>
+        <p style="margin:10px 0 0;font:500 12px/1.4 'Instrument Sans',sans-serif;color:rgba(248,245,239,.7)">Oportunidad en <b style="color:#FFFFFF">Cotización</b> · $ 8.400.000</p>
+      </div>
+      <div style="background:#12161a;border:1px solid rgba(229,185,79,.3);border-radius:14px;padding:14px;display:flex;gap:11px;align-items:center;animation:tFloat 8s .6s ease-in-out infinite">
+        <span style="width:14px;height:14px;border:2px solid #E5B94F;border-radius:4px;flex:none"></span>
+        <b style="font:600 12.5px/1.3 'Instrument Sans',sans-serif">Tarea de seguimiento · hoy 4:00 p.m.</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto" style="background:#080A0B;color:#F8F5EF;padding:clamp(44px,5vw,72px) clamp(18px,4vw,44px) 30px">
+  <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:clamp(24px,3vw,44px)">
+    <div style="min-width:200px">
+      <span style="display:flex;align-items:center;gap:10px">
+        <span style="width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,#1a1d1f,#0B0E0F);display:grid;place-items:center"><span style="width:12px;height:12px;border:2.5px solid #E5B94F;border-radius:50%;border-right-color:transparent;display:block"></span></span>
+        <b style="font:600 16px/1 Sora,sans-serif">Tehus<span style="color:#B7790B"> CRM</span></b>
+      </span>
+      <p style="font:400 13.5px/1.6 'Instrument Sans',sans-serif;color:rgba(248,245,239,.55);margin:14px 0 0;max-width:30ch">CRM comercial para equipos que venden por WhatsApp. Colombia.</p>
+      <p style="font:400 12.5px/1.6 'Instrument Sans',sans-serif;color:rgba(248,245,239,.38);margin:12px 0 0">Correo de contacto: pendiente de confirmar<br>WhatsApp comercial: pendiente de confirmar</p>
+    </div>
+    <div>
+      <b style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,239,.45)">Producto</b>
+      <div style="display:grid;gap:10px;margin-top:14px">
+        <a href="#funciones" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Funciones</a>
+        <a href="#whatsapp" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">WhatsApp</a>
+        <a href="#empresas" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Personalización</a>
+        <a href="#seguridad" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Seguridad</a>
+      </div>
+    </div>
+    <div>
+      <b style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,239,.45)">Empresa</b>
+      <div style="display:grid;gap:10px;margin-top:14px">
+        <a href="#producto" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Nosotros</a>
+        <a href="#contacto" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Contacto</a>
+        <a href="#demo" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Solicitar demostración</a>
+      </div>
+    </div>
+    <div>
+      <b style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,239,.45)">Legal</b>
+      <div style="display:grid;gap:10px;margin-top:14px">
+        <a href="#legal" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Política de privacidad</a>
+        <a href="#legal" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Términos y condiciones</a>
+        <a href="#legal" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Política de tratamiento de datos</a>
+      </div>
+    </div>
+    <div id="acceso">
+      <b style="font:600 11px/1 'Instrument Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,245,239,.45)">Acceso</b>
+      <div style="display:grid;gap:10px;margin-top:14px">
+        <a href="#acceso" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Iniciar sesión</a>
+        <a href="#demo" style="font:400 13.5px/1 'Instrument Sans',sans-serif;color:rgba(248,245,239,.78)" style-hover="color:#E5B94F">Solicitar acceso</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1240px;margin:clamp(30px,3.5vw,48px) auto 0;padding-top:20px;border-top:1px solid rgba(248,245,239,.1);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between">
+    <span style="font:400 12px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.38)">© 2026 Tehus CRM. Todos los derechos reservados.</span>
+    <span style="font:400 12px/1.5 'Instrument Sans',sans-serif;color:rgba(248,245,239,.38)">WhatsApp es una marca de Meta Platforms, Inc. Tehus CRM no está afiliado a Meta.</span>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:1000},&quot;showValueStrip&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Secciones&quot;},&quot;animateProduct&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Movimiento&quot;}}">
+class Component extends DCLogic {
+  state = { open: 0, f: { nombre:'', empresa:'', correo:'', telefono:'', asesores:'', necesidad:'', consent:false }, errs: {}, status: 'normal' };
+
+  set(k, v) { this.setState(s => ({ f: Object.assign({}, s.f, { [k]: v }), errs: Object.assign({}, s.errs, { [k]: undefined }) })); }
+
+  validate() {
+    const f = this.state.f, e = {};
+    if (!f.nombre.trim()) e.nombre = 'Escribe tu nombre';
+    if (!f.empresa.trim()) e.empresa = 'Escribe el nombre de tu empresa';
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(f.correo.trim())) e.correo = 'Ingresa un correo válido';
+    if (f.telefono.replace(/\D/g,'').length < 7) e.telefono = 'Ingresa un teléfono de contacto';
+    if (!f.consent) e.consent = 'Necesitamos tu autorización para contactarte';
+    return e;
+  }
+
+  submit = (ev) => {
+    if (ev && ev.preventDefault) ev.preventDefault();
+    const errs = this.validate();
+    if (Object.keys(errs).length) { this.setState({ errs, status: 'error' }); return; }
+    this.setState({ errs: {}, status: 'sending' });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ status: 'sent' }), 1400);
+  };
+
+  reset = () => this.setState({ status: 'normal', f: { nombre:'', empresa:'', correo:'', telefono:'', asesores:'', necesidad:'', consent:false }, errs: {} });
+
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  renderVals() {
+    const v = {
+      showValueStrip: this.props.showValueStrip ?? true,
+      animateProduct: this.props.animateProduct ?? true,
+      f: this.state.f,
+      errs: this.state.errs,
+      submit: this.submit,
+      reset: this.reset,
+      isSending: this.state.status === 'sending',
+      isSent: this.state.status === 'sent',
+      notSent: this.state.status !== 'sent',
+      hasError: this.state.status === 'error' && Object.keys(this.state.errs).length > 0,
+      submitLabel: this.state.status === 'sending' ? 'Enviando…' : 'Solicitar demostración',
+      onNombre: e => this.set('nombre', e.target.value),
+      onEmpresa: e => this.set('empresa', e.target.value),
+      onCorreo: e => this.set('correo', e.target.value),
+      onTelefono: e => this.set('telefono', e.target.value),
+      onAsesores: e => this.set('asesores', e.target.value),
+      onNecesidad: e => this.set('necesidad', e.target.value),
+      onConsent: e => this.set('consent', e.target.checked)
+    };
+    ['nombre','empresa','correo','telefono','consent'].forEach(k => {
+      v['e_' + k] = this.state.errs[k];
+      v['has_' + k] = !!this.state.errs[k];
+      v['bd_' + k] = this.state.errs[k] ? '1px solid #C0392B' : '1px solid #E4E0D8';
+    });
+    const pulse = this.props.animateProduct ?? true;
+    v.marquee = pulse ? 'tFloat 6.5s ease-in-out infinite' : 'none';
+    for (let i = 1; i <= 10; i++) {
+      const open = this.state.open === i;
+      v['o' + i] = open;
+      v['r' + i] = open ? 'rotate(45deg)' : 'rotate(0deg)';
+      v['bg' + i] = open ? '#FFFFFF' : 'transparent';
+      v['t' + i] = () => this.setState(s => ({ open: s.open === i ? 0 : i }));
+    }
+    return v;
+  }
+}
+</script>
+</body>
+</html>

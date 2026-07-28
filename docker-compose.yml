@@ -1,0 +1,63 @@
+# =====================================================================
+# Tehus CRM · web comercial
+#
+# Servicio AISLADO. No comparte red, volúmenes ni dependencias con el CRM.
+# No declara base de datos: la landing no tiene estado.
+#
+# El puerto se publica SOLO en la interfaz de loopback: Caddy es quien
+# expone el sitio hacia fuera. Así no se abre ningún puerto nuevo al exterior.
+# =====================================================================
+services:
+  tehus-crm-web:
+    build:
+      context: .
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://crm.tehusrattan.com}
+        NEXT_PUBLIC_CRM_LOGIN_URL: ${NEXT_PUBLIC_CRM_LOGIN_URL:-https://crm-staging.tehusrattan.com/login}
+        NEXT_PUBLIC_ALLOW_INDEXING: ${NEXT_PUBLIC_ALLOW_INDEXING:-true}
+    image: tehus-crm-web:latest
+    container_name: tehus-crm-web
+    restart: unless-stopped
+
+    # 127.0.0.1 → solo accesible desde el propio host (Caddy).
+    # El puerto 3100 se eligió para no colisionar con los servicios del CRM.
+    ports:
+      - "127.0.0.1:3100:3000"
+
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      HOSTNAME: "0.0.0.0"
+      # Destino del formulario. `log` no envía ni almacena nada.
+      DEMO_LEAD_SINK: ${DEMO_LEAD_SINK:-log}
+      DEMO_RATE_LIMIT_MAX: ${DEMO_RATE_LIMIT_MAX:-5}
+      DEMO_RATE_LIMIT_WINDOW_MS: ${DEMO_RATE_LIMIT_WINDOW_MS:-600000}
+
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+    # Límites conservadores: la landing es estática y consume muy poco.
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 384M
+        reservations:
+          memory: 128M
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    security_opt:
+      - no-new-privileges:true
