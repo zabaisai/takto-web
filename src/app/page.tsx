@@ -4,6 +4,7 @@ import { ValueStrip } from "@/components/landing/ValueStrip";
 import { ProblemSection } from "@/components/landing/ProblemSection";
 import { FeaturesSection } from "@/components/landing/FeaturesSection";
 import { WhatsappSection } from "@/components/landing/WhatsappSection";
+import { FlowSection } from "@/components/landing/FlowSection";
 import { ConversationsSection } from "@/components/landing/ConversationsSection";
 import { ContactsSection } from "@/components/landing/ContactsSection";
 import { PipelineSection } from "@/components/landing/PipelineSection";
@@ -44,6 +45,7 @@ export default function HomePage() {
       <ProblemSection />
       <FeaturesSection />
       <WhatsappSection />
+      <FlowSection />
       <ConversationsSection />
       <ContactsSection />
       <PipelineSection />

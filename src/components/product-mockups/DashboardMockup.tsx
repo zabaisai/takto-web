@@ -11,7 +11,9 @@ export function DashboardMockup() {
 
   return (
     <div
-      className="relative min-h-[clamp(380px,42vw,520px)] animate-(--animate-t-rise-slow)"
+      // El padding superior e inferior reserva sitio a las tarjetas flotantes
+      // para que no se solapen con el contenido del panel.
+      className="relative min-h-[clamp(380px,42vw,520px)] animate-(--animate-t-rise-slow) pt-12 pb-10 sm:pt-14"
       role="img"
       aria-label="Vista del módulo de conversaciones de Tehus CRM con la lista de chats, el detalle del cliente y su oportunidad asociada. Datos de ejemplo."
     >
@@ -141,8 +143,9 @@ export function DashboardMockup() {
         </div>
       </div>
 
-      {/* Tarjeta flotante superior */}
-      <div className="absolute top-[-3%] right-[-1%] w-[min(255px,72%)] animate-(--animate-t-float) rounded-[14px] border border-line bg-surface p-3 shadow-[0_22px_46px_-18px_rgba(11,14,15,.36)]">
+      {/* Tarjeta flotante superior. Vive en el espacio reservado por el
+          padding, así que no cubre ningún dato del panel. */}
+      <div className="absolute top-0 right-0 w-[min(240px,66%)] animate-(--animate-t-float) rounded-[14px] border border-line bg-surface p-3 shadow-[0_22px_46px_-18px_rgba(11,14,15,.36)]">
         <div className="flex items-center gap-[9px]">
           <span
             aria-hidden="true"
@@ -158,7 +161,7 @@ export function DashboardMockup() {
       </div>
 
       {/* Tarjeta flotante inferior */}
-      <div className="on-dark absolute bottom-[2%] left-[-1%] w-[min(230px,66%)] animate-(--animate-t-float-slow) rounded-[14px] bg-ink px-[13px] py-3 text-bone shadow-[0_22px_46px_-18px_rgba(11,14,15,.5)]">
+      <div className="on-dark absolute bottom-0 left-0 w-[min(220px,62%)] animate-(--animate-t-float-slow) rounded-[14px] bg-ink px-[13px] py-3 text-bone shadow-[0_22px_46px_-18px_rgba(11,14,15,.5)]">
         <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
           Pipeline
         </span>

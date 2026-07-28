@@ -130,20 +130,58 @@ export const features = {
 
 export const whatsapp = {
   eyebrow: "WhatsApp Business",
-  title: "Tu WhatsApp Business, ahora conectado con todo tu proceso comercial",
-  body: "Conecta el número de tu empresa mediante el proceso oficial de Meta y permite que tu equipo atienda, organice y haga seguimiento sin perder el contexto de cada cliente.",
+  title: "De una conversación a una oportunidad, sin perder el contexto",
+  body: "Conecta el WhatsApp Business de tu empresa y permite que tu equipo organice conversaciones, asigne responsables y dé seguimiento desde el CRM.",
   items: [
-    "Conserva el número comercial cuando la modalidad de conexión lo permita",
-    "Organiza todas las conversaciones desde el CRM",
-    "Asigna clientes a asesores y consulta el historial",
-    "Relaciona conversaciones con contactos y oportunidades",
-    "Recibe notificaciones de lo que necesita respuesta",
-    "Mantén el control administrativo del canal",
+    "Conversaciones organizadas en un solo panel.",
+    "Asignación automática o manual a asesores.",
+    "Historial relacionado con cada contacto.",
+    "Oportunidades y tareas creadas desde la conversación.",
+    "Notificaciones para mantener el seguimiento.",
   ],
   ctaPrimary: "Conectar mi empresa",
   ctaSecondary: "Ver cómo funciona",
   disclaimer:
-    "La disponibilidad de determinadas funciones depende de la configuración y aprobación de la cuenta de WhatsApp Business en Meta.",
+    "La conexión y las funciones disponibles dependen de la elegibilidad y configuración de la cuenta en Meta.",
+  /** Etapas de la demostración animada de la columna derecha. */
+  stages: [
+    { id: "recibido", label: "Mensaje recibido" },
+    { id: "identificado", label: "Contacto identificado" },
+    { id: "asignado", label: "Asignado" },
+    { id: "oportunidad", label: "Oportunidad creada" },
+    { id: "seguimiento", label: "Seguimiento programado" },
+  ],
+} as const;
+
+export const flow = {
+  eyebrow: "Flujo comercial",
+  title: "Cada conversación activa el siguiente paso",
+  body: "Tehus CRM conecta mensajes, oportunidades y tareas para que el equipo sepa qué ocurrió y qué debe hacer después.",
+  cta: "Solicitar una demostración",
+  steps: [
+    { title: "Nueva conversación", detail: "Entra un mensaje al número comercial." },
+    { title: "Contacto identificado", detail: "Se reconoce al cliente o se crea su ficha." },
+    { title: "Asesor asignado", detail: "Queda un responsable con nombre y apellido." },
+    { title: "Oportunidad creada", detail: "El interés pasa a ser un negocio con valor." },
+    { title: "Cotización en preparación", detail: "Se arma la propuesta desde el catálogo." },
+    { title: "Tarea programada", detail: "Con fecha, hora y recordatorio." },
+    { title: "Seguimiento realizado", detail: "Queda registrado en el historial del cliente." },
+  ],
+  panel: {
+    contactLabel: "Contacto",
+    contact: "María Gómez",
+    company: "Distribuciones del Valle",
+    messageLabel: "Último mensaje",
+    message: "¿Me confirmas el precio de las 20 sillas?",
+    ownerLabel: "Responsable",
+    owner: "Camilo Restrepo",
+    valueLabel: "Valor de la oportunidad",
+    value: "$ 8.400.000",
+    stageLabel: "Etapa",
+    stage: "Cotización",
+    nextLabel: "Próxima actividad",
+    next: "Enviar cotización · hoy 4:00 p.m.",
+  },
 } as const;
 
 export const conversations = {
