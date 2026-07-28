@@ -1,3 +1,7 @@
+# Banco de pruebas de viewports: artefacto local de QA. Está en public/, así
+# que sin esta línea acabaría servido en producción.
+public/_qa-viewports.*
+
 node_modules
 .next
 .git

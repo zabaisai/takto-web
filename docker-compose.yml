@@ -4,9 +4,25 @@
 # Servicio AISLADO. No comparte red, volúmenes ni dependencias con el CRM.
 # No declara base de datos: la landing no tiene estado.
 #
-# El puerto se publica SOLO en la interfaz de loopback: Caddy es quien
-# expone el sitio hacia fuera. Así no se abre ningún puerto nuevo al exterior.
+# El puerto se publica SOLO en loopback, para diagnóstico desde el propio
+# host. Hacia fuera solo se llega por Caddy. No se abre ningún puerto a
+# internet.
+#
+# Caddy corre dentro de un contenedor, así que NO puede alcanzar el
+# loopback del host: se comprobó en el servidor. Por eso el servicio se une
+# además a la red de borde del CRM (`tehus-crm-staging_proxy`), donde ya
+# están caddy, frontend y backend, y Caddy lo resuelve como `takto-web:3000`.
+#
+# NO se une a `tehus-crm-staging_internal`, que es la única red donde vive
+# PostgreSQL. Sin volúmenes compartidos, sin base de datos, sin variables
+# del CRM.
 # =====================================================================
+
+# Nombre de proyecto explícito: sin esto Compose lo deduce del directorio,
+# que en este equipo es `tehus-crm-web`. Fijarlo evita crear un proyecto con
+# el nombre viejo al desplegar.
+name: takto-web
+
 services:
   takto-web:
     build:
@@ -20,8 +36,12 @@ services:
     container_name: takto-web
     restart: unless-stopped
 
-    # 127.0.0.1 → solo accesible desde el propio host (Caddy).
-    # El puerto 3100 se eligió para no colisionar con los servicios del CRM.
+    networks:
+      - edge
+
+    # Solo loopback: para `curl 127.0.0.1:3100` en el smoke test del host.
+    # 3100 verificado libre en el servidor (ss -ltn) y sin colisión con el
+    # CRM, la API, PostgreSQL, pgAdmin ni Caddy.
     ports:
       - "127.0.0.1:3100:3000"
 
@@ -62,3 +82,11 @@ services:
 
     security_opt:
       - no-new-privileges:true
+
+# La red de borde ya existe: la crea el stack del CRM. Se declara `external`
+# para NO gestionarla desde aquí — este compose nunca la crea ni la borra.
+# Sobrescribible con TAKTO_EDGE_NETWORK si el stack del CRM cambia de nombre.
+networks:
+  edge:
+    external: true
+    name: ${TAKTO_EDGE_NETWORK:-tehus-crm-staging_proxy}
