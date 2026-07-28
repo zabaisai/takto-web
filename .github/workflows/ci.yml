@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Sin secretos: el pipeline no necesita ninguno.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Misma versión que el runtime de la imagen.
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Pruebas
+        run: npm test
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Comprobación de tipos
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Build de la imagen
+        # Sin CSP_ALLOW_INSECURE_PREVIEW: se construye como producción.
+        run: docker build -t takto-web:ci .
+
+      - name: La imagen no lleva artefactos de QA ni .env
+        run: |
+          docker run --rm --entrypoint sh takto-web:ci -c '
+            for f in /app/src /app/docs /app/mockup /app/.git \
+                     /app/public/_qa-viewports.html /app/public/_qa-viewports.js; do
+              if [ -e "$f" ]; then echo "ARTEFACTO INESPERADO: $f"; exit 1; fi
+            done
+            if find / -maxdepth 4 -name ".env*" -not -path "*/node_modules/*" | grep -q .; then
+              echo "HAY UN .env EN LA IMAGEN"; exit 1
+            fi
+            echo "imagen limpia"'

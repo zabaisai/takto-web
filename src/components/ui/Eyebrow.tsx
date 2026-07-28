@@ -6,9 +6,16 @@ type EyebrowProps = {
   className?: string;
 };
 
-/** Etiqueta pequeña en mayúsculas que encabeza cada sección del mockup. */
+/**
+ * Etiqueta pequeña en mayúsculas que encabeza cada sección.
+ *
+ * A 12 px es texto pequeño, así que sobre fondos claros usa el tono reforzado
+ * (`--color-brand-text`, 5.44:1 sobre marfil) en lugar del principal, que se
+ * queda en 3.40:1 y no cumple AA. Sobre superficies oscuras el secundario ya
+ * llega a 10.42:1, así que ahí sí se usa.
+ */
 export function Eyebrow({ children, tone = "brand", className = "" }: EyebrowProps) {
-  const color = tone === "gold" ? "text-brand-gold" : "text-brand";
+  const color = tone === "gold" ? "text-brand-gold" : "text-brand-text";
   return (
     <span
       className={`block text-[12px] leading-none font-semibold tracking-[0.1em] uppercase ${color} ${className}`}

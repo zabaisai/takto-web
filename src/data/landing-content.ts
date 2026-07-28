@@ -1,11 +1,12 @@
 /**
- * Contenido de la landing.
+ * Contenido de la landing de TAKTO.
  *
- * Todos los textos provienen del mockup aprobado
- * (`mockup/tehus-crm-landing.mockup.html`). No se añaden estadísticas,
- * clientes, testimonios, certificaciones ni precios que el mockup no declare.
+ * La estructura y el tono vienen del mockup aprobado
+ * (`mockup/landing.mockup.html`). No se añaden estadísticas, clientes,
+ * testimonios, certificaciones ni precios que el mockup no declare.
  *
  * Los nombres de personas y empresas son deliberadamente ficticios.
+ * La marca sale de `@/lib/site`; aquí no se escribe a mano.
  */
 
 export const nav = [
@@ -21,17 +22,24 @@ export const cta = {
   primary: "Solicitar una demostración",
   primaryShort: "Solicitar demostración",
   secondary: "Ver cómo funciona",
-  login: "Iniciar sesión",
+  /** Acceso al CRM de pruebas. */
+  login: "Ingresar",
+  /**
+   * El onboarding exige código de invitación, así que el botón NO dice
+   * «Crear mi empresa»: eso se leería como registro libre.
+   */
+  activate: "Activar mi empresa",
+  activateNote: "Acceso disponible mediante invitación.",
 } as const;
 
 export const hero = {
-  eyebrow: "CRM para equipos que venden por WhatsApp",
+  eyebrow: "CRM comercial orientado a ventas",
   title: {
-    lead: "Convierte cada conversación en una ",
-    highlight: "oportunidad de venta",
+    lead: "Cada oportunidad, un ",
+    highlight: "siguiente movimiento",
   },
   subtitle:
-    "Centraliza WhatsApp, organiza tus clientes y ayuda a tu equipo comercial a hacer seguimiento desde un solo lugar.",
+    "Centraliza conversaciones, prospectos, tareas, cotizaciones y resultados. TAKTO ayuda a tu equipo comercial a mover oportunidades y cerrar más.",
   note: "Configuración acompañada · Acceso por empresa · Soporte personalizado",
 } as const;
 
@@ -68,7 +76,7 @@ export const problem = {
     },
   ],
   statement: {
-    lead: "Tehus CRM reúne el proceso comercial para que cada contacto, mensaje, tarea y oportunidad tenga un ",
+    lead: "TAKTO reúne el proceso comercial para que cada contacto, mensaje, tarea y oportunidad tenga un ",
     highlightA: "responsable",
     middle: " y un ",
     highlightB: "siguiente paso",
@@ -79,7 +87,7 @@ export const problem = {
     items: ["Chats dispersos", "Notas manuales", "Prospectos olvidados", "Poca visibilidad"],
   },
   after: {
-    label: "Con Tehus CRM",
+    label: "Con TAKTO",
     items: [
       "Conversaciones centralizadas",
       "Clientes organizados",
@@ -130,20 +138,58 @@ export const features = {
 
 export const whatsapp = {
   eyebrow: "WhatsApp Business",
-  title: "Tu WhatsApp Business, ahora conectado con todo tu proceso comercial",
-  body: "Conecta el número de tu empresa mediante el proceso oficial de Meta y permite que tu equipo atienda, organice y haga seguimiento sin perder el contexto de cada cliente.",
+  title: "De una conversación a una oportunidad, sin perder el contexto",
+  body: "Conecta el WhatsApp Business de tu empresa y permite que tu equipo organice conversaciones, asigne responsables y dé seguimiento desde el CRM.",
   items: [
-    "Conserva el número comercial cuando la modalidad de conexión lo permita",
-    "Organiza todas las conversaciones desde el CRM",
-    "Asigna clientes a asesores y consulta el historial",
-    "Relaciona conversaciones con contactos y oportunidades",
-    "Recibe notificaciones de lo que necesita respuesta",
-    "Mantén el control administrativo del canal",
+    "Conversaciones organizadas en un solo panel.",
+    "Asignación automática o manual a asesores.",
+    "Historial relacionado con cada contacto.",
+    "Oportunidades y tareas creadas desde la conversación.",
+    "Notificaciones para mantener el seguimiento.",
   ],
   ctaPrimary: "Conectar mi empresa",
   ctaSecondary: "Ver cómo funciona",
   disclaimer:
-    "La disponibilidad de determinadas funciones depende de la configuración y aprobación de la cuenta de WhatsApp Business en Meta.",
+    "La conexión y las funciones disponibles dependen de la elegibilidad y configuración de la cuenta en Meta.",
+  /** Etapas de la demostración animada de la columna derecha. */
+  stages: [
+    { id: "recibido", label: "Mensaje recibido" },
+    { id: "identificado", label: "Contacto identificado" },
+    { id: "asignado", label: "Asignado" },
+    { id: "oportunidad", label: "Oportunidad creada" },
+    { id: "seguimiento", label: "Seguimiento programado" },
+  ],
+} as const;
+
+export const flow = {
+  eyebrow: "Flujo comercial",
+  title: "Cada conversación activa el siguiente paso",
+  body: "TAKTO conecta mensajes, oportunidades y tareas para que el equipo sepa qué ocurrió y qué debe hacer después.",
+  cta: "Solicitar una demostración",
+  steps: [
+    { title: "Nueva conversación", detail: "Entra un mensaje al número comercial." },
+    { title: "Contacto identificado", detail: "Se reconoce al cliente o se crea su ficha." },
+    { title: "Asesor asignado", detail: "Queda un responsable con nombre y apellido." },
+    { title: "Oportunidad creada", detail: "El interés pasa a ser un negocio con valor." },
+    { title: "Cotización en preparación", detail: "Se arma la propuesta desde el catálogo." },
+    { title: "Tarea programada", detail: "Con fecha, hora y recordatorio." },
+    { title: "Seguimiento realizado", detail: "Queda registrado en el historial del cliente." },
+  ],
+  panel: {
+    contactLabel: "Contacto",
+    contact: "María Gómez",
+    company: "Distribuciones del Valle",
+    messageLabel: "Último mensaje",
+    message: "¿Me confirmas el precio de las 20 sillas?",
+    ownerLabel: "Responsable",
+    owner: "Camilo Restrepo",
+    valueLabel: "Valor de la oportunidad",
+    value: "$ 8.400.000",
+    stageLabel: "Etapa",
+    stage: "Cotización",
+    nextLabel: "Próxima actividad",
+    next: "Enviar cotización · hoy 4:00 p.m.",
+  },
 } as const;
 
 export const conversations = {
@@ -242,9 +288,9 @@ export const companies = {
   body: "Nombre, logotipo, colores, datos comerciales y fiscales, moneda, identidad de las cotizaciones y el pipeline inicial: cada empresa configura su propio espacio.",
   disclaimer: "Ejemplos ilustrativos. Las empresas mostradas son ficticias.",
   samples: [
-    { name: "Distribuidora Ejemplo", color: "#B7790B", label: "Ámbar · COP", fill: 72 },
-    { name: "Clínica Ejemplo", color: "#1F5C8B", label: "Azul · COP", fill: 64 },
-    { name: "Agroservicios Ejemplo", color: "#2F6B4F", label: "Verde · COP", fill: 80 },
+    { name: "Distribuidora Ejemplo", color: "var(--color-demo-amber)", label: "Ámbar · COP", fill: 72 },
+    { name: "Clínica Ejemplo", color: "var(--color-demo-blue)", label: "Azul · COP", fill: 64 },
+    { name: "Agroservicios Ejemplo", color: "var(--color-demo-green)", label: "Verde · COP", fill: 80 },
   ],
   onboardingTitle: "Incorporación guiada de tu empresa",
   onboarding: [
@@ -320,7 +366,7 @@ export const process = {
 
 export const demo = {
   eyebrow: "Demostración",
-  title: "Veamos Tehus CRM con el proceso de tu empresa",
+  title: "Veamos TAKTO con el proceso de tu empresa",
   body: "Cuéntanos cómo vende tu equipo y preparamos una demostración enfocada en tu caso. Sin compromiso.",
   bullets: [
     "Sesión guiada de aproximadamente 30 minutos",
@@ -336,7 +382,7 @@ export const faq = {
   title: "Respuestas claras antes de empezar",
   items: [
     {
-      q: "¿Tehus CRM reemplaza WhatsApp Business?",
+      q: "¿TAKTO reemplaza WhatsApp Business?",
       a: "No. Lo complementa: tu empresa sigue usando su cuenta de WhatsApp Business y el CRM organiza esas conversaciones junto con clientes, oportunidades y tareas.",
     },
     {
@@ -381,13 +427,13 @@ export const faq = {
 export const finalCta = {
   title:
     "Tu equipo ya tiene conversaciones. Ahora necesita un sistema para convertirlas en ventas.",
-  body: "Conoce cómo Tehus CRM puede adaptarse al proceso comercial de tu empresa.",
+  body: "Conoce cómo TAKTO puede adaptarse al proceso comercial de tu empresa.",
   primary: "Solicitar una demostración",
   secondary: "Hablar con un asesor",
 } as const;
 
 export const footer = {
-  tagline: "CRM comercial para equipos que venden por WhatsApp. Colombia.",
+  tagline: "Mueve oportunidades. Cierra ventas. CRM comercial. Colombia.",
   contactPending: "Correo de contacto: pendiente de confirmar",
   whatsappPending: "WhatsApp comercial: pendiente de confirmar",
   columns: [
@@ -417,9 +463,9 @@ export const footer = {
       ],
     },
   ],
-  copyright: "© 2026 Tehus CRM. Todos los derechos reservados.",
+  copyright: "© 2026 TAKTO. Todos los derechos reservados.",
   trademark:
-    "WhatsApp es una marca de Meta Platforms, Inc. Tehus CRM no está afiliado a Meta.",
+    "WhatsApp es una marca de Meta Platforms, Inc. TAKTO no está afiliado a Meta.",
 } as const;
 
 /**

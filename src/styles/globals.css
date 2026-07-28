@@ -1,20 +1,61 @@
 @import "tailwindcss";
 
 /* =====================================================================
-   Tokens de diseño — extraídos del mockup aprobado
-   mockup/tehus-crm-landing.mockup.html
+   PALETA DE MARCA — ÚNICO lugar del proyecto con valores literales.
+   ---------------------------------------------------------------------
+   La familia cromática definitiva sigue en evaluación entre las rutas
+   7, 9 y 11. Para cambiarla NO hay que tocar ningún componente: basta
+   con sustituir los tres valores de este bloque.
+
+   TAK = principal · TO = secundario. Esa división es estructural y se
+   mantiene sea cual sea la paleta que se elija.
+
+   CONTRASTE (WCAG 2.1) de la paleta provisional, medido contra
+   marfil #F8F5EF y tinta #0B0E0F:
+
+     --color-tak  #B7790B  sobre marfil ->  3.40:1
+        AA solo para texto grande (>=24px o >=19px negrita) y para
+        bordes/iconos. NO cumple para texto pequeño.
+     --color-tak  #B7790B  sobre tinta  ->  4.13:1   AA texto pequeño.
+     --color-to   #E5B94F  sobre marfil ->  1.71:1   NO apto para texto.
+     --color-to   #E5B94F  sobre tinta  -> 10.42:1   AAA.
+     --color-tak-strong #8A5A0A sobre marfil -> 5.44:1  AA texto pequeño.
+
+   Por eso TO se usa como ACENTO sobre claro (fondos, bordes, barras) y
+   como color de texto solo sobre superficies oscuras; y para texto
+   pequeño sobre claro existe --color-brand-text, que apunta al tono
+   reforzado. Al cambiar de ruta cromática hay que rehacer estas cinco
+   medidas y ajustar `--color-tak-strong` hasta pasar 4.5:1 sobre marfil.
    ===================================================================== */
 @theme {
+  /* --- Los tres valores de marca ------------------------------------ */
+  --color-tak: #b7790b;
+  --color-to: #e5b94f;
+  /* Variante reforzada de TAK para texto pequeño sobre fondos claros. */
+  --color-tak-strong: #8a5a0a;
+
+  /* --- Alias semánticos: los componentes usan SOLO estos ------------- */
+  --color-brand: var(--color-tak);
+  --color-brand-gold: var(--color-to);
+  --color-brand-deep: var(--color-tak-strong);
+  /* Texto pequeño sobre marfil/blanco. */
+  --color-brand-text: var(--color-tak-strong);
+  /* Texto pequeño sobre tinta. */
+  --color-brand-text-dark: var(--color-to);
+
   /* Superficies */
   --color-bone: #f8f5ef;
   --color-surface: #ffffff;
   --color-surface-soft: #fcfaf6;
+  --color-surface-tint: #f6f3ed;
 
   /* Tinta y paneles oscuros */
   --color-ink: #0b0e0f;
   --color-ink-panel: #12161a;
   --color-ink-raised: #1a1d1f;
   --color-ink-deep: #080a0b;
+  --color-ink-device: #0f1214;
+  --color-ink-device-line: #2a2e31;
 
   /* Texto */
   --color-muted: #62676d;
@@ -28,12 +69,7 @@
   --color-line-faint: #f0ede6;
   --color-line-dim: #c9c4ba;
 
-  /* Marca */
-  --color-brand: #b7790b;
-  --color-brand-gold: #e5b94f;
-  --color-brand-deep: #8a5a0a;
-
-  /* WhatsApp */
+  /* WhatsApp — fuera de la paleta de marca, son colores del canal */
   --color-wa: #25d366;
   --color-wa-header: #075e54;
   --color-wa-out: #005c4b;
@@ -46,6 +82,7 @@
   --color-danger: #c0392b;
 
   /* Empresas de ejemplo (ficticias) */
+  --color-demo-amber: var(--color-tak);
   --color-demo-blue: #1f5c8b;
   --color-demo-green: #2f6b4f;
 
@@ -127,6 +164,220 @@
 }
 
 /* =====================================================================
+   Superficies de sección
+   ---------------------------------------------------------------------
+   NO usar `bg-[radial-gradient(...),var(--color-x)]` en las clases de
+   Tailwind. Esa forma se traduce a `background-image`, que solo acepta
+   valores <image>; un color como última capa invalida la declaración
+   entera y la sección se queda SIN FONDO. Cuando el texto es claro, eso
+   lo vuelve invisible sobre el marfil de la página.
+
+   Aquí el color y las capas de gradiente se declaran por separado, que
+   es lo único válido.
+   ===================================================================== */
+.surface-hero {
+  background-color: var(--color-bone);
+  background-image:
+    radial-gradient(1100px 520px at 78% -8%, rgba(229, 185, 79, 0.2), transparent 62%),
+    radial-gradient(700px 420px at 8% 12%, rgba(255, 255, 255, 0.9), transparent 60%);
+}
+
+.surface-ink-wa {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(900px 500px at 85% 0%, rgba(37, 211, 102, 0.14), transparent 60%),
+    radial-gradient(700px 400px at 12% 100%, rgba(229, 185, 79, 0.08), transparent 62%);
+}
+
+.surface-ink-gold {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(900px 480px at 78% 10%, rgba(183, 121, 11, 0.24), transparent 62%),
+    radial-gradient(600px 400px at 10% 90%, rgba(229, 185, 79, 0.1), transparent 60%);
+}
+
+.surface-ink-flow {
+  background-color: var(--color-ink);
+  background-image:
+    radial-gradient(800px 460px at 20% 0%, rgba(229, 185, 79, 0.14), transparent 60%),
+    radial-gradient(700px 420px at 92% 80%, rgba(37, 211, 102, 0.08), transparent 62%);
+}
+
+.surface-bone-gold {
+  background-color: var(--color-bone);
+  background-image: radial-gradient(
+    900px 460px at 20% 0%,
+    rgba(229, 185, 79, 0.18),
+    transparent 62%
+  );
+}
+
+/*
+  Cuadrícula muy tenue para dar textura a las superficies oscuras.
+
+  Se evita `mask-image`: aplicar una máscara a una capa a pantalla completa
+  obliga al compositor a rasterizarla en cada fotograma y, junto al
+  `backdrop-filter` del header, llegaba a bloquear el renderizador durante el
+  scroll. Un degradado vertical en el propio `background-image` consigue el
+  mismo desvanecido sin coste de composición.
+
+  Solo se pinta desde tablet en adelante: en móvil no aporta y ahorra trabajo.
+*/
+@media (min-width: 768px) {
+  .surface-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to bottom, transparent, rgba(11, 14, 15, 0.85) 88%),
+      linear-gradient(to right, rgba(248, 245, 239, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(248, 245, 239, 0.04) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      64px 64px,
+      64px 64px;
+  }
+}
+
+/* =====================================================================
+   Sistema de movimiento
+   ---------------------------------------------------------------------
+   Duraciones y curvas únicas para toda la web. Ningún componente define
+   las suyas por su cuenta.
+   ===================================================================== */
+@theme {
+  --ease-premium: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-premium-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --motion-micro: 200ms;
+  --motion-enter: 560ms;
+  --motion-sequence: 7s;
+}
+
+/* ---------------------------------------------------------------------
+   Revelado progresivo.
+
+   REGLA: el estado base es VISIBLE. El contenido nunca depende de que
+   JavaScript se ejecute. Solo cuando un componente `Reveal` confirma
+   que el elemento está por debajo del pliegue Y que hay soporte de
+   IntersectionObserver, se marca `data-reveal="armed"` y se anima su
+   entrada. Si el script falla, si el observer no dispara, si se recarga
+   a media página o si se vuelve atrás, el elemento sigue visible.
+   --------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal="armed"] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--motion-enter) var(--ease-premium-out),
+    transform var(--motion-enter) var(--ease-premium-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* ---------------------------------------------------------------------
+   Entrada escalonada del hero.
+
+   CSS puro con `animation-fill-mode: both`: si las animaciones no corren
+   (reduced motion), la regla de más abajo lo deja visible. Nunca depende
+   de JavaScript, porque el hero es lo primero que se ve.
+   --------------------------------------------------------------------- */
+.hero-in {
+  animation: hero-rise var(--motion-enter) var(--ease-premium-out) both;
+}
+
+/*
+  La entrada del hero anima SOLO el desplazamiento, nunca la opacidad.
+
+  `animation-fill-mode: both` mantiene el fotograma inicial durante el retardo
+  del escalonado. Si el documento no recibe ciclos de pintado —pestaña de
+  fondo, iframe fuera de pantalla, motor con el render suspendido— la
+  animación se queda congelada en ese fotograma. Con opacidad 0 eso dejaba el
+  H1 invisible de forma indefinida, que es justo lo que no puede pasar.
+
+  Animando solo `translateY`, el peor caso es un texto 16 px más abajo:
+  perfectamente legible.
+*/
+@keyframes hero-rise {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Barra de progreso de los pasos del proceso.
+
+   Se completa una sola vez al entrar. Si las animaciones están apagadas
+   la regla de reducción de movimiento la deja completa, no vacía.
+   --------------------------------------------------------------------- */
+.proc-fill {
+  animation: proc-fill 900ms var(--ease-premium-out) both;
+}
+
+@keyframes proc-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Apertura del acordeón de preguntas frecuentes.
+
+   Anima altura y opacidad con `grid-template-rows`, que no produce
+   saltos de layout ni requiere medir el contenido con JavaScript.
+   --------------------------------------------------------------------- */
+.faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms var(--ease-premium),
+    opacity 200ms var(--ease-premium);
+}
+
+.faq-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.faq-panel > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ---------------------------------------------------------------------
+   Secuencias demostrativas.
+
+   Solo se ejecutan cuando el bloque está en pantalla y la pestaña está
+   activa. `Sequence` alterna `data-seq` entre "run" y "idle"; en "idle"
+   las animaciones se pausan en su fotograma actual, nunca se ocultan.
+   --------------------------------------------------------------------- */
+[data-seq] [class*="seq-"] {
+  animation-play-state: paused;
+}
+
+[data-seq="run"] [class*="seq-"] {
+  animation-play-state: running;
+}
+
+/* =====================================================================
    Base
    ===================================================================== */
 @layer base {
@@ -165,6 +416,222 @@
   }
 }
 
+/* =====================================================================
+   Fotogramas de las secuencias demostrativas
+   ---------------------------------------------------------------------
+   Ninguna secuencia lleva un elemento a `opacity: 0` permanente ni lo
+   saca del flujo: el ciclo siempre vuelve a un estado legible y los
+   pasos ya recorridos se quedan encendidos.
+   ===================================================================== */
+
+/* Paso de la secuencia: apagado -> encendido -> se mantiene */
+@keyframes seq-step {
+  0%,
+  8% {
+    opacity: 0.35;
+    border-color: var(--color-line-soft);
+  }
+  14%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Punto/indicador que se ilumina y permanece */
+@keyframes seq-dot {
+  0%,
+  8% {
+    transform: scale(0.6);
+    opacity: 0.3;
+  }
+  16% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  22%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Línea de progreso que avanza y se queda completa */
+@keyframes seq-progress {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes seq-progress-x {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/*
+  Burbuja de mensaje entrante.
+
+  NO baja de 0.45 de opacidad: los mensajes son contenido del mockup, no
+  decoración, así que nunca pueden desaparecer entre ciclos. La animación
+  solo marca cuál "acaba de llegar".
+*/
+@keyframes seq-bubble {
+  0%,
+  4% {
+    opacity: 0.45;
+    transform: translateY(6px) scale(0.98);
+  }
+  12%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Viaje del mensaje del teléfono hacia el CRM */
+@keyframes seq-travel {
+  0%,
+  10% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  16% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+    transform: translateX(var(--seq-travel-distance, 46px));
+  }
+  36%,
+  100% {
+    opacity: 0;
+    transform: translateX(var(--seq-travel-distance, 46px));
+  }
+}
+
+/* Puntos de "escribiendo…" */
+@keyframes seq-typing {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+/* Tarjeta del pipeline que avanza una etapa y regresa */
+@keyframes seq-card-move {
+  0%,
+  22% {
+    transform: translate(0, 0);
+  }
+  38%,
+  72% {
+    transform: translate(var(--seq-move-x, 0), var(--seq-move-y, 0));
+  }
+  88%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Casilla de tarea que se marca */
+@keyframes seq-check {
+  0%,
+  45% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  55%,
+  92% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+
+/* Contador de notificaciones 0 -> 1 */
+@keyframes seq-badge {
+  0%,
+  30% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  38% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  44%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/*
+  Notificación que entra desde arriba.
+
+  Igual que las burbujas: se atenúa, nunca se oculta del todo. Así el bloque
+  se lee entero en cualquier fotograma del ciclo.
+*/
+@keyframes seq-toast {
+  0%,
+  30% {
+    opacity: 0.4;
+    transform: translateY(-8px);
+  }
+  40%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Barrido de luz sobre un borde */
+@keyframes seq-sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+
+/* Rotación entre las tres marcas de ejemplo */
+@keyframes seq-brand {
+  0%,
+  28% {
+    opacity: 1;
+  }
+  33%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* =====================================================================
+   Reducción de movimiento
+   ---------------------------------------------------------------------
+   Se eliminan animaciones, transiciones y desplazamientos, pero NINGUNA
+   información desaparece: los estados de revelado y de secuencia se
+   fuerzan a su fotograma legible.
+   ===================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -176,5 +643,35 @@
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
+  }
+
+  /* El contenido revelable queda visible pase lo que pase. */
+  [data-reveal],
+  [data-reveal="armed"],
+  [data-reveal="in"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Las secuencias se quedan en su estado final legible. */
+  [class*="seq-"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* El hero no depende de su animación de entrada. */
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* La barra de progreso del proceso se muestra completa, no vacía. */
+  .proc-fill {
+    transform: scaleX(1) !important;
+  }
+
+  /* El acordeón abre y cierra de golpe, pero abre. */
+  .faq-panel[data-open="true"] {
+    opacity: 1 !important;
   }
 }

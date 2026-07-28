@@ -1,4 +1,5 @@
 import { companies } from "@/data/landing-content";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/components/ui/Eyebrow";
 
@@ -7,7 +8,7 @@ export function CompaniesSection() {
     <section
       id="empresas"
       aria-labelledby="empresas-title"
-      className="border-t border-line bg-[radial-gradient(900px_460px_at_20%_0%,rgba(229,185,79,.16),transparent_62%),var(--color-bone)] px-[clamp(18px,4vw,44px)] py-[clamp(56px,6vw,104px)]"
+      className="surface-bone-gold border-t border-line px-[clamp(18px,4vw,44px)] py-[clamp(56px,6vw,96px)]"
     >
       <Container>
         <div className="max-w-[680px]">
@@ -17,11 +18,32 @@ export function CompaniesSection() {
         </div>
 
         <ul className="mt-[clamp(26px,3.2vw,44px)] grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-          {companies.samples.map((sample) => (
-            <li
+          {companies.samples.map((sample, index) => (
+            <Reveal
               key={sample.name}
-              className="overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_26px_52px_-36px_rgba(11,14,15,.4)] transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              as="li"
+              delay={index * 110}
+              className="seq-brand-card overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_26px_52px_-36px_rgba(11,14,15,.4)] transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
             >
+              {/*
+                Un barrido dorado recorre las tres tarjetas por turnos para
+                mostrar que es el mismo CRM con otra identidad. Es un halo
+                superpuesto: no altera el contenido ni lo oculta.
+              */}
+              <div className="relative">
+                <span
+                  aria-hidden="true"
+                  className="seq-brand pointer-events-none absolute inset-0 z-10 rounded-[18px] ring-2 ring-inset"
+                  style={{
+                    ["--tw-ring-color" as string]: sample.color,
+                    animationName: "seq-brand",
+                    animationDuration: "9s",
+                    animationDelay: `${index * 3}s`,
+                    animationIterationCount: "infinite",
+                    animationFillMode: "both",
+                  }}
+                />
+              </div>
               <div aria-hidden="true" className="h-[5px]" style={{ background: sample.color }} />
               <div className="p-4">
                 <span className="flex items-center gap-[9px]">
@@ -45,8 +67,8 @@ export function CompaniesSection() {
                       className="h-9 flex-1 rounded-[9px]"
                       style={{ background: `${sample.color}1F` }}
                     />
-                    <span className="h-9 flex-1 rounded-[9px] bg-[#F6F3ED]" />
-                    <span className="h-9 flex-1 rounded-[9px] bg-[#F6F3ED]" />
+                    <span className="h-9 flex-1 rounded-[9px] bg-surface-tint" />
+                    <span className="h-9 flex-1 rounded-[9px] bg-surface-tint" />
                   </span>
                 </div>
                 <span
@@ -56,7 +78,7 @@ export function CompaniesSection() {
                   {sample.label}
                 </span>
               </div>
-            </li>
+            </Reveal>
           ))}
         </ul>
 

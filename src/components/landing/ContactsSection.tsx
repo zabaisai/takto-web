@@ -1,6 +1,7 @@
 import { contacts } from "@/data/landing-content";
 import { ContactMockup } from "@/components/product-mockups/ContactMockup";
 import { CheckDot } from "@/components/product-mockups/primitives";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, SectionLead, SectionTitle } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -24,9 +25,9 @@ export function ContactsSection() {
           ))}
         </ul>
 
-        <div className="mt-[clamp(26px,3.2vw,42px)]">
+        <Reveal delay={120} className="mt-[clamp(26px,3.2vw,42px)]">
           <ContactMockup />
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

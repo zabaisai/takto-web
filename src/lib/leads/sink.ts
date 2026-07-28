@@ -38,6 +38,17 @@ import type { DemoRequestInput } from "@/lib/validation/demo-request";
 
 export type LeadSinkKind = "log" | "smtp" | "crm" | "forms";
 
+/**
+ * ¿El destino actual conserva realmente la solicitud?
+ *
+ * `log` no envía correo ni almacena nada, así que la web NO debe decirle al
+ * visitante que su solicitud quedó registrada. La landing usa este dato para
+ * mostrar un aviso provisional honesto en lugar de simular un envío correcto.
+ */
+export function sinkPersistsLeads(kind: LeadSinkKind = resolveSinkKind()): boolean {
+  return kind !== "log";
+}
+
 export type LeadSinkResult =
   | { ok: true; kind: LeadSinkKind; stored: boolean }
   | { ok: false; kind: LeadSinkKind; reason: string };

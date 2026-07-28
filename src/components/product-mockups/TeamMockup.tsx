@@ -7,7 +7,7 @@ export function TeamMockup() {
     <>
       <div
         role="img"
-        aria-label="Listado de usuarios de una empresa en Tehus CRM con su rol, cantidad de clientes asignados y estado de sesión. Datos de ejemplo."
+        aria-label="Listado de usuarios de una empresa en TAKTO con su rol, cantidad de clientes asignados y estado de sesión. Datos de ejemplo."
         className="overflow-hidden rounded-[18px] border border-line"
       >
         <div className="flex items-center justify-between border-b border-line-soft bg-surface-soft px-4 py-3">

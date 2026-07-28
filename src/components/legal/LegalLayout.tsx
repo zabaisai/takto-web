@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { isBeta } from "@/lib/site";
 
 /**
  * Marco común de las páginas legales.
@@ -41,7 +42,9 @@ export function LegalLayout({
           className="mt-6 rounded-[14px] border border-brand/30 bg-brand/[0.06] p-4"
         >
           <b className="block text-[13px] leading-[1.4] font-semibold text-brand-deep">
-            Documento en borrador · pendiente de revisión jurídica
+            {isBeta
+              ? "Borrador informativo · versión beta · pendiente de revisión jurídica"
+              : "Documento en borrador · pendiente de revisión jurídica"}
           </b>
           <p className="mt-1.5 text-[13px] leading-[1.55] text-muted">
             Este texto es una base de trabajo y no constituye un documento legal definitivo. Los

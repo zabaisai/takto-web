@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Términos y condiciones",
   description:
-    "Borrador de los términos y condiciones de uso del sitio comercial de Tehus CRM, pendiente de revisión jurídica.",
+    "Borrador de los términos y condiciones de uso del sitio comercial de TAKTO, pendiente de revisión jurídica.",
   alternates: { canonical: "/terminos" },
   robots: { index: false, follow: true },
 };
@@ -20,7 +20,7 @@ export default function TerminosPage() {
     <LegalLayout title="Términos y condiciones" updated="Borrador · 28 de julio de 2026">
       <LegalHeading>1. Objeto</LegalHeading>
       <LegalText>
-        Estos términos regulan el acceso y uso del sitio web comercial de Tehus CRM. El sitio tiene
+        Estos términos regulan el acceso y uso del sitio web comercial de TAKTO. El sitio tiene
         carácter informativo: presenta las funcionalidades del producto y permite solicitar una
         demostración. No constituye el acceso al CRM, que se realiza desde una plataforma
         independiente y requiere credenciales otorgadas por la empresa contratante.
@@ -55,9 +55,9 @@ export default function TerminosPage() {
 
       <LegalHeading>5. Propiedad intelectual</LegalHeading>
       <LegalText>
-        Los contenidos, la marca Tehus CRM, los textos y los elementos gráficos de este sitio son
+        Los contenidos, la marca TAKTO, los textos y los elementos gráficos de este sitio son
         propiedad de <Pending>razón social</Pending> o se utilizan bajo licencia. WhatsApp es una
-        marca de Meta Platforms, Inc.; Tehus CRM no está afiliado a Meta ni cuenta con su patrocinio.
+        marca de Meta Platforms, Inc.; TAKTO no está afiliado a Meta ni cuenta con su patrocinio.
       </LegalText>
 
       <LegalHeading>6. Enlaces a otros sistemas</LegalHeading>

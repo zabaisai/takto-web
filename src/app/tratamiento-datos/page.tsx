@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Política de tratamiento de datos personales",
   description:
-    "Borrador de la política de tratamiento de datos personales de Tehus CRM, pendiente de revisión jurídica.",
+    "Borrador de la política de tratamiento de datos personales de TAKTO, pendiente de revisión jurídica.",
   alternates: { canonical: "/tratamiento-datos" },
   robots: { index: false, follow: true },
 };
@@ -33,7 +33,7 @@ export default function TratamientoDatosPage() {
       <LegalText>
         Esta política aplica a los datos personales recogidos mediante el formulario de solicitud de
         demostración de este sitio comercial. El tratamiento de los datos que cada empresa cliente
-        gestiona dentro del CRM se rige por el contrato suscrito con esa empresa, en el que Tehus CRM
+        gestiona dentro del CRM se rige por el contrato suscrito con esa empresa, en el que TAKTO
         actúa como encargado del tratamiento y no como responsable.
       </LegalText>
 

@@ -14,10 +14,10 @@ describe("SiteHeader", () => {
     }
   });
 
-  it("apunta «Iniciar sesión» a la URL del CRM que resuelve la configuración", () => {
+  it("apunta «Ingresar» a la URL del CRM que resuelve la configuración", () => {
     render(<SiteHeader />);
 
-    const login = screen.getAllByRole("link", { name: /iniciar sesión/i })[0];
+    const login = screen.getAllByRole("link", { name: /ingresar/i })[0];
     expect(login).toHaveAttribute("href", "https://crm-staging.tehusrattan.com/login");
   });
 

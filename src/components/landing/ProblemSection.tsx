@@ -1,4 +1,5 @@
 import { problem } from "@/data/landing-content";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, SectionTitle } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -14,10 +15,12 @@ export function ProblemSection() {
       </Container>
 
       <Container className="mt-[clamp(34px,4vw,54px)] grid gap-3.5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
-        {problem.items.map((item) => (
-          <article
+        {problem.items.map((item, index) => (
+          <Reveal
             key={item.number}
-            className="rounded-2xl border border-line bg-bone p-[22px] transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-[0_18px_34px_-22px_rgba(11,14,15,.3)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+            as="article"
+            delay={index * 90}
+            className="rounded-2xl border border-line bg-bone p-[22px] transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-[3px] hover:border-brand/40 hover:shadow-[0_18px_34px_-22px_rgba(11,14,15,.3)] motion-reduce:transition-none motion-reduce:hover:translate-y-0"
           >
             <span className="font-mono text-[11px] leading-none font-semibold text-brand">
               {item.number}
@@ -26,7 +29,7 @@ export function ProblemSection() {
               {item.title}
             </h3>
             <p className="mt-[9px] text-[14px] leading-[1.55] text-muted">{item.body}</p>
-          </article>
+          </Reveal>
         ))}
       </Container>
 

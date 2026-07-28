@@ -1,109 +1,290 @@
-import { demoData } from "@/data/landing-content";
+import { demoData, whatsapp } from "@/data/landing-content";
+import { Sequence } from "@/components/motion/Sequence";
 import { Avatar, TaskBox } from "./primitives";
 
 /**
- * Teléfono con un chat de WhatsApp Business junto al flujo de lo que ocurre
- * dentro del CRM cuando llega esa conversación. Datos ficticios.
+ * Demostración animada: un mensaje de WhatsApp Business entra, viaja al CRM,
+ * identifica al contacto, se asigna, genera una oportunidad y deja una tarea
+ * de seguimiento con su notificación.
+ *
+ * El ciclo dura 8 s y cada etapa se ilumina y SE QUEDA encendida. Ningún
+ * elemento desaparece entre ciclos: sin animación, el bloque se lee como el
+ * resultado final del proceso. Datos ficticios.
  */
+
+/** Cadencia del ciclo. Un único valor gobierna todas las capas. */
+const CYCLE = "8s";
+
+function StageChip({
+  label,
+  index,
+  active,
+}: {
+  label: string;
+  index: number;
+  active?: boolean;
+}) {
+  return (
+    <li
+      className={`seq-stage flex items-center gap-2 rounded-full border px-2.5 py-1.5 text-[10.5px] leading-none font-semibold whitespace-nowrap ${
+        active
+          ? "border-wa/40 bg-wa/12 text-wa"
+          : "border-bone/15 bg-bone/[0.04] text-bone/70"
+      }`}
+      style={{
+        animationName: "seq-step",
+        animationDuration: CYCLE,
+        animationDelay: `${index * 0.9}s`,
+        animationIterationCount: "infinite",
+        animationFillMode: "both",
+      }}
+    >
+      <span
+        aria-hidden="true"
+        className={`h-1.5 w-1.5 flex-none rounded-full ${active ? "bg-wa" : "bg-brand-gold"}`}
+      />
+      {label}
+    </li>
+  );
+}
+
 export function WhatsappFlowMockup() {
   return (
-    <div
-      role="img"
-      aria-label="Un chat de WhatsApp Business en un teléfono y, al lado, el flujo dentro de Tehus CRM: la conversación se recibe, se asigna a un asesor, se relaciona con una oportunidad y genera una tarea de seguimiento. Datos de ejemplo."
-      className="relative flex flex-wrap items-center justify-center gap-[clamp(14px,2vw,26px)]"
+    <Sequence
+      label="Demostración: un mensaje de WhatsApp Business entra a TAKTO, se identifica el contacto Distribuciones del Valle, se asigna al asesor Camilo Restrepo, se crea la oportunidad Dotación oficina por 8.400.000 pesos y se programa la tarea de enviar la cotización hoy a las 4 de la tarde. Datos de ejemplo."
+      className="grid gap-5"
     >
-      {/* Teléfono */}
-      <div className="w-[min(212px,44vw)] flex-none overflow-hidden rounded-[30px] border-8 border-ink-raised bg-[#0f1214] shadow-[0_30px_60px_-24px_rgba(0,0,0,.7)]">
-        <div aria-hidden="true" className="grid h-5 place-items-center bg-[#0f1214]">
-          <span className="h-[5px] w-11 rounded-full bg-[#2a2e31]" />
+      {/* Indicadores de etapa */}
+      <ul className="flex flex-wrap gap-2">
+        {whatsapp.stages.map((stage, index) => (
+          <StageChip
+            key={stage.id}
+            label={stage.label}
+            index={index}
+            active={index === 0}
+          />
+        ))}
+      </ul>
+
+      <div className="grid items-start gap-4 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        {/* --- Teléfono --------------------------------------------------- */}
+        <div className="relative mx-auto w-full max-w-[230px] sm:mx-0">
+          <div className="overflow-hidden rounded-[28px] border-8 border-ink-raised bg-ink-device shadow-[0_30px_60px_-24px_rgba(0,0,0,.7)]">
+            <div aria-hidden="true" className="grid h-5 place-items-center bg-ink-device">
+              <span className="h-[5px] w-11 rounded-full bg-ink-device-line" />
+            </div>
+
+            <div className="flex items-center gap-2 bg-wa-header px-[11px] py-2.5">
+              <span aria-hidden="true" className="h-[22px] w-[22px] rounded-full bg-white/20" />
+              <span className="min-w-0">
+                <b className="block truncate text-[11px] leading-[1.2] font-semibold text-white">
+                  María Gómez
+                </b>
+                <i className="text-[9px] leading-[1.2] text-white/65 not-italic">en línea</i>
+              </span>
+            </div>
+
+            <div className="grid min-h-[178px] content-start gap-2 bg-wa-bg px-2.5 py-3">
+              {demoData.thread.map((message, index) => (
+                <span
+                  key={`wa-${message.text}`}
+                  className="seq-bubble max-w-[86%] rounded-[9px] px-2.5 py-2 text-[11px] leading-[1.4] text-wa-text"
+                  style={{
+                    justifySelf: message.from === "cliente" ? "start" : "end",
+                    background:
+                      message.from === "cliente" ? "var(--color-wa-in)" : "var(--color-wa-out)",
+                    borderBottomLeftRadius: message.from === "cliente" ? "2px" : undefined,
+                    borderBottomRightRadius: message.from === "empresa" ? "2px" : undefined,
+                    animationName: "seq-bubble",
+                    animationDuration: CYCLE,
+                    animationDelay: `${index * 0.45}s`,
+                    animationIterationCount: "infinite",
+                    animationFillMode: "both",
+                  }}
+                >
+                  {message.text}
+                </span>
+              ))}
+
+              {/* Indicador de escritura, discreto y sin texto esencial */}
+              <span
+                aria-hidden="true"
+                className="flex w-fit items-center gap-1 rounded-[9px] bg-wa-in px-2.5 py-2"
+              >
+                {[0, 1, 2].map((dot) => (
+                  <span
+                    key={dot}
+                    className="seq-typing block h-1.5 w-1.5 rounded-full bg-wa-text"
+                    style={{
+                      animationName: "seq-typing",
+                      animationDuration: "1.4s",
+                      animationDelay: `${dot * 0.16}s`,
+                      animationIterationCount: "infinite",
+                    }}
+                  />
+                ))}
+              </span>
+            </div>
+          </div>
+
+          {/* Mensaje viajando del teléfono al CRM. Puramente decorativo. */}
+          <span
+            aria-hidden="true"
+            className="seq-travel pointer-events-none absolute top-1/2 -right-2 hidden h-2.5 w-2.5 rounded-full bg-wa shadow-[0_0_16px_4px_rgba(37,211,102,.45)] sm:block"
+            style={{
+              ["--seq-travel-distance" as string]: "42px",
+              animationName: "seq-travel",
+              animationDuration: CYCLE,
+              animationIterationCount: "infinite",
+              animationFillMode: "both",
+            }}
+          />
         </div>
-        <div className="flex items-center gap-2 bg-wa-header px-[11px] py-[9px]">
-          <span aria-hidden="true" className="h-[22px] w-[22px] rounded-full bg-white/20" />
-          <span>
-            <b className="block text-[11px] leading-[1.2] font-semibold text-white">María Gómez</b>
-            <i className="text-[9px] leading-[1.2] text-white/65 not-italic">en línea</i>
-          </span>
-        </div>
-        <div className="grid min-h-[180px] content-start gap-2 bg-wa-bg px-2.5 py-3">
-          {demoData.thread.map((message) => (
+
+        {/* --- Lo que ocurre dentro del CRM ------------------------------- */}
+        <div className="relative grid gap-2.5">
+          {/* Riel de progreso vertical */}
+          <span
+            aria-hidden="true"
+            className="absolute top-2 bottom-2 -left-3 hidden w-px bg-bone/12 sm:block"
+          >
             <span
-              key={`wa-${message.text}`}
-              className={
-                message.from === "cliente"
-                  ? "max-w-[82%] justify-self-start rounded-[9px] rounded-bl-[2px] bg-wa-in px-2.5 py-2 text-[11px] leading-[1.4] text-wa-text"
-                  : "max-w-[82%] justify-self-end rounded-[9px] rounded-br-[2px] bg-wa-out px-2.5 py-2 text-[11px] leading-[1.4] text-wa-text"
-              }
-            >
-              {message.text}
+              className="seq-rail block h-full w-full origin-top bg-linear-to-b from-wa via-brand-gold to-brand"
+              style={{
+                animationName: "seq-progress",
+                animationDuration: CYCLE,
+                animationIterationCount: "infinite",
+                animationFillMode: "both",
+              }}
+            />
+          </span>
+
+          <FlowCard delay="0.6s" tone="wa">
+            <span className="flex items-center gap-2">
+              <span
+                aria-hidden="true"
+                className="seq-dot h-2 w-2 flex-none rounded-full bg-wa"
+                style={{
+                  animationName: "seq-dot",
+                  animationDuration: CYCLE,
+                  animationDelay: "0.6s",
+                  animationIterationCount: "infinite",
+                  animationFillMode: "both",
+                }}
+              />
+              <b className="text-[12px] leading-none font-semibold text-bone">
+                Conversación recibida en el CRM
+              </b>
             </span>
-          ))}
-        </div>
-      </div>
+            <p className="mt-2 text-[11.5px] leading-[1.45] text-bone/60">
+              María Gómez · WhatsApp Business
+            </p>
+          </FlowCard>
 
-      {/* Flujo en el CRM */}
-      <div className="grid min-w-[min(260px,100%)] flex-1 gap-2.5">
-        <div
-          aria-hidden="true"
-          className="flex items-center justify-center gap-2.5 font-mono text-[11px] leading-none text-bone/40"
-        >
-          <span className="h-px flex-1 bg-linear-to-r from-transparent to-wa/60" />
-          conectado
-          <span className="h-px flex-1 bg-linear-to-r from-wa/60 to-transparent" />
-        </div>
+          <FlowCard delay="1.5s">
+            <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
+              Contacto identificado
+            </span>
+            <span className="mt-2 flex items-center gap-2">
+              <Avatar initials="DV" size={24} tone="gold" />
+              <b className="text-[12.5px] leading-none font-medium text-bone">
+                Distribuciones del Valle
+              </b>
+            </span>
+          </FlowCard>
 
-        <div className="animate-(--animate-t-slide-in) rounded-[14px] border border-bone/12 bg-ink-panel p-[14px]">
-          <span className="flex items-center gap-2">
+          <FlowCard delay="2.4s">
+            <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
+              Asignada a
+            </span>
+            <span className="mt-2 flex items-center gap-2">
+              <Avatar initials="CR" size={24} tone="gold" />
+              <b className="text-[12.5px] leading-none font-medium text-bone">
+                Camilo Restrepo · Asesor
+              </b>
+            </span>
+          </FlowCard>
+
+          <FlowCard delay="3.3s" tone="gold">
+            <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
+              Oportunidad relacionada
+            </span>
+            <b className="mt-[7px] block font-display text-[13px] leading-[1.3] font-semibold text-white">
+              {demoData.opportunity.name}
+            </b>
+            <span className="mt-2 flex justify-between">
+              <i className="font-mono text-[11.5px] leading-none font-semibold text-bone/70 not-italic">
+                {demoData.opportunity.value}
+              </i>
+              <i className="text-[10px] leading-none font-semibold text-brand-gold not-italic">
+                {demoData.opportunity.stage}
+              </i>
+            </span>
+          </FlowCard>
+
+          <FlowCard delay="4.2s">
+            <span className="flex items-center gap-[9px]">
+              <TaskBox tone="gold" size={14} />
+              <b className="text-[12.5px] leading-[1.3] font-medium text-bone">
+                Tarea creada: enviar cotización hoy 4:00 p.m.
+              </b>
+            </span>
+          </FlowCard>
+
+          {/* Notificación final: entra desde arriba y se queda */}
+          <div
+            className="seq-toast flex items-center gap-2.5 rounded-[14px] border border-wa/30 bg-wa/[0.08] p-3"
+            style={{
+              animationName: "seq-toast",
+              animationDuration: CYCLE,
+              animationDelay: "5.1s",
+              animationIterationCount: "infinite",
+              animationFillMode: "both",
+            }}
+          >
             <span
               aria-hidden="true"
-              className="h-2 w-2 animate-(--animate-t-pulse) rounded-full bg-wa"
-            />
-            <b className="text-[12px] leading-none font-semibold text-bone">
-              Conversación recibida en el CRM
+              className="grid h-6 w-6 flex-none place-items-center rounded-lg bg-wa/20"
+            >
+              <span className="block h-2 w-2 rounded-full bg-wa" />
+            </span>
+            <b className="text-[11.5px] leading-[1.3] font-semibold text-bone">
+              Notificación enviada al asesor
             </b>
-          </span>
-          <p className="mt-2 text-[11.5px] leading-[1.45] text-bone/60">
-            María Gómez · WhatsApp Business
-          </p>
-        </div>
-
-        <div className="rounded-[14px] border border-bone/12 bg-ink-panel p-[14px]">
-          <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
-            Asignada a
-          </span>
-          <span className="mt-2 flex items-center gap-2">
-            <Avatar initials="CR" size={24} tone="gold" />
-            <b className="text-[12.5px] leading-none font-medium text-bone">
-              Camilo Restrepo · Asesor
-            </b>
-          </span>
-        </div>
-
-        <div className="rounded-[14px] border border-brand-gold/[0.28] bg-ink-panel p-[14px]">
-          <span className="block text-[9.5px] leading-none font-semibold tracking-[0.1em] text-brand-gold uppercase">
-            Oportunidad relacionada
-          </span>
-          <b className="mt-[7px] block font-display text-[13px] leading-[1.3] font-semibold text-white">
-            {demoData.opportunity.name}
-          </b>
-          <span className="mt-2 flex justify-between">
-            <i className="font-mono text-[11.5px] leading-none font-semibold text-bone/70 not-italic">
-              {demoData.opportunity.value}
-            </i>
-            <i className="text-[10px] leading-none font-semibold text-brand-gold not-italic">
-              {demoData.opportunity.stage}
-            </i>
-          </span>
-        </div>
-
-        <div className="rounded-[14px] border border-bone/12 bg-ink-panel p-[14px]">
-          <span className="flex items-center gap-[9px]">
-            <TaskBox tone="gold" size={14} />
-            <b className="text-[12.5px] leading-[1.3] font-medium text-bone">
-              Tarea creada: enviar cotización hoy 4:00 p.m.
-            </b>
-          </span>
+          </div>
         </div>
       </div>
+    </Sequence>
+  );
+}
+
+function FlowCard({
+  children,
+  delay,
+  tone = "neutral",
+}: {
+  children: React.ReactNode;
+  delay: string;
+  tone?: "neutral" | "wa" | "gold";
+}) {
+  const tones = {
+    neutral: "border-bone/12",
+    wa: "border-wa/25",
+    gold: "border-brand-gold/30",
+  } as const;
+
+  return (
+    <div
+      className={`seq-card rounded-[14px] border bg-ink-panel p-3.5 ${tones[tone]}`}
+      style={{
+        animationName: "seq-step",
+        animationDuration: CYCLE,
+        animationDelay: delay,
+        animationIterationCount: "infinite",
+        animationFillMode: "both",
+      }}
+    >
+      {children}
     </div>
   );
 }

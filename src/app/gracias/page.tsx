@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { demo } from "@/data/landing-content";
 
 export const metadata: Metadata = {
   title: "Solicitud recibida",
-  description: "Hemos recibido tu solicitud de demostración de Tehus CRM.",
+  description: "Hemos recibido tu solicitud de demostración de TAKTO.",
   alternates: { canonical: "/gracias" },
   robots: { index: false, follow: true },
 };
@@ -45,7 +45,7 @@ export default function GraciasPage() {
         </h1>
 
         <p className="mt-4 max-w-[52ch] text-[clamp(16px,1.3vw,18px)] leading-[1.6] text-muted">
-          Gracias por escribirnos. Un asesor de Tehus CRM te contactará para agendar la
+          Gracias por escribirnos. Un asesor de TAKTO te contactará para agendar la
           demostración. {demo.footnote}
         </p>
 
@@ -77,9 +77,9 @@ export default function GraciasPage() {
 
         <p className="mt-8 text-[13px] leading-[1.6] text-subtle">
           Si necesitas corregir algún dato, puedes{" "}
-          <Link href="/#demo" className="text-brand underline underline-offset-2">
+          <AnchorLink href="/#demo" className="text-brand underline underline-offset-2">
             enviar una nueva solicitud
-          </Link>
+          </AnchorLink>
           .
         </p>
       </Container>

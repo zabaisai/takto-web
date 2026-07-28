@@ -1,6 +1,6 @@
-# tehus-crm-web
+# takto-web
 
-Página web comercial pública de **Tehus CRM**.
+Página web comercial pública de **TAKTO**.
 
 Proyecto **independiente**: no forma parte, no depende y no se despliega junto al repositorio
 del CRM (`Tehus_Rattan`). Puede desarrollarse, desplegarse y revertirse sin afectarlo.

@@ -56,10 +56,25 @@ export function FaqSection() {
                     </span>
                   </button>
                 </h3>
-                <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!open}>
-                  <p className="m-0 pr-[42px] pb-[22px] pl-1 text-[15px] leading-[1.65] text-muted">
-                    {item.a}
-                  </p>
+                {/*
+                  El panel permanece en el DOM y se colapsa con
+                  `grid-template-rows`, no con `hidden`: así la apertura y el
+                  cierre son suaves y sin saltos. `inert` evita que el
+                  contenido cerrado reciba foco o se anuncie.
+                */}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  data-open={open}
+                  inert={!open}
+                  className="faq-panel"
+                >
+                  <div>
+                    <p className="m-0 pr-[42px] pb-[22px] pl-1 text-[15px] leading-[1.65] text-muted">
+                      {item.a}
+                    </p>
+                  </div>
                 </div>
               </div>
             );

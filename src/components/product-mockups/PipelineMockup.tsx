@@ -1,4 +1,5 @@
 import { demoData } from "@/data/landing-content";
+import { Sequence } from "@/components/motion/Sequence";
 import { Chip } from "./primitives";
 
 /** Forma común de las tarjetas del tablero: cada etapa usa solo algunos campos. */
@@ -17,9 +18,8 @@ type PipelineCard = {
 /** Tablero de pipeline con seis etapas. Datos ficticios. */
 export function PipelineMockup() {
   return (
-    <div
-      role="img"
-      aria-label="Tablero de pipeline de Tehus CRM con seis etapas —nuevo lead, calificado, cotización, negociación, cerrado ganado y cerrado perdido— y las oportunidades de cada una con su valor y responsable. Datos de ejemplo."
+    <Sequence
+      label="Tablero de pipeline de TAKTO con seis etapas —nuevo lead, calificado, cotización, negociación, cerrado ganado y cerrado perdido— y las oportunidades de cada una con su valor y responsable. Una oportunidad avanza de nuevo lead a calificado. Datos de ejemplo."
       className="overflow-x-auto rounded-[18px] border border-line bg-surface p-[clamp(14px,1.6vw,22px)] shadow-[0_34px_70px_-44px_rgba(11,14,15,.4)]"
     >
       <div className="grid min-w-[1020px] grid-cols-6 gap-3">
@@ -56,19 +56,35 @@ export function PipelineMockup() {
               const featured = card.featured === true;
               const lost = card.lost === true;
               const won = card.won === true;
+              // «Hotel Marena» es la tarjeta que demuestra el avance de etapa.
+              const moving = card.name === "Hotel Marena";
 
               return (
                 <span
                   key={card.name}
-                  className={`block rounded-[10px] bg-surface p-2.5 ${
+                  className={`seq-card-move relative block rounded-[10px] bg-surface p-2.5 ${
                     featured
-                      ? "animate-(--animate-t-float) border border-brand shadow-[0_12px_22px_-14px_rgba(183,121,11,.6)]"
+                      ? "border border-brand shadow-[0_12px_22px_-14px_rgba(183,121,11,.6)]"
                       : lost
                         ? "border border-dashed border-line opacity-70"
                         : won
                           ? "border border-wa/40"
                           : "border border-line"
                   }`}
+                  style={
+                    // Una sola tarjeta avanza de «Nuevo lead» a «Calificado»
+                    // y regresa. Es un desplazamiento corto, no interfiere con
+                    // el desplazamiento horizontal del tablero.
+                    moving
+                      ? {
+                          ["--seq-move-x" as string]: "calc(100% + 12px)",
+                          animationName: "seq-card-move",
+                          animationDuration: "8s",
+                          animationIterationCount: "infinite",
+                          animationTimingFunction: "cubic-bezier(0.22,0.61,0.36,1)",
+                        }
+                      : undefined
+                  }
                 >
                   <b className="block text-[12px] leading-[1.3] font-semibold">{card.name}</b>
                   {card.value ? (
@@ -102,6 +118,6 @@ export function PipelineMockup() {
           </div>
         ))}
       </div>
-    </div>
+    </Sequence>
   );
 }

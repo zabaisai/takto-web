@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { contactIsActive } from "@/lib/contact";
 import { deliverLead } from "@/lib/leads/sink";
 import { checkRateLimit, clientKeyFromHeaders } from "@/lib/security/rate-limit";
 import {
@@ -84,7 +85,21 @@ export async function POST(request: Request) {
     );
   }
 
-  // 5 · Entrega al destino configurado
+  // 5 · Si no hay destino aprobado, se dice la verdad en lugar de fingir
+  //     un envío correcto. No se almacena nada ni se manda a ningún tercero.
+  if (!contactIsActive) {
+    return NextResponse.json(
+      {
+        ok: false,
+        pending: true,
+        message:
+          "El formulario todavía no está activado: tu solicitud no se ha enviado ni guardado. Estamos configurando el canal comercial.",
+      },
+      { status: 503, headers: { "Retry-After": "3600" } },
+    );
+  }
+
+  // 6 · Entrega al destino configurado
   const result = await deliverLead({ ...input, receivedAt: new Date().toISOString() });
 
   if (!result.ok) {

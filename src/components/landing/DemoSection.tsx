@@ -1,4 +1,5 @@
 import { demo } from "@/data/landing-content";
+import { contactIsActive } from "@/lib/contact";
 import { DemoForm } from "@/components/forms/DemoForm";
 import { CheckDot } from "@/components/product-mockups/primitives";
 import { Container } from "@/components/ui/Container";
@@ -34,6 +35,21 @@ export function DemoSection() {
         </div>
 
         <div className="rounded-[20px] border border-line bg-surface p-[clamp(20px,2.4vw,32px)] shadow-[0_34px_70px_-46px_rgba(11,14,15,.5)]">
+          {/*
+            Mientras el destino del formulario sea el adaptador `log`, la
+            solicitud NO se envía ni se almacena. Se avisa en la propia página
+            en lugar de simular un envío correcto.
+          */}
+          {!contactIsActive ? (
+            <p
+              role="note"
+              className="mb-5 rounded-[12px] border border-brand/30 bg-brand/[0.06] px-4 py-3 text-[12.5px] leading-[1.5] text-brand-deep"
+            >
+              <b className="font-semibold">Formulario pendiente de activación.</b> Todavía no hay
+              un canal comercial configurado, así que la solicitud no se envía ni se guarda. Puedes
+              revisar el resto del sitio con normalidad.
+            </p>
+          ) : null}
           <DemoForm />
         </div>
       </Container>
