@@ -12,6 +12,11 @@ out/
 .cache/
 .parcel-cache/
 .vite/
+next-env.d.ts
+*.tsbuildinfo
+
+# Pruebas
+coverage/
 
 # Entorno / secretos
 .env
