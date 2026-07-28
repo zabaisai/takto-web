@@ -115,7 +115,7 @@ export function DemoForm() {
         </span>
         <b className="font-display text-[22px] leading-[1.25] font-semibold">Solicitud enviada</b>
         <p className="max-w-[36ch] text-[14.5px] leading-[1.6] text-muted">
-          Gracias. Un asesor de Tehus CRM te contactará para agendar la demostración.
+          Gracias. Un asesor de TAKTO te contactará para agendar la demostración.
         </p>
         <div className="mt-1 flex flex-wrap justify-center gap-2.5">
           <Link

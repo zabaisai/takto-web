@@ -6,7 +6,7 @@ export function InboxMockup() {
   return (
     <div
       role="img"
-      aria-label="Bandeja de conversaciones de Tehus CRM: lista de chats a la izquierda, el hilo de la conversación en el centro y la ficha del cliente con su oportunidad y próxima tarea a la derecha. Datos de ejemplo."
+      aria-label="Bandeja de conversaciones de TAKTO: lista de chats a la izquierda, el hilo de la conversación en el centro y la ficha del cliente con su oportunidad y próxima tarea a la derecha. Datos de ejemplo."
       className="overflow-hidden rounded-[18px] border border-line bg-surface-soft shadow-[0_34px_70px_-40px_rgba(11,14,15,.45)]"
     >
       <div className="flex flex-wrap items-center gap-3 border-b border-line-soft bg-surface px-4 py-3">

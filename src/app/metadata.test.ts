@@ -9,13 +9,20 @@ import { site } from "@/lib/site";
 
 describe("metadata crítica", () => {
   it("usa el título exacto acordado", () => {
-    expect(homeMetadata.title).toBe("Tehus CRM | Organiza WhatsApp, clientes y ventas");
+    expect(homeMetadata.title).toBe(
+      "TAKTO | CRM de ventas para mover oportunidades y cerrar más",
+    );
   });
 
   it("usa la meta description exacta acordada", () => {
     expect(homeMetadata.description).toBe(
-      "Centraliza conversaciones de WhatsApp, organiza clientes, asigna asesores y administra el seguimiento comercial de tu empresa con Tehus CRM.",
+      "Centraliza conversaciones, prospectos, tareas, cotizaciones y resultados. TAKTO ayuda a tu equipo comercial a convertir cada oportunidad en un siguiente movimiento.",
     );
+  });
+
+  it("declara takto.online como dominio canónico", () => {
+    expect(site.url).toBe("https://takto.online");
+    expect(metadata.metadataBase?.toString()).toBe("https://takto.online/");
   });
 
   it("declara canonical en la portada", () => {
@@ -23,7 +30,7 @@ describe("metadata crítica", () => {
   });
 
   it("declara metadataBase para resolver las URLs absolutas", () => {
-    expect(metadata.metadataBase?.toString()).toContain("crm.tehusrattan.com");
+    expect(metadata.metadataBase?.toString()).toContain("takto.online");
   });
 
   it("publica Open Graph y Twitter Card", () => {
@@ -53,7 +60,7 @@ describe("sitemap y manifest", () => {
   it("el sitemap solo contiene la portada, con URL absoluta", () => {
     const entries = sitemap();
     expect(entries).toHaveLength(1);
-    expect(entries[0]?.url).toBe("https://crm.tehusrattan.com/");
+    expect(entries[0]?.url).toBe("https://takto.online/");
   });
 
   it("el manifest usa los colores de marca", () => {

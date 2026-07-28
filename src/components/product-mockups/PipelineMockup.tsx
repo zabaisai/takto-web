@@ -19,7 +19,7 @@ type PipelineCard = {
 export function PipelineMockup() {
   return (
     <Sequence
-      label="Tablero de pipeline de Tehus CRM con seis etapas —nuevo lead, calificado, cotización, negociación, cerrado ganado y cerrado perdido— y las oportunidades de cada una con su valor y responsable. Una oportunidad avanza de nuevo lead a calificado. Datos de ejemplo."
+      label="Tablero de pipeline de TAKTO con seis etapas —nuevo lead, calificado, cotización, negociación, cerrado ganado y cerrado perdido— y las oportunidades de cada una con su valor y responsable. Una oportunidad avanza de nuevo lead a calificado. Datos de ejemplo."
       className="overflow-x-auto rounded-[18px] border border-line bg-surface p-[clamp(14px,1.6vw,22px)] shadow-[0_34px_70px_-44px_rgba(11,14,15,.4)]"
     >
       <div className="grid min-w-[1020px] grid-cols-6 gap-3">

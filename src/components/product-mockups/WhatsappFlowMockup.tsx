@@ -51,7 +51,7 @@ function StageChip({
 export function WhatsappFlowMockup() {
   return (
     <Sequence
-      label="Demostración: un mensaje de WhatsApp Business entra al CRM de Tehus, se identifica el contacto Distribuciones del Valle, se asigna al asesor Camilo Restrepo, se crea la oportunidad Dotación oficina por 8.400.000 pesos y se programa la tarea de enviar la cotización hoy a las 4 de la tarde. Datos de ejemplo."
+      label="Demostración: un mensaje de WhatsApp Business entra a TAKTO, se identifica el contacto Distribuciones del Valle, se asigna al asesor Camilo Restrepo, se crea la oportunidad Dotación oficina por 8.400.000 pesos y se programa la tarea de enviar la cotización hoy a las 4 de la tarde. Datos de ejemplo."
       className="grid gap-5"
     >
       {/* Indicadores de etapa */}
@@ -69,9 +69,9 @@ export function WhatsappFlowMockup() {
       <div className="grid items-start gap-4 sm:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         {/* --- Teléfono --------------------------------------------------- */}
         <div className="relative mx-auto w-full max-w-[230px] sm:mx-0">
-          <div className="overflow-hidden rounded-[28px] border-8 border-ink-raised bg-[#0f1214] shadow-[0_30px_60px_-24px_rgba(0,0,0,.7)]">
-            <div aria-hidden="true" className="grid h-5 place-items-center bg-[#0f1214]">
-              <span className="h-[5px] w-11 rounded-full bg-[#2a2e31]" />
+          <div className="overflow-hidden rounded-[28px] border-8 border-ink-raised bg-ink-device shadow-[0_30px_60px_-24px_rgba(0,0,0,.7)]">
+            <div aria-hidden="true" className="grid h-5 place-items-center bg-ink-device">
+              <span className="h-[5px] w-11 rounded-full bg-ink-device-line" />
             </div>
 
             <div className="flex items-center gap-2 bg-wa-header px-[11px] py-2.5">

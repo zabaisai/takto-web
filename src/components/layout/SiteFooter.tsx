@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cta, footer } from "@/data/landing-content";
-import { crmLoginUrl } from "@/lib/site";
-import { LogoMark } from "./Logo";
+import { crmLoginUrl, crmOnboardingUrl } from "@/lib/site";
+import { LogoMark, LogoWordmark } from "./Logo";
 
 const linkClass =
   "text-[13.5px] leading-none text-bone/[0.78] transition-colors hover:text-brand-gold";
@@ -16,9 +16,7 @@ export function SiteFooter() {
         <div className="min-w-[200px]">
           <span className="flex items-center gap-[10px]">
             <LogoMark size={30} />
-            <b className="font-display text-[16px] leading-none font-semibold">
-              Tehus<span className="text-brand"> CRM</span>
-            </b>
+            <LogoWordmark tone="dark" className="text-[16px]" />
           </span>
           <p className="mt-[14px] max-w-[30ch] text-[13.5px] leading-[1.6] text-bone/55">
             {footer.tagline}
@@ -58,8 +56,17 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
+              <a href={crmOnboardingUrl} rel="noopener noreferrer" className={linkClass}>
+                {cta.activate}
+              </a>
+              {/* El onboarding pide código de invitación: no es registro libre. */}
+              <span className="mt-1 block text-[11.5px] leading-[1.4] text-bone/45">
+                {cta.activateNote}
+              </span>
+            </li>
+            <li>
               <Link href="/#demo" className={linkClass}>
-                Solicitar acceso
+                Solicitar demostración
               </Link>
             </li>
           </ul>

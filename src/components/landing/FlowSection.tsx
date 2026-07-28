@@ -44,7 +44,7 @@ export function FlowSection() {
           {/* Línea de tiempo */}
           <Reveal delay={200} className="mt-8">
             <Sequence
-              label="Los siete pasos que recorre una conversación en Tehus CRM: nueva conversación, contacto identificado, asesor asignado, oportunidad creada, cotización en preparación, tarea programada y seguimiento realizado."
+              label="Los siete pasos que recorre una conversación en TAKTO: nueva conversación, contacto identificado, asesor asignado, oportunidad creada, cotización en preparación, tarea programada y seguimiento realizado."
               className="relative"
             >
               {/* Riel vertical con progreso */}

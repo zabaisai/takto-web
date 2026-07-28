@@ -15,7 +15,7 @@ export function DashboardMockup() {
       // para que no se solapen con el contenido del panel.
       className="relative min-h-[clamp(380px,42vw,520px)] animate-(--animate-t-rise-slow) pt-12 pb-10 sm:pt-14"
       role="img"
-      aria-label="Vista del módulo de conversaciones de Tehus CRM con la lista de chats, el detalle del cliente y su oportunidad asociada. Datos de ejemplo."
+      aria-label="Vista del módulo de conversaciones de TAKTO con la lista de chats, el detalle del cliente y su oportunidad asociada. Datos de ejemplo."
     >
       <div
         aria-hidden="true"
@@ -23,7 +23,7 @@ export function DashboardMockup() {
       />
 
       <div className="relative overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_30px_70px_-24px_rgba(11,14,15,.34),0_2px_6px_rgba(11,14,15,.06)]">
-        <BrowserChrome path="app.tehuscrm.com / conversaciones" />
+        <BrowserChrome path="app.takto.online / conversaciones" />
 
         <div className="grid min-h-[clamp(300px,32vw,400px)] grid-cols-[44px_minmax(0,1fr)] sm:grid-cols-[52px_minmax(0,1fr)_minmax(0,.9fr)]">
           {/* Barra lateral */}

@@ -42,6 +42,7 @@ export function SiteHeader() {
             className="hidden min-h-11 items-center px-1 text-[14px] leading-none font-medium text-ink sm:inline-flex"
           >
             {cta.login}
+            <span className="sr-only"> al CRM (se abre en el mismo sitio del CRM de pruebas)</span>
           </a>
           <Link
             href="/#demo"

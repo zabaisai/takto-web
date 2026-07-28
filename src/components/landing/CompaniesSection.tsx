@@ -67,8 +67,8 @@ export function CompaniesSection() {
                       className="h-9 flex-1 rounded-[9px]"
                       style={{ background: `${sample.color}1F` }}
                     />
-                    <span className="h-9 flex-1 rounded-[9px] bg-[#F6F3ED]" />
-                    <span className="h-9 flex-1 rounded-[9px] bg-[#F6F3ED]" />
+                    <span className="h-9 flex-1 rounded-[9px] bg-surface-tint" />
+                    <span className="h-9 flex-1 rounded-[9px] bg-surface-tint" />
                   </span>
                 </div>
                 <span

@@ -1,5 +1,5 @@
 # =====================================================================
-# Tehus CRM · web comercial
+# TAKTO · web comercial
 #
 # Servicio AISLADO. No comparte red, volúmenes ni dependencias con el CRM.
 # No declara base de datos: la landing no tiene estado.
@@ -8,15 +8,16 @@
 # expone el sitio hacia fuera. Así no se abre ningún puerto nuevo al exterior.
 # =====================================================================
 services:
-  tehus-crm-web:
+  takto-web:
     build:
       context: .
       args:
-        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://crm.tehusrattan.com}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://takto.online}
         NEXT_PUBLIC_CRM_LOGIN_URL: ${NEXT_PUBLIC_CRM_LOGIN_URL:-https://crm-staging.tehusrattan.com/login}
+        NEXT_PUBLIC_CRM_ONBOARDING_URL: ${NEXT_PUBLIC_CRM_ONBOARDING_URL:-https://crm-staging.tehusrattan.com/onboarding}
         NEXT_PUBLIC_ALLOW_INDEXING: ${NEXT_PUBLIC_ALLOW_INDEXING:-true}
-    image: tehus-crm-web:latest
-    container_name: tehus-crm-web
+    image: takto-web:latest
+    container_name: takto-web
     restart: unless-stopped
 
     # 127.0.0.1 → solo accesible desde el propio host (Caddy).

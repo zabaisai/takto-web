@@ -8,13 +8,13 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { demoData, hero, whatsapp } from "@/data/landing-content";
 
 describe("Hero", () => {
-  it("declara un único H1 con el mensaje del mockup", () => {
+  it("declara un único H1 con la frase principal de marca", () => {
     render(<Hero />);
 
     const headings = screen.getAllByRole("heading", { level: 1 });
     expect(headings).toHaveLength(1);
-    expect(headings[0]).toHaveTextContent(/convierte cada conversación/i);
-    expect(headings[0]).toHaveTextContent(/oportunidad de venta/i);
+    expect(headings[0]).toHaveTextContent(/cada oportunidad/i);
+    expect(headings[0]).toHaveTextContent(/siguiente movimiento/i);
   });
 
   it("ofrece el CTA principal y el secundario como enlaces reales", () => {
@@ -123,7 +123,7 @@ describe("SiteFooter", () => {
     expect(text).not.toMatch(/[\w.+-]+@[\w-]+\.[a-z]{2,}/i);
   });
 
-  it("aclara que Tehus CRM no está afiliado a Meta", () => {
+  it("aclara que TAKTO no está afiliado a Meta", () => {
     render(<SiteFooter />);
     expect(screen.getByText(/no está afiliado a meta/i)).toBeInTheDocument();
   });
@@ -132,9 +132,22 @@ describe("SiteFooter", () => {
     render(<SiteFooter />);
 
     const footer = screen.getByRole("contentinfo");
-    expect(within(footer).getByRole("link", { name: /iniciar sesión/i })).toHaveAttribute(
+    expect(within(footer).getByRole("link", { name: /ingresar/i })).toHaveAttribute(
       "href",
       "https://crm-staging.tehusrattan.com/login",
     );
+  });
+
+  it("presenta «Activar mi empresa» con la aclaración de invitación", () => {
+    render(<SiteFooter />);
+
+    const footer = screen.getByRole("contentinfo");
+    expect(within(footer).getByRole("link", { name: /activar mi empresa/i })).toHaveAttribute(
+      "href",
+      "https://crm-staging.tehusrattan.com/onboarding",
+    );
+    // No puede leerse como registro libre.
+    expect(within(footer).getByText(/acceso disponible mediante invitación/i)).toBeInTheDocument();
+    expect(within(footer).queryByText(/crear mi empresa/i)).not.toBeInTheDocument();
   });
 });

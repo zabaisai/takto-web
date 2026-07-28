@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cta, nav } from "@/data/landing-content";
-import { crmLoginUrl } from "@/lib/site";
+import { crmLoginUrl, crmOnboardingUrl } from "@/lib/site";
 
 /**
  * Menú de navegación para pantallas pequeñas.
@@ -110,6 +110,17 @@ export function MobileNav() {
               >
                 {cta.login}
               </a>
+              <a
+                href={crmOnboardingUrl}
+                rel="noopener noreferrer"
+                onClick={close}
+                className="flex min-h-12 items-center justify-center rounded-[10px] border border-line bg-surface text-[15px] font-semibold text-ink"
+              >
+                {cta.activate}
+              </a>
+              <span className="-mt-1 text-center text-[12px] leading-[1.4] text-muted">
+                {cta.activateNote}
+              </span>
               <Link
                 href="/#demo"
                 onClick={close}

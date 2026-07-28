@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { allowIndexing, site, siteUrl } from "@/lib/site";
+import { allowIndexing, brand, site, siteUrl } from "@/lib/site";
 import "@/styles/globals.css";
 
 const sora = Sora({
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: site.title,
-    template: "%s | Tehus CRM",
+    template: `%s | ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
@@ -64,12 +64,14 @@ export const viewport: Viewport = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  name: "Tehus CRM",
+  name: site.name,
+  alternateName: `${site.name} — ${brand.concept}`,
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   url: siteUrl,
-  inLanguage: "es-CO",
+  inLanguage: site.lang,
   description: site.description,
+  slogan: brand.claim,
   audience: {
     "@type": "Audience",
     audienceType: "Equipos comerciales",

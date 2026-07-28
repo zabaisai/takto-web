@@ -9,7 +9,7 @@ export function ContactMockup() {
   return (
     <div
       role="img"
-      aria-label="Ficha de contacto en Tehus CRM: datos de la empresa, personas de contacto, asesor responsable, oportunidad abierta, próxima tarea y actividad reciente. Datos de ejemplo."
+      aria-label="Ficha de contacto en TAKTO: datos de la empresa, personas de contacto, asesor responsable, oportunidad abierta, próxima tarea y actividad reciente. Datos de ejemplo."
       className="overflow-hidden rounded-[18px] border border-line bg-surface shadow-[0_30px_60px_-40px_rgba(11,14,15,.42)]"
     >
       <div className="flex flex-wrap items-center gap-3 border-b border-line-soft bg-surface-soft px-4 py-3">

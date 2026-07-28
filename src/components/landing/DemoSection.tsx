@@ -1,4 +1,5 @@
 import { demo } from "@/data/landing-content";
+import { sinkPersistsLeads } from "@/lib/leads/sink";
 import { DemoForm } from "@/components/forms/DemoForm";
 import { CheckDot } from "@/components/product-mockups/primitives";
 import { Container } from "@/components/ui/Container";
@@ -7,6 +8,9 @@ import { LinkButton } from "@/components/ui/LinkButton";
 import { Section } from "@/components/ui/Section";
 
 export function DemoSection() {
+  // Se evalúa en el servidor: la variable del destino nunca llega al cliente.
+  const leadsArePersisted = sinkPersistsLeads();
+
   return (
     <Section id="demo" aria-labelledby="demo-title">
       <Container className="grid items-start gap-[clamp(28px,3.5vw,52px)] [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
@@ -34,6 +38,21 @@ export function DemoSection() {
         </div>
 
         <div className="rounded-[20px] border border-line bg-surface p-[clamp(20px,2.4vw,32px)] shadow-[0_34px_70px_-46px_rgba(11,14,15,.5)]">
+          {/*
+            Mientras el destino del formulario sea el adaptador `log`, la
+            solicitud NO se envía ni se almacena. Se avisa en la propia página
+            en lugar de simular un envío correcto.
+          */}
+          {!leadsArePersisted ? (
+            <p
+              role="note"
+              className="mb-5 rounded-[12px] border border-brand/30 bg-brand/[0.06] px-4 py-3 text-[12.5px] leading-[1.5] text-brand-deep"
+            >
+              <b className="font-semibold">Formulario en configuración.</b> Todavía no hay un
+              destino aprobado para las solicitudes, así que este envío no se guarda ni se remite a
+              nadie. Escríbenos por los canales del pie de página mientras tanto.
+            </p>
+          ) : null}
           <DemoForm />
         </div>
       </Container>

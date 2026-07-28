@@ -1,8 +1,8 @@
 {
-  "name": "tehus-crm-web",
+  "name": "takto-web",
   "version": "0.1.0",
   "private": true,
-  "description": "Página web comercial pública de Tehus CRM",
+  "description": "Página web comercial pública de TAKTO",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

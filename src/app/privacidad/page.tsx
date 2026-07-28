@@ -10,7 +10,7 @@ import {
 export const metadata: Metadata = {
   title: "Política de privacidad",
   description:
-    "Borrador de la política de privacidad de Tehus CRM, pendiente de revisión jurídica.",
+    "Borrador de la política de privacidad de TAKTO, pendiente de revisión jurídica.",
   alternates: { canonical: "/privacidad" },
   robots: { index: false, follow: true },
 };

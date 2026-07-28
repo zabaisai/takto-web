@@ -13,7 +13,7 @@ const validBody = {
 };
 
 function request(body: unknown, headers: Record<string, string> = {}) {
-  return new Request("https://crm.tehusrattan.com/api/demo", {
+  return new Request("https://takto.online/api/demo", {
     method: "POST",
     headers: { "content-type": "application/json", ...headers },
     body: typeof body === "string" ? body : JSON.stringify(body),
@@ -71,7 +71,7 @@ describe("POST /api/demo", () => {
 
   it("rechaza cuerpos que no son JSON", async () => {
     const response = await POST(
-      new Request("https://crm.tehusrattan.com/api/demo", {
+      new Request("https://takto.online/api/demo", {
         method: "POST",
         headers: { "content-type": "text/plain", "x-forwarded-for": "203.0.113.5" },
         body: "hola",

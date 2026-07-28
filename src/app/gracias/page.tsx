@@ -6,7 +6,7 @@ import { demo } from "@/data/landing-content";
 
 export const metadata: Metadata = {
   title: "Solicitud recibida",
-  description: "Hemos recibido tu solicitud de demostración de Tehus CRM.",
+  description: "Hemos recibido tu solicitud de demostración de TAKTO.",
   alternates: { canonical: "/gracias" },
   robots: { index: false, follow: true },
 };
@@ -45,7 +45,7 @@ export default function GraciasPage() {
         </h1>
 
         <p className="mt-4 max-w-[52ch] text-[clamp(16px,1.3vw,18px)] leading-[1.6] text-muted">
-          Gracias por escribirnos. Un asesor de Tehus CRM te contactará para agendar la
+          Gracias por escribirnos. Un asesor de TAKTO te contactará para agendar la
           demostración. {demo.footnote}
         </p>
 

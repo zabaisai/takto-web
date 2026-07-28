@@ -12,7 +12,7 @@ const dotTones = {
 export function NotificationsMockup() {
   return (
     <Sequence
-      label="Centro de notificaciones de Tehus CRM: llega un aviso nuevo, el contador pasa a uno y se listan la nueva conversación, una tarea vencida, una tarea próxima y la asignación de una oportunidad. Datos de ejemplo."
+      label="Centro de notificaciones de TAKTO: llega un aviso nuevo, el contador pasa a uno y se listan la nueva conversación, una tarea vencida, una tarea próxima y la asignación de una oportunidad. Datos de ejemplo."
       className="w-[min(400px,100%)] overflow-hidden rounded-[18px] border border-line bg-surface-soft shadow-[0_30px_60px_-38px_rgba(11,14,15,.45)]"
     >
       <div className="flex items-center gap-2.5 border-b border-line-soft bg-surface px-4 py-[13px]">

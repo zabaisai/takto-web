@@ -57,8 +57,9 @@ export function Chip({
   tone?: "brand" | "wa" | "muted" | "ink" | "danger" | "warning";
   className?: string;
 }) {
+  // Las etiquetas rondan los 9,5 px: siempre el tono reforzado sobre claro.
   const tones = {
-    brand: "bg-brand/10 text-brand",
+    brand: "bg-brand/10 text-brand-text",
     wa: "bg-wa/[0.16] text-ink",
     muted: "bg-line-soft text-muted",
     ink: "bg-bone text-ink",

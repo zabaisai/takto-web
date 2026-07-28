@@ -13,7 +13,7 @@ const rowStyles = {
 export function TasksMockup() {
   return (
     <Sequence
-      label="Lista de tareas del día en Tehus CRM: una tarea vencida, una para hoy que se marca como completada durante la demostración, una para mañana y una ya completada, cada una con su responsable y su hora. Datos de ejemplo."
+      label="Lista de tareas del día en TAKTO: una tarea vencida, una para hoy que se marca como completada durante la demostración, una para mañana y una ya completada, cada una con su responsable y su hora. Datos de ejemplo."
       className="rounded-[18px] border border-line bg-surface-soft p-[clamp(14px,1.6vw,20px)] shadow-[0_30px_60px_-40px_rgba(11,14,15,.4)]"
     >
       <div className="mb-3 flex items-center justify-between">

@@ -1,20 +1,61 @@
 @import "tailwindcss";
 
 /* =====================================================================
-   Tokens de diseño — extraídos del mockup aprobado
-   mockup/tehus-crm-landing.mockup.html
+   PALETA DE MARCA — ÚNICO lugar del proyecto con valores literales.
+   ---------------------------------------------------------------------
+   La familia cromática definitiva sigue en evaluación entre las rutas
+   7, 9 y 11. Para cambiarla NO hay que tocar ningún componente: basta
+   con sustituir los tres valores de este bloque.
+
+   TAK = principal · TO = secundario. Esa división es estructural y se
+   mantiene sea cual sea la paleta que se elija.
+
+   CONTRASTE (WCAG 2.1) de la paleta provisional, medido contra
+   marfil #F8F5EF y tinta #0B0E0F:
+
+     --color-tak  #B7790B  sobre marfil ->  3.40:1
+        AA solo para texto grande (>=24px o >=19px negrita) y para
+        bordes/iconos. NO cumple para texto pequeño.
+     --color-tak  #B7790B  sobre tinta  ->  4.13:1   AA texto pequeño.
+     --color-to   #E5B94F  sobre marfil ->  1.71:1   NO apto para texto.
+     --color-to   #E5B94F  sobre tinta  -> 10.42:1   AAA.
+     --color-tak-strong #8A5A0A sobre marfil -> 5.44:1  AA texto pequeño.
+
+   Por eso TO se usa como ACENTO sobre claro (fondos, bordes, barras) y
+   como color de texto solo sobre superficies oscuras; y para texto
+   pequeño sobre claro existe --color-brand-text, que apunta al tono
+   reforzado. Al cambiar de ruta cromática hay que rehacer estas cinco
+   medidas y ajustar `--color-tak-strong` hasta pasar 4.5:1 sobre marfil.
    ===================================================================== */
 @theme {
+  /* --- Los tres valores de marca ------------------------------------ */
+  --color-tak: #b7790b;
+  --color-to: #e5b94f;
+  /* Variante reforzada de TAK para texto pequeño sobre fondos claros. */
+  --color-tak-strong: #8a5a0a;
+
+  /* --- Alias semánticos: los componentes usan SOLO estos ------------- */
+  --color-brand: var(--color-tak);
+  --color-brand-gold: var(--color-to);
+  --color-brand-deep: var(--color-tak-strong);
+  /* Texto pequeño sobre marfil/blanco. */
+  --color-brand-text: var(--color-tak-strong);
+  /* Texto pequeño sobre tinta. */
+  --color-brand-text-dark: var(--color-to);
+
   /* Superficies */
   --color-bone: #f8f5ef;
   --color-surface: #ffffff;
   --color-surface-soft: #fcfaf6;
+  --color-surface-tint: #f6f3ed;
 
   /* Tinta y paneles oscuros */
   --color-ink: #0b0e0f;
   --color-ink-panel: #12161a;
   --color-ink-raised: #1a1d1f;
   --color-ink-deep: #080a0b;
+  --color-ink-device: #0f1214;
+  --color-ink-device-line: #2a2e31;
 
   /* Texto */
   --color-muted: #62676d;
@@ -28,12 +69,7 @@
   --color-line-faint: #f0ede6;
   --color-line-dim: #c9c4ba;
 
-  /* Marca */
-  --color-brand: #b7790b;
-  --color-brand-gold: #e5b94f;
-  --color-brand-deep: #8a5a0a;
-
-  /* WhatsApp */
+  /* WhatsApp — fuera de la paleta de marca, son colores del canal */
   --color-wa: #25d366;
   --color-wa-header: #075e54;
   --color-wa-out: #005c4b;
@@ -46,6 +82,7 @@
   --color-danger: #c0392b;
 
   /* Empresas de ejemplo (ficticias) */
+  --color-demo-amber: var(--color-tak);
   --color-demo-blue: #1f5c8b;
   --color-demo-green: #2f6b4f;
 
