@@ -1,4 +1,5 @@
 import { demoData } from "@/data/landing-content";
+import { Sequence } from "@/components/motion/Sequence";
 import { TaskBox } from "./primitives";
 
 const rowStyles = {
@@ -11,9 +12,8 @@ const rowStyles = {
 /** Lista de tareas del día con una vencida y una completada. Datos ficticios. */
 export function TasksMockup() {
   return (
-    <div
-      role="img"
-      aria-label="Lista de tareas del día en Tehus CRM: una tarea vencida, una para hoy, una para mañana y una completada, cada una con su responsable y su hora. Datos de ejemplo."
+    <Sequence
+      label="Lista de tareas del día en Tehus CRM: una tarea vencida, una para hoy que se marca como completada durante la demostración, una para mañana y una ya completada, cada una con su responsable y su hora. Datos de ejemplo."
       className="rounded-[18px] border border-line bg-surface-soft p-[clamp(14px,1.6vw,20px)] shadow-[0_30px_60px_-40px_rgba(11,14,15,.4)]"
     >
       <div className="mb-3 flex items-center justify-between">
@@ -29,19 +29,41 @@ export function TasksMockup() {
             key={task.title}
             className={`flex items-center gap-[11px] rounded-[11px] bg-surface p-3 ${rowStyles[task.state]}`}
           >
-            <TaskBox
-              size={15}
-              tone={
-                task.state === "overdue"
-                  ? "danger"
-                  : task.state === "today"
-                    ? "brand"
-                    : task.state === "done"
-                      ? "wa"
-                      : "dim"
-              }
-              checked={task.state === "done"}
-            />
+            <span className="relative flex flex-none items-center">
+              <TaskBox
+                size={15}
+                tone={
+                  task.state === "overdue"
+                    ? "danger"
+                    : task.state === "today"
+                      ? "brand"
+                      : task.state === "done"
+                        ? "wa"
+                        : "dim"
+                }
+                checked={task.state === "done"}
+              />
+              {/*
+                La tarea de hoy se marca a mitad del ciclo y vuelve a su estado
+                inicial. Es una capa superpuesta: la casilla real nunca
+                desaparece, así que sin animación la lista se lee igual.
+              */}
+              {task.state === "today" ? (
+                <span
+                  aria-hidden="true"
+                  className="seq-check absolute inset-0 grid place-items-center rounded-[4px] bg-wa text-[9px] font-bold text-white"
+                  style={{
+                    animationName: "seq-check",
+                    animationDuration: "8s",
+                    animationIterationCount: "infinite",
+                    animationFillMode: "both",
+                  }}
+                >
+                  ✓
+                </span>
+              ) : null}
+            </span>
+
             <span className="min-w-0">
               <b
                 className={`block text-[13px] leading-[1.3] font-semibold ${
@@ -61,6 +83,6 @@ export function TasksMockup() {
           </div>
         ))}
       </div>
-    </div>
+    </Sequence>
   );
 }
