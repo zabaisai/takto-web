@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { cta, nav } from "@/data/landing-content";
 import { crmLoginUrl, crmOnboardingUrl } from "@/lib/site";
@@ -91,13 +91,13 @@ export function MobileNav() {
             <ul className="grid gap-1">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <Link
+                  <AnchorLink
                     href={`/${item.href}`}
                     onClick={close}
                     className="flex min-h-12 items-center rounded-[10px] px-3 text-[15px] font-medium text-ink"
                   >
                     {item.label}
-                  </Link>
+                  </AnchorLink>
                 </li>
               ))}
             </ul>
@@ -121,13 +121,13 @@ export function MobileNav() {
               <span className="-mt-1 text-center text-[12px] leading-[1.4] text-muted">
                 {cta.activateNote}
               </span>
-              <Link
+              <AnchorLink
                 href="/#demo"
                 onClick={close}
                 className="flex min-h-12 items-center justify-center rounded-[10px] bg-ink text-[15px] font-semibold text-bone shadow-[0_1px_0_rgba(229,185,79,.55)_inset]"
               >
                 {cta.primaryShort}
-              </Link>
+              </AnchorLink>
             </div>
           </nav>
         </div>

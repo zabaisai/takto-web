@@ -43,6 +43,19 @@ const sizes: Record<Size, string> = {
   lg: "px-[26px] py-4 text-[15px] min-h-12",
 };
 
+/**
+ * Un destino con almohadilla no es una navegación de ruta.
+ *
+ * Usar `next/link` para ellos mete al router por medio: Next hace *prefetch*
+ * del payload RSC de `/` por cada enlace visible y aborta los que quedan a
+ * medias, lo que hace que el cliente de React lance «Connection closed.» en
+ * consola. Con un ancla normal no hay router, ni prefetch, ni excepción, y el
+ * comportamiento para el usuario es el mismo.
+ */
+function isAnchor(href: string): boolean {
+  return href.startsWith("#") || href.startsWith("/#");
+}
+
 export function LinkButton({
   href,
   children,
@@ -56,6 +69,14 @@ export function LinkButton({
   if (external) {
     return (
       <a href={href} className={classes} rel="noopener noreferrer">
+        {children}
+      </a>
+    );
+  }
+
+  if (isAnchor(href)) {
+    return (
+      <a href={href} className={classes}>
         {children}
       </a>
     );

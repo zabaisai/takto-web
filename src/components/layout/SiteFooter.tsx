@@ -1,6 +1,6 @@
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { cta, footer } from "@/data/landing-content";
-import { crmLoginUrl, crmOnboardingUrl } from "@/lib/site";
+import { crmLoginUrl, crmOnboardingUrl, isBeta } from "@/lib/site";
 import { LogoMark, LogoWordmark } from "./Logo";
 
 const linkClass =
@@ -36,9 +36,9 @@ export function SiteFooter() {
             <ul className="mt-[14px] grid gap-[10px]">
               {column.links.map((link) => (
                 <li key={`${column.title}-${link.label}`}>
-                  <Link href={link.href} className={linkClass}>
+                  <AnchorLink href={link.href} className={linkClass}>
                     {link.label}
-                  </Link>
+                  </AnchorLink>
                 </li>
               ))}
             </ul>
@@ -65,16 +65,24 @@ export function SiteFooter() {
               </span>
             </li>
             <li>
-              <Link href="/#demo" className={linkClass}>
+              <AnchorLink href="/#demo" className={linkClass}>
                 Solicitar demostración
-              </Link>
+              </AnchorLink>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="mx-auto mt-[clamp(30px,3.5vw,48px)] flex w-full max-w-[1240px] flex-wrap justify-between gap-3 border-t border-bone/10 pt-5">
-        <span className="text-[12px] leading-[1.5] text-bone/[0.38]">{footer.copyright}</span>
+        <span className="flex flex-wrap items-center gap-2 text-[12px] leading-[1.5] text-bone/[0.38]">
+          {footer.copyright}
+          {/* Sello discreto: informa sin ensuciar el diseño ni parecer un fallo. */}
+          {isBeta ? (
+            <span className="rounded-full border border-bone/20 px-2 py-0.5 text-[10.5px] font-medium text-bone/55">
+              Versión beta
+            </span>
+          ) : null}
+        </span>
         <span className="text-[12px] leading-[1.5] text-bone/[0.38]">{footer.trademark}</span>
       </div>
     </footer>

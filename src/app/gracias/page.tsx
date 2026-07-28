@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { demo } from "@/data/landing-content";
@@ -77,9 +77,9 @@ export default function GraciasPage() {
 
         <p className="mt-8 text-[13px] leading-[1.6] text-subtle">
           Si necesitas corregir algún dato, puedes{" "}
-          <Link href="/#demo" className="text-brand underline underline-offset-2">
+          <AnchorLink href="/#demo" className="text-brand underline underline-offset-2">
             enviar una nueva solicitud
-          </Link>
+          </AnchorLink>
           .
         </p>
       </Container>

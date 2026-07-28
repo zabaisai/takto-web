@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { AnchorLink } from "@/components/ui/AnchorLink";
 import { Container } from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/LinkButton";
 import { nav } from "@/data/landing-content";
@@ -43,12 +43,12 @@ export default function NotFound() {
           <ul className="mt-4 flex flex-wrap gap-2.5">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link
+                <AnchorLink
                   href={`/${item.href}`}
                   className="inline-flex min-h-11 items-center rounded-full border border-line bg-bone px-[13px] text-[13px] font-medium text-ink hover:border-brand"
                 >
                   {item.label}
-                </Link>
+                </AnchorLink>
               </li>
             ))}
           </ul>
