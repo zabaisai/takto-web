@@ -20,9 +20,16 @@ COPY . .
 ARG NEXT_PUBLIC_SITE_URL=https://crm.tehusrattan.com
 ARG NEXT_PUBLIC_CRM_LOGIN_URL=https://crm-staging.tehusrattan.com/login
 ARG NEXT_PUBLIC_ALLOW_INDEXING=true
+
+# Las cabeceras de `next.config.ts` se resuelven durante el build, así que
+# esta bandera de preview tiene que llegar aquí y no en `docker run`.
+# Debe quedar SIN definir para producción.
+ARG CSP_ALLOW_INSECURE_PREVIEW=0
+
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
     NEXT_PUBLIC_CRM_LOGIN_URL=$NEXT_PUBLIC_CRM_LOGIN_URL \
     NEXT_PUBLIC_ALLOW_INDEXING=$NEXT_PUBLIC_ALLOW_INDEXING \
+    CSP_ALLOW_INSECURE_PREVIEW=$CSP_ALLOW_INSECURE_PREVIEW \
     NEXT_TELEMETRY_DISABLED=1
 
 RUN npm run build

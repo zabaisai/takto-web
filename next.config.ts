@@ -10,6 +10,18 @@ import type { NextConfig } from "next";
  * `'unsafe-inline'` en `style-src` es necesario porque React inyecta estilos inline
  * (atributo `style`) y Next inserta la hoja de estilos crítica inline durante la hidratación.
  */
+/**
+ * `upgrade-insecure-requests` obliga al navegador a pedir por HTTPS todos los
+ * subrecursos. En producción es lo correcto y va activado.
+ *
+ * En un preview servido por HTTP sobre una IP de red hace inservible la
+ * página: el navegador no considera de confianza esa IP (a diferencia de
+ * localhost), fuerza la hoja de estilos a https:// y la petición falla, así
+ * que el sitio se muestra sin CSS. Por eso puede desactivarse SOLO en preview,
+ * mediante `CSP_ALLOW_INSECURE_PREVIEW=1`. Nunca debe activarse en producción.
+ */
+const allowInsecurePreview = process.env.CSP_ALLOW_INSECURE_PREVIEW === "1";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -22,7 +34,7 @@ const contentSecurityPolicy = [
   "font-src 'self'",
   "connect-src 'self'",
   "manifest-src 'self'",
-  "upgrade-insecure-requests",
+  ...(allowInsecurePreview ? [] : ["upgrade-insecure-requests"]),
 ].join("; ");
 
 const securityHeaders = [
