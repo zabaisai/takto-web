@@ -48,3 +48,6 @@ $RECYCLE.BIN/
 # Temporales
 tmp/
 temp/
+
+# Banco de pruebas de viewports: artefacto local de QA, no se versiona
+public/_qa-viewports.*

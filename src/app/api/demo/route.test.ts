@@ -30,10 +30,23 @@ describe("POST /api/demo", () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
   });
 
-  it("acepta una solicitud válida", async () => {
+  it("acepta una solicitud válida pero avisa de que el canal no está activo", async () => {
+    // Sin NEXT_PUBLIC_CONTACT_MODE configurado el canal está en «pending».
+    // La solicitud pasa validación, pero NO se finge un envío correcto.
     const response = await POST(request(validBody, { "x-forwarded-for": "203.0.113.1" }));
-    expect(response.status).toBe(200);
-    await expect(response.json()).resolves.toEqual({ ok: true });
+
+    expect(response.status).toBe(503);
+    const body = (await response.json()) as { ok: boolean; pending: boolean; message: string };
+    expect(body.ok).toBe(false);
+    expect(body.pending).toBe(true);
+    expect(body.message).toMatch(/no está activado/i);
+  });
+
+  it("no almacena ni registra nada mientras el canal esté pendiente", async () => {
+    await POST(request(validBody, { "x-forwarded-for": "203.0.113.20" }));
+
+    // El adaptador de destino no llega a ejecutarse: cero rastro de los datos.
+    expect(console.info).not.toHaveBeenCalled();
   });
 
   it("rechaza una solicitud incompleta con 422 y los errores por campo", async () => {
@@ -97,9 +110,10 @@ describe("POST /api/demo", () => {
   it("aplica rate limiting por IP y devuelve Retry-After", async () => {
     const ip = { "x-forwarded-for": "203.0.113.8" };
 
+    // 503 = pasó el limitador y llegó al canal (que está pendiente).
     for (let i = 0; i < 5; i += 1) {
-      const ok = await POST(request(validBody, ip));
-      expect(ok.status, `envío ${i + 1}`).toBe(200);
+      const passed = await POST(request(validBody, ip));
+      expect(passed.status, `envío ${i + 1}`).toBe(503);
     }
 
     const blocked = await POST(request(validBody, ip));
@@ -113,15 +127,16 @@ describe("POST /api/demo", () => {
 
     for (let i = 0; i < 5; i += 1) await POST(request(validBody, a));
     expect((await POST(request(validBody, a))).status).toBe(429);
-    expect((await POST(request(validBody, b))).status).toBe(200);
+    expect((await POST(request(validBody, b))).status).toBe(503);
   });
 
-  it("no filtra datos personales completos en los logs", async () => {
-    await POST(request(validBody, { "x-forwarded-for": "203.0.113.12" }));
+  it("no filtra datos personales en la respuesta", async () => {
+    const response = await POST(request(validBody, { "x-forwarded-for": "203.0.113.12" }));
+    const body = JSON.stringify(await response.json());
 
-    const logged = JSON.stringify((console.info as ReturnType<typeof vi.fn>).mock.calls);
-    expect(logged).not.toContain("maria@empresa.com");
-    expect(logged).not.toContain("3001234567");
+    expect(body).not.toContain("maria@empresa.com");
+    expect(body).not.toContain("3001234567");
+    expect(body).not.toContain("María Gómez");
   });
 });
 

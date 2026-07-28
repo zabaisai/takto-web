@@ -15,7 +15,7 @@ import {
   type DemoRequestInput,
 } from "@/lib/validation/demo-request";
 
-type Status = "normal" | "sending" | "sent" | "error";
+type Status = "normal" | "sending" | "sent" | "error" | "pending";
 
 const advisorLabels: Record<string, string> = {
   "1-3": "1 a 3",
@@ -77,9 +77,16 @@ export function DemoForm() {
       const payload: unknown = await response.json().catch(() => null);
 
       if (!response.ok) {
-        const body = (payload ?? {}) as { message?: string; errors?: DemoRequestErrors };
+        const body = (payload ?? {}) as {
+          message?: string;
+          errors?: DemoRequestErrors;
+          pending?: boolean;
+        };
         if (body.errors) setErrors(body.errors);
-        setStatus("error");
+        // `pending` = el canal comercial aún no está activado. No es un fallo
+        // del visitante ni un error transitorio: se distingue para no pedirle
+        // que "vuelva a intentarlo".
+        setStatus(body.pending ? "pending" : "error");
         setServerMessage(
           body.message ?? "No pudimos enviar tu solicitud. Inténtalo de nuevo en unos minutos.",
         );
@@ -322,6 +329,16 @@ export function DemoForm() {
         {status === "error" ? (
           <div className="rounded-[11px] border border-danger/30 bg-danger/5 px-3.5 py-3 text-[12.5px] leading-[1.45] font-medium text-danger">
             {serverMessage ?? "Revisa los campos marcados para poder enviar tu solicitud."}
+          </div>
+        ) : null}
+        {status === "pending" ? (
+          // Respuesta honesta: el canal no está activado. Ni «enviado» ni
+          // «vuelve a intentarlo», porque ninguna de las dos sería cierta.
+          <div
+            role="status"
+            className="rounded-[11px] border border-brand/30 bg-brand/[0.06] px-3.5 py-3 text-[12.5px] leading-[1.45] font-medium text-brand-deep"
+          >
+            {serverMessage}
           </div>
         ) : null}
       </div>

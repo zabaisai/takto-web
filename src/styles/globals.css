@@ -297,13 +297,23 @@
   animation: hero-rise var(--motion-enter) var(--ease-premium-out) both;
 }
 
+/*
+  La entrada del hero anima SOLO el desplazamiento, nunca la opacidad.
+
+  `animation-fill-mode: both` mantiene el fotograma inicial durante el retardo
+  del escalonado. Si el documento no recibe ciclos de pintado —pestaña de
+  fondo, iframe fuera de pantalla, motor con el render suspendido— la
+  animación se queda congelada en ese fotograma. Con opacidad 0 eso dejaba el
+  H1 invisible de forma indefinida, que es justo lo que no puede pasar.
+
+  Animando solo `translateY`, el peor caso es un texto 16 px más abajo:
+  perfectamente legible.
+*/
 @keyframes hero-rise {
   from {
-    opacity: 0;
     transform: translateY(16px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }
