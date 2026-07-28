@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { features } from "@/data/landing-content";
 import { Avatar, SkeletonBar } from "@/components/product-mockups/primitives";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, SectionTitle } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -171,18 +172,22 @@ function FeatureCard({
   title,
   body,
   dark,
+  delay,
 }: {
   id: string;
   title: string;
   body: string;
   dark: boolean;
+  delay: number;
 }): ReactNode {
   return (
-    <article
-      className={`rounded-[20px] p-6 transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
+    <Reveal
+      as="article"
+      delay={delay}
+      className={`group rounded-[20px] p-6 transition-[transform,box-shadow,border-color] duration-200 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 ${
         dark
-          ? "on-dark border border-ink bg-ink text-bone hover:shadow-[0_26px_52px_-30px_rgba(11,14,15,.6)]"
-          : "border border-line bg-surface hover:shadow-[0_26px_52px_-30px_rgba(11,14,15,.4)]"
+          ? "on-dark border border-ink bg-ink text-bone hover:border-brand-gold/40 hover:shadow-[0_26px_52px_-30px_rgba(11,14,15,.6)]"
+          : "border border-line bg-surface hover:border-brand/35 hover:shadow-[0_26px_52px_-30px_rgba(11,14,15,.4)]"
       }`}
     >
       <FeatureIcon id={id} />
@@ -191,7 +196,7 @@ function FeatureCard({
         {body}
       </p>
       <FeaturePreview id={id} />
-    </article>
+    </Reveal>
   );
 }
 
@@ -210,13 +215,14 @@ export function FeaturesSection() {
         </div>
 
         <div className="mt-[clamp(28px,3.4vw,46px)] grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
-          {features.items.map((item) => (
+          {features.items.map((item, index) => (
             <FeatureCard
               key={item.id}
               id={item.id}
               title={item.title}
               body={item.body}
               dark={item.id === "contactos"}
+              delay={index * 80}
             />
           ))}
         </div>

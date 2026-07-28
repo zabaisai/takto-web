@@ -1,5 +1,6 @@
 import { pipeline } from "@/data/landing-content";
 import { PipelineMockup } from "@/components/product-mockups/PipelineMockup";
+import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow, SectionTitle } from "@/components/ui/Eyebrow";
 import { Section } from "@/components/ui/Section";
@@ -22,9 +23,9 @@ export function PipelineSection() {
           </ul>
         </div>
 
-        <div className="mt-[clamp(26px,3.2vw,42px)]">
+        <Reveal delay={120} className="mt-[clamp(26px,3.2vw,42px)]">
           <PipelineMockup />
-        </div>
+        </Reveal>
       </Container>
     </Section>
   );

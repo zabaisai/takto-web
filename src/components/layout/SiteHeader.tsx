@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { cta, nav } from "@/data/landing-content";
 import { crmLoginUrl } from "@/lib/site";
+import { HeaderShell } from "./HeaderShell";
 import { LogoMark, LogoWordmark } from "./Logo";
 import { MobileNav } from "./MobileNav";
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-60 border-b border-line bg-bone/[0.82] backdrop-blur-[14px]">
+    <HeaderShell>
       <div className="mx-auto flex w-full max-w-[1280px] items-center gap-[clamp(16px,3vw,40px)] px-[clamp(18px,4vw,44px)] py-[14px]">
         <Link href="/" className="flex flex-none items-center gap-[10px] text-ink">
           <LogoMark />
@@ -20,9 +21,14 @@ export function SiteHeader() {
               <li key={item.href}>
                 <Link
                   href={`/${item.href}`}
-                  className="block px-0.5 py-2 text-[14px] leading-none font-medium text-muted transition-colors hover:text-ink"
+                  className="group relative block px-0.5 py-2 text-[14px] leading-none font-medium text-muted transition-colors duration-200 hover:text-ink motion-reduce:transition-none"
                 >
                   {item.label}
+                  {/* Subrayado que crece desde el centro al pasar el cursor */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-px h-px origin-center scale-x-0 bg-brand transition-transform duration-200 group-hover:scale-x-100 motion-reduce:transition-none"
+                  />
                 </Link>
               </li>
             ))}
@@ -46,6 +52,6 @@ export function SiteHeader() {
           <MobileNav />
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }
