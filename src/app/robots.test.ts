@@ -1,24 +1,11 @@
 import { describe, expect, it } from "vitest";
-import robots from "./robots";
+import { GET, buildRobots, CACHE_CONTROL } from "./robots.txt/route";
 import { allowIndexing, isBeta } from "@/lib/site";
 
-/**
- * Next serializa cada entrada de `rules` como un grupo independiente de
- * `robots.txt`. Se normaliza a esa forma para poder afirmar sobre grupos
- * («hay un grupo para facebookexternalhit con Allow: /») y no sobre la
- * estructura interna del objeto.
- */
-function groupsOf(rules: ReturnType<typeof robots>["rules"]) {
-  const list = Array.isArray(rules) ? rules : rules ? [rules] : [];
-  return list.map((rule) => ({
-    userAgents: [rule.userAgent ?? "*"].flat(),
-    allow: [rule.allow ?? []].flat(),
-    disallow: [rule.disallow ?? []].flat(),
-  }));
-}
-
-function groupFor(userAgent: string) {
-  return groupsOf(robots().rules).find((group) => group.userAgents.includes(userAgent));
+function metaRequest(userAgent = "facebookexternalhit/1.1") {
+  return new Request("https://takto.online/robots.txt", {
+    headers: { "user-agent": userAgent },
+  });
 }
 
 describe("robots.txt", () => {
@@ -28,34 +15,39 @@ describe("robots.txt", () => {
     expect(allowIndexing).toBe(false);
   });
 
-  it("permite explícitamente a facebookexternalhit", () => {
-    expect(groupFor("facebookexternalhit")).toMatchObject({ allow: ["/"] });
-  });
-
-  it("permite explícitamente a Facebot", () => {
-    expect(groupFor("Facebot")).toMatchObject({ allow: ["/"] });
-  });
-
-  it("no bloquea ninguna ruta a los rastreadores de Meta", () => {
-    for (const agent of ["facebookexternalhit", "Facebot"]) {
-      expect(groupFor(agent)?.disallow).toEqual([]);
-    }
+  it("permite a los rastreadores de Meta con `Disallow:` vacío, no `Allow: /`", () => {
+    const body = buildRobots();
+    expect(body).toContain("User-agent: facebookexternalhit\nDisallow:");
+    expect(body).toContain("User-agent: Facebot\nDisallow:");
+    // Máxima compatibilidad de parsers: nunca se usa `Allow: /`.
+    expect(body).not.toContain("Allow: /");
   });
 
   it("mantiene bloqueados al resto de robots mientras dure la beta", () => {
-    const general = groupFor("*");
-    expect(general).toMatchObject({ disallow: ["/"] });
-    expect(general?.allow).toEqual([]);
+    expect(buildRobots()).toContain("User-agent: *\nDisallow: /");
   });
 
-  it("declara los grupos de Meta antes del grupo general", () => {
-    // Un grupo específico gana al comodín en cualquier rastreador conforme,
-    // pero el orden deja la intención explícita y evita implementaciones laxas.
-    const agents = groupsOf(robots().rules).flatMap((group) => group.userAgents);
-    expect(agents).toEqual(["facebookexternalhit", "Facebot", "*"]);
+  it("declara los grupos de Meta antes del comodín", () => {
+    const body = buildRobots();
+    expect(body.indexOf("facebookexternalhit")).toBeLessThan(body.indexOf("Facebot"));
+    expect(body.indexOf("Facebot")).toBeLessThan(body.indexOf("User-agent: *"));
   });
 
   it("sigue publicando el sitemap en beta", () => {
-    expect(robots().sitemap).toBe("https://takto.online/sitemap.xml");
+    expect(buildRobots()).toContain("Sitemap: https://takto.online/sitemap.xml");
+  });
+
+  it("responde como text/plain con Cache-Control sin almacenamiento", () => {
+    const res = GET(metaRequest());
+    expect(res.headers.get("content-type")).toContain("text/plain");
+    expect(res.headers.get("cache-control")).toBe(CACHE_CONTROL);
+    expect(CACHE_CONTROL).toBe(
+      "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
+    );
+  });
+
+  it("el GET sirve exactamente el cuerpo generado", async () => {
+    const res = GET(metaRequest());
+    expect(await res.text()).toBe(buildRobots());
   });
 });
