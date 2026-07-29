@@ -1,10 +1,20 @@
 # Repositorio remoto de takto-web
 
-> **Estado: NO EJECUTADO.** Ningún comando de abajo se ha lanzado.
-> `gh` CLI **no está instalado** en este equipo y no hay token autorizado, así
-> que el repositorio tiene que crearlo el operador.
+> **Estado: EJECUTADO.** El repositorio privado `git@github.com:zabaisai/takto-web.git`
+> existe y opera. La autenticación usa una **clave SSH dedicada**
+> (`core.sshCommand` local al repo con `~/.ssh/takto_github_ed25519`); esa clave
+> **nunca** se copia al VPS.
 >
-> No se leyeron ni se extrajeron credenciales de Git Credential Manager.
+> **Fuente y despliegue oficiales:** la rama de despliegue es **`main`**. El
+> commit desplegable es el `HEAD` verificado de `origin/main`. El despliegue se
+> hace con un **artefacto `git archive` + SHA-256** (ver
+> [`despliegue-takto-online.md`](./despliegue-takto-online.md)); **nunca** se
+> clona el repositorio en el VPS ni se usa `rsync`. La rama `feature/takto-rebrand`
+> es **histórica** y ya **no** es la fuente de despliegue.
+>
+> `gh` CLI no está instalado y no hay token autorizado: los PR y la lectura del
+> estado de CI los confirma el operador en GitHub. No se leyeron ni se extrajeron
+> credenciales de Git Credential Manager.
 
 ## Recomendación
 

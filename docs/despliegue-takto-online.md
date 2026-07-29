@@ -1,7 +1,22 @@
 # Despliegue de takto.online
 
-> **Estado: NO EJECUTADO.** Ningún paso de este documento se ha aplicado.
-> Requiere autorización explícita.
+> **Método oficial y vigente.** El sitio se despliega desde un **artefacto
+> reproducible** generado con `git archive` desde `main`, transferido por SSH y
+> verificado por SHA-256. No se clona el repositorio en el VPS, no se copian
+> claves privadas al VPS y no se usa `rsync`.
+
+## Fuente y commit
+
+| Concepto | Valor |
+| --- | --- |
+| **Fuente oficial** | rama `main` |
+| **Commit desplegable** | el `HEAD` verificado de `origin/main` (p. ej. `git ls-remote origin refs/heads/main`) |
+| **Método oficial** | artefacto `git archive` + verificación **SHA-256** |
+| **Alcance** | únicamente el servicio `takto-web` |
+
+La rama `feature/takto-rebrand` **queda obsoleta como fuente de despliegue**: no
+se despliega desde ella. Todo cambio se integra a `main` (PR o `merge --no-ff`)
+y se despliega el artefacto de `main`.
 
 ## Principio
 
@@ -9,163 +24,125 @@ La web es un proyecto, repositorio, imagen y contenedor **independientes**.
 Caddy solo la enruta. No se comparte código, dependencias, variables, volúmenes
 ni base de datos con el CRM.
 
-**Nunca**: `docker compose down -v`, `docker system prune`, `git reset --hard`,
-`git clean`, force push, reinicio del VPS, cambios en el CRM o en PostgreSQL.
+**Nunca**: clonar el repositorio privado dentro del VPS · copiar una clave
+privada de GitHub al VPS · `rsync` improvisado · `docker compose down -v` ·
+`docker system prune` · `git reset --hard` · `git clean` · force push · reinicio
+del VPS · recrear o reiniciar Caddy, backend, frontend, PostgreSQL o pgAdmin ·
+migraciones (takto-web no tiene base de datos).
 
 ## Arquitectura resuelta
 
 Caddy corre **dentro de un contenedor** del stack del CRM y es dueño de 80/443.
-Se comprobó en el servidor que **no alcanza el loopback del host**, así que
-`reverse_proxy 127.0.0.1:3100` no funcionaría.
-
 La web se une a la red de borde `tehus-crm-staging_proxy` —donde ya están
 `caddy`, `frontend` y `backend`— declarada como **externa**: este compose nunca
 la crea ni la borra. Caddy la resuelve como `takto-web:3000`.
 
 **No** se une a `tehus-crm-staging_internal`, la única red donde vive PostgreSQL.
-
-| Red | Contenedores | ¿Se une takto-web? |
-| --- | --- | --- |
-| `tehus-crm-staging_proxy` (172.19.0.0/16) | caddy, frontend, backend | **Sí** |
-| `tehus-crm-staging_internal` (172.18.0.0/16) | backend, **postgres** | **No** |
-
 El puerto `127.0.0.1:3100` se publica solo para el smoke test desde el host.
-Verificado libre; sin colisión con CRM, API, PostgreSQL, pgAdmin ni Caddy.
+
+El bloque de Caddy para `takto.online` ya existe y funciona; **una actualización
+de la aplicación no lo toca**. Solo se revisa Caddy en el alta inicial del dominio.
 
 ---
 
-## Procedimiento (idempotente)
+## Procedimiento de actualización (idempotente)
 
-Cada paso puede repetirse sin efectos acumulativos.
-
-### 1 · Backup si el directorio ya existe
+### 1 · Preparar el artefacto en local, desde el commit exacto
 
 ```bash
-if [ -d /opt/takto-web ]; then
-  sudo tar czf /opt/takto-web.bak.$(date +%Y%m%d-%H%M%S).tar.gz -C /opt takto-web
-  ls -lh /opt/takto-web.bak.*.tar.gz | tail -1
-fi
-```
-
-### 2 · Código
-
-```bash
-sudo mkdir -p /opt/takto-web && sudo chown deploy:deploy /opt/takto-web
-cd /opt/takto-web
-
-if [ -d .git ]; then
-  git fetch --all --prune
-  git checkout feature/takto-rebrand
-  git pull --ff-only            # nunca reset --hard
-else
-  git clone <REMOTO-DE-TAKTO-WEB> .
-  git checkout feature/takto-rebrand
-fi
-git rev-parse HEAD
-```
-
-> El remoto todavía no existe. Alternativa sin remoto: `rsync` del repositorio
-> local excluyendo `node_modules`, `.next` y `public/_qa-viewports.*`.
-
-### 3 · Build
-
-```bash
-cd /opt/takto-web
-docker compose build            # NO pasar CSP_ALLOW_INSECURE_PREVIEW
-docker compose config           # debe resolver sin errores
-```
-
-### 4 · Arranque exclusivo de takto-web
-
-```bash
-docker compose up -d takto-web  # solo este servicio
-docker compose ps
-```
-
-### 5 · Esperar healthcheck
-
-```bash
-for i in $(seq 1 30); do
-  s=$(docker inspect takto-web --format '{{.State.Health.Status}}' 2>/dev/null)
-  echo "$i: $s"
-  [ "$s" = "healthy" ] && break
-  sleep 2
-done
-[ "$s" = "healthy" ] || { echo "NO LEVANTO"; docker logs --tail 50 takto-web; exit 1; }
-```
-
-### 6 · Prueba local (antes de tocar Caddy)
-
-```bash
-curl -sS -o /dev/null -w "host loopback  -> %{http_code}\n" http://127.0.0.1:3100/
-curl -sS -o /dev/null -w "health         -> %{http_code}\n" http://127.0.0.1:3100/api/health
-docker exec tehus-crm-staging-caddy-1 wget -qO- -T5 http://takto-web:3000/api/health && echo " <- Caddy alcanza el contenedor"
-```
-
-Si Caddy no lo alcanza, **detenerse aquí**: el problema es de red, no de Caddy.
-
-### 7 · Caddy: backup, aplicar, validar
-
-```bash
-cd /opt/tehus-crm
-cp deploy/Caddyfile /opt/Caddyfile.bak.$(date +%Y%m%d-%H%M%S)
-ls -l /opt/Caddyfile.bak.*
-
+# En el repositorio local, sobre main ya fusionado y con CI verde:
 git fetch origin
-git checkout feature/takto-domain-routing   # rama ya commiteada, cambio aditivo
-git --no-pager diff main --stat             # debe ser: deploy/Caddyfile | +32
+git checkout main
+git rev-parse HEAD                        # == origin/main == commit desplegable
+[ -z "$(git status --porcelain)" ]        # working tree limpio
 
-docker exec tehus-crm-staging-caddy-1 caddy validate \
-  --config /etc/caddy/Caddyfile --adapter caddyfile
+COMMIT=$(git rev-parse HEAD)
+git archive --format=tar.gz -o /tmp/takto-web-$COMMIT.tar.gz "$COMMIT"
+sha256sum /tmp/takto-web-$COMMIT.tar.gz    # anota el SHA-256
 ```
 
-> El Caddyfile está bind-mounteado desde el repo del CRM, así que cambiar de
-> rama ya actualiza el archivo que ve el contenedor. **No se edita a mano.**
-
-### 8 · Recarga sin reiniciar
+`git archive` incluye **solo archivos rastreados**: no lleva `.git`, `.env`,
+`node_modules` ni `.next`. Verifícalo antes de transferir:
 
 ```bash
-docker exec tehus-crm-staging-caddy-1 caddy reload \
-  --config /etc/caddy/Caddyfile --adapter caddyfile
-
-docker ps --filter name=tehus-crm-staging-caddy-1 --format '{{.Status}}'
+tar tzf /tmp/takto-web-$COMMIT.tar.gz | grep -E '(^|/)\.git(/|$)|node_modules/|(^|/)\.next/|(^|/)\.env$' \
+  && echo "ARTEFACTO SUCIO" || echo "artefacto limpio"
 ```
 
-`reload` aplica en caliente. **Nunca** `docker restart` ni `docker compose up`
-sobre el contenedor de Caddy: eso sí cortaría el CRM.
-
-### 9 · Certificado
+### 2 · Transferir por SSH y verificar el SHA-256 en el VPS
 
 ```bash
-for i in $(seq 1 30); do
-  code=$(curl -sS -o /dev/null -w '%{http_code}' --max-time 10 https://takto.online/ || echo 000)
-  echo "$i: $code"
-  [ "$code" = "200" ] && break
-  sleep 5
+scp /tmp/takto-web-$COMMIT.tar.gz deploy@<VPS>:/tmp/
+ssh deploy@<VPS> "sha256sum /tmp/takto-web-$COMMIT.tar.gz"   # debe COINCIDIR con el local
+```
+
+Si el SHA-256 no coincide, **detenerse**: no se despliega un artefacto no íntegro.
+
+### 3 · Extraer en un directorio temporal y validar el contenido (en el VPS)
+
+```bash
+rm -rf /tmp/takto-web-new && mkdir -p /tmp/takto-web-new
+tar xzf /tmp/takto-web-$COMMIT.tar.gz -C /tmp/takto-web-new
+# No debe contener: .env real, claves, tokens, node_modules, .next, .git,
+# ni secretos del CRM. .env.example (plantilla) sí es correcto.
+```
+
+### 4 · Backup recuperable + reemplazo del código (preservando la config beta)
+
+```bash
+TS=$(date +%Y%m%d-%H%M%S)
+docker tag takto-web:latest takto-web:prev-$TS            # imagen de rollback
+sudo tar czf /opt/takto-web.bak.$TS.tar.gz -C /opt takto-web   # backup recuperable
+
+cp -p /opt/takto-web/.env /tmp/takto-web-new/.env         # PRESERVAR variables beta
+sudo mv /opt/takto-web /opt/takto-web.old.$TS             # dir anterior (rollback)
+sudo mv /tmp/takto-web-new /opt/takto-web
+sudo chown -R deploy:deploy /opt/takto-web && chmod 600 /opt/takto-web/.env
+```
+
+El `.env` del VPS (variables beta, sin secretos con prefijo `NEXT_PUBLIC_`) **se
+conserva siempre**. El artefacto nunca lo trae.
+
+### 5 · Construir y recrear ÚNICAMENTE takto-web
+
+```bash
+cd /opt/takto-web
+docker compose build takto-web
+docker compose up -d takto-web            # solo este servicio
+```
+
+**Nunca** `docker compose up` sobre Caddy, backend, frontend o PostgreSQL.
+
+### 6 · Esperar healthy; si falla, rollback (sin tocar el CRM)
+
+```bash
+for i in $(seq 1 40); do
+  s=$(docker inspect takto-web --format '{{.State.Health.Status}}' 2>/dev/null)
+  [ "$s" = "healthy" ] && break; sleep 3
 done
-echo | openssl s_client -connect takto.online:443 -servername takto.online 2>/dev/null \
-  | openssl x509 -noout -subject -issuer -dates
+# Si NO llega a healthy:
+#   docker tag takto-web:prev-$TS takto-web:latest
+#   sudo rm -rf /opt/takto-web && sudo mv /opt/takto-web.old.$TS /opt/takto-web
+#   cd /opt/takto-web && docker compose up -d --force-recreate takto-web
 ```
 
-### 10 · Verificación
+### 7 · Verificación pública + integridad del CRM
 
 ```bash
-curl -sS -o /dev/null -w "https raiz      -> %{http_code}\n" https://takto.online/
-curl -sSI http://takto.online/  | head -2      # 308 a https
-curl -sSI https://www.takto.online/ | head -3  # 301 a https://takto.online
-for p in /privacidad /terminos /tratamiento-datos /gracias /robots.txt /sitemap.xml /icon.svg /favicon.ico /api/health; do
+for p in / /eliminacion-datos /privacidad /terminos /tratamiento-datos /sitemap.xml /robots.txt; do
   printf "%-22s %s\n" "$p" "$(curl -sS -o /dev/null -w '%{http_code}' https://takto.online$p)"
 done
 curl -sS -o /dev/null -w "404 -> %{http_code}\n" https://takto.online/no-existe
-```
 
-**Y que el CRM sigue intacto:**
-
-```bash
-curl -sS -o /dev/null -w "crm-staging     -> %{http_code}\n" https://crm-staging.tehusrattan.com
-curl -sS -o /dev/null -w "api health      -> %{http_code}\n" https://api.crm-staging.tehusrattan.com/api/health
+# El CRM sigue intacto:
+curl -sS -o /dev/null -w "crm-staging -> %{http_code}\n" https://crm-staging.tehusrattan.com/login
+curl -sS -o /dev/null -w "api health  -> %{http_code}\n" https://api.crm-staging.tehusrattan.com/api/health
 docker ps --format '{{.Names}} {{.Status}}' | grep tehus-crm-staging
 ```
+
+Comprobar además: `canonical` correcto, `noindex` (beta) tanto en la home como en
+`robots.txt`, la página en el `sitemap`, enlaces legales visibles, y que
+**PostgreSQL no fue recreado** (su `StartedAt` no cambia con el despliegue).
 
 ---
 
@@ -173,41 +150,16 @@ docker ps --format '{{.Names}} {{.Status}}' | grep tehus-crm-staging
 
 Revierte **solo** lo nuevo. El CRM no se toca en ningún caso.
 
-### A · Solo Caddy (la web sigue arriba, deja de ser pública)
-
-```bash
-cd /opt/tehus-crm
-git checkout main                       # vuelve al Caddyfile sin takto
-docker exec tehus-crm-staging-caddy-1 caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
-docker exec tehus-crm-staging-caddy-1 caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
-```
-
-Si el repo no colaborara, restaurar el backup:
-
-```bash
-cp /opt/Caddyfile.bak.<timestamp> /opt/tehus-crm/deploy/Caddyfile
-docker exec tehus-crm-staging-caddy-1 caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
-docker exec tehus-crm-staging-caddy-1 caddy reload  --config /etc/caddy/Caddyfile --adapter caddyfile
-```
-
-### B · Solo el servicio de la web
-
-```bash
-cd /opt/takto-web
-docker compose stop takto-web
-docker compose rm -f takto-web          # SIN -v: no hay volúmenes que borrar
-```
-
-### C · Retirada completa
-
-Ejecutar A y B, y opcionalmente:
-
-```bash
-docker image rm takto-web:latest
-```
+- **Aplicación:** restaurar la imagen `takto-web:prev-<TS>` como `:latest`,
+  devolver `/opt/takto-web.old.<TS>` a su sitio y `docker compose up -d
+  --force-recreate takto-web`. El backup `/opt/takto-web.bak.<TS>.tar.gz` es la
+  copia recuperable.
+- **Caddy (solo si se hubiera tocado el alta del dominio):** restaurar el bloque
+  desde el repositorio del CRM o desde el backup del `Caddyfile`, `caddy validate`
+  y `caddy reload` (nunca `restart`).
 
 Tras cualquier rollback, comprobar que `crm-staging` y `api.crm-staging` siguen
-en 200 y que los cuatro contenedores del CRM siguen *healthy*.
+en 200 y que los contenedores del CRM siguen *healthy*.
 
 ---
 
@@ -218,11 +170,8 @@ en 200 y que los cuatro contenedores del CRM siguen *healthy*.
 | `NEXT_PUBLIC_SITE_URL` | build | `https://takto.online` |
 | `NEXT_PUBLIC_CRM_LOGIN_URL` | build | login del CRM de pruebas |
 | `NEXT_PUBLIC_CRM_ONBOARDING_URL` | build | onboarding del CRM de pruebas |
-| `NEXT_PUBLIC_ALLOW_INDEXING` | build | `true` en producción |
+| `NEXT_PUBLIC_ALLOW_INDEXING` | build | (la web permanece en beta → `noindex`) |
 | `NEXT_PUBLIC_CONTACT_MODE` | build | `pending` (sin canal activo) |
-| `NEXT_PUBLIC_CONTACT_ENDPOINT` | build | vacío |
-| `NEXT_PUBLIC_CONTACT_WHATSAPP` | build | vacío |
-| `CSP_ALLOW_INSECURE_PREVIEW` | build | **sin definir** en producción |
 | `TAKTO_EDGE_NETWORK` | runtime | por defecto `tehus-crm-staging_proxy` |
 
-Ningún secreto. Ninguna variable del CRM.
+Ningún secreto lleva el prefijo `NEXT_PUBLIC_`. Ninguna variable del CRM se usa aquí.
