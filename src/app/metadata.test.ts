@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { metadata } from "./layout";
 import { metadata as homeMetadata } from "./page";
 import { metadata as privacidadMetadata } from "./privacidad/page";
+import { metadata as terminosMetadata } from "./terminos/page";
 import { metadata as graciasMetadata } from "./gracias/page";
 import { metadata as eliminacionMetadata } from "./eliminacion-datos/page";
 import sitemap from "./sitemap";
@@ -48,17 +49,23 @@ describe("metadata crítica", () => {
 });
 
 describe("páginas no indexables", () => {
-  it("marca las legales en borrador como noindex", () => {
-    expect(privacidadMetadata.robots).toMatchObject({ index: false });
+  // El robots.txt abre el rastreo general (para superar el parser de Meta); la
+  // protección contra indexación es este `noindex` por página. Cada legal debe
+  // permitir el rastreo (`follow`) pero no la indexación (`index: false`).
+  it("marca privacidad, términos y eliminación de datos como noindex, follow", () => {
+    for (const meta of [privacidadMetadata, terminosMetadata, eliminacionMetadata]) {
+      expect(meta.robots).toMatchObject({ index: false, follow: true });
+    }
   });
 
   it("marca la página de agradecimiento como noindex", () => {
     expect(graciasMetadata.robots).toMatchObject({ index: false });
   });
 
-  it("mantiene la eliminación de datos en noindex pese a ser rastreable por Meta", () => {
-    // Meta necesita leer la página (ver robots.test.ts), no que se indexe.
-    expect(eliminacionMetadata.robots).toMatchObject({ index: false });
+  it("las páginas legales declaran el canonical correcto", () => {
+    expect(privacidadMetadata.alternates?.canonical).toBe("/privacidad");
+    expect(terminosMetadata.alternates?.canonical).toBe("/terminos");
+    expect(eliminacionMetadata.alternates?.canonical).toBe("/eliminacion-datos");
   });
 });
 

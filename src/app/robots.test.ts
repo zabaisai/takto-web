@@ -1,44 +1,38 @@
 import { describe, expect, it } from "vitest";
 import { GET, buildRobots, CACHE_CONTROL } from "./robots.txt/route";
-import { allowIndexing, isBeta } from "@/lib/site";
-
-function metaRequest(userAgent = "facebookexternalhit/1.1") {
-  return new Request("https://takto.online/robots.txt", {
-    headers: { "user-agent": userAgent },
-  });
-}
 
 describe("robots.txt", () => {
-  it("la web sigue en beta y sin indexación general", () => {
-    // Guarda de contexto: el resto de expectativas describen la beta.
-    expect(isBeta).toBe(true);
-    expect(allowIndexing).toBe(false);
-  });
-
-  it("permite a los rastreadores de Meta con `Disallow:` vacío, no `Allow: /`", () => {
+  it("declara un único grupo `User-agent: *`", () => {
     const body = buildRobots();
-    expect(body).toContain("User-agent: facebookexternalhit\nDisallow:");
-    expect(body).toContain("User-agent: Facebot\nDisallow:");
-    // Máxima compatibilidad de parsers: nunca se usa `Allow: /`.
-    expect(body).not.toContain("Allow: /");
+    const userAgentLines = body.match(/^User-agent:/gim) ?? [];
+    expect(userAgentLines).toHaveLength(1);
+    expect(body).toMatch(/^User-agent: \*$/m);
   });
 
-  it("mantiene bloqueados al resto de robots mientras dure la beta", () => {
-    expect(buildRobots()).toContain("User-agent: *\nDisallow: /");
+  it("usa `Disallow:` vacío (acceso total)", () => {
+    expect(buildRobots()).toMatch(/^Disallow:\s*$/m);
   });
 
-  it("declara los grupos de Meta antes del comodín", () => {
-    const body = buildRobots();
-    expect(body.indexOf("facebookexternalhit")).toBeLessThan(body.indexOf("Facebot"));
-    expect(body.indexOf("Facebot")).toBeLessThan(body.indexOf("User-agent: *"));
+  it("no contiene `Disallow: /`", () => {
+    expect(buildRobots()).not.toMatch(/^Disallow:\s*\/\s*$/m);
   });
 
-  it("sigue publicando el sitemap en beta", () => {
+  it("no contiene ninguna directiva `Allow:`", () => {
+    expect(buildRobots()).not.toMatch(/^Allow:/m);
+  });
+
+  it("publica el Sitemap correcto", () => {
     expect(buildRobots()).toContain("Sitemap: https://takto.online/sitemap.xml");
   });
 
-  it("responde como text/plain con Cache-Control sin almacenamiento", () => {
-    const res = GET(metaRequest());
+  it("sirve el cuerpo exacto esperado", () => {
+    expect(buildRobots()).toBe(
+      "User-agent: *\nDisallow:\n\nSitemap: https://takto.online/sitemap.xml\n",
+    );
+  });
+
+  it("responde text/plain con Cache-Control sin almacenamiento", () => {
+    const res = GET();
     expect(res.headers.get("content-type")).toContain("text/plain");
     expect(res.headers.get("cache-control")).toBe(CACHE_CONTROL);
     expect(CACHE_CONTROL).toBe(
@@ -47,7 +41,6 @@ describe("robots.txt", () => {
   });
 
   it("el GET sirve exactamente el cuerpo generado", async () => {
-    const res = GET(metaRequest());
-    expect(await res.text()).toBe(buildRobots());
+    expect(await GET().text()).toBe(buildRobots());
   });
 });
