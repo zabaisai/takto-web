@@ -12,10 +12,17 @@ import { isBeta } from "@/lib/site";
 export function LegalLayout({
   title,
   updated,
+  hasPendingFields = true,
   children,
 }: {
   title: string;
   updated: string;
+  /**
+   * Si el documento aún contiene marcadores <Pending>, el aviso explica los
+   * códigos [PENDIENTE]. Las páginas sin campos pendientes (p. ej. la de
+   * eliminación de datos) lo desactivan para no mostrar códigos que no existen.
+   */
+  hasPendingFields?: boolean;
   children: ReactNode;
 }) {
   return (
@@ -47,11 +54,16 @@ export function LegalLayout({
               : "Documento en borrador · pendiente de revisión jurídica"}
           </b>
           <p className="mt-1.5 text-[13px] leading-[1.55] text-muted">
-            Este texto es una base de trabajo y no constituye un documento legal definitivo. Los
-            campos marcados como <code className="font-mono text-[12px]">[PENDIENTE]</code> deben
-            completarse con la información societaria real antes de su publicación. No debe
-            invocarse como política vigente hasta contar con validación jurídica y autorización
-            expresa.
+            Este texto es una base de trabajo y no constituye un documento legal definitivo.{" "}
+            {hasPendingFields ? (
+              <>
+                Los campos marcados como{" "}
+                <code className="font-mono text-[12px]">[PENDIENTE]</code> deben completarse con la
+                información societaria real antes de su publicación.{" "}
+              </>
+            ) : null}
+            No debe invocarse como política vigente hasta contar con validación jurídica y
+            autorización expresa.
           </p>
         </div>
 

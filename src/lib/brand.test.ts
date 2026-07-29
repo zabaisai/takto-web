@@ -28,8 +28,19 @@ const sourceFiles = walk(SRC).filter(
   (file) => /\.(ts|tsx|css|svg)$/.test(file) && !/\.test\.[cm]?tsx?$/.test(file),
 );
 
-/** Enlace autorizado al CRM de staging: se permite, todo lo demás no. */
-const ALLOWED_STAGING = /crm-staging\.tehusrattan\.com/g;
+/**
+ * Referencias autorizadas que NO son identidad de producto y por eso se
+ * descartan antes de buscar rastros de la marca anterior:
+ * - el enlace funcional al CRM de pruebas (`crm-staging.tehusrattan.com`);
+ * - el buzón operativo de contacto para privacidad y eliminación de datos;
+ * - la mención prudente del operador legal («operado por Tehus Rattan»), que
+ *   distingue la marca del producto (TAKTO) de la entidad que lo opera.
+ */
+const ALLOWED_REFERENCES: RegExp[] = [
+  /crm-staging\.tehusrattan\.com/gi,
+  /info@tehusrattan\.com/gi,
+  /Tehus Rattan/g,
+];
 
 describe("identidad de marca", () => {
   it("expone TAKTO con la división cromática TAK / TO", () => {
@@ -62,8 +73,11 @@ describe("sin rastros de la marca anterior", () => {
 
     for (const file of sourceFiles) {
       const contents = readFileSync(file, "utf8");
-      // Se descarta primero el enlace autorizado al CRM de staging.
-      const withoutAllowed = contents.replace(ALLOWED_STAGING, "");
+      // Se descartan primero todas las referencias autorizadas al operador.
+      let withoutAllowed = contents;
+      for (const pattern of ALLOWED_REFERENCES) {
+        withoutAllowed = withoutAllowed.replace(pattern, "");
+      }
       if (/tehus/i.test(withoutAllowed)) {
         offenders.push(relative(process.cwd(), file));
       }

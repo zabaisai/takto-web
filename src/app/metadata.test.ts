@@ -57,10 +57,11 @@ describe("páginas no indexables", () => {
 });
 
 describe("sitemap y manifest", () => {
-  it("el sitemap solo contiene la portada, con URL absoluta", () => {
+  it("el sitemap incluye la portada y la eliminación de datos, con URLs absolutas", () => {
     const entries = sitemap();
-    expect(entries).toHaveLength(1);
-    expect(entries[0]?.url).toBe("https://takto.online/");
+    const urls = entries.map((entry) => entry.url);
+    expect(urls).toContain("https://takto.online/");
+    expect(urls).toContain("https://takto.online/eliminacion-datos");
   });
 
   it("el manifest usa los colores de marca", () => {
