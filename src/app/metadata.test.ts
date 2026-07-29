@@ -3,6 +3,7 @@ import { metadata } from "./layout";
 import { metadata as homeMetadata } from "./page";
 import { metadata as privacidadMetadata } from "./privacidad/page";
 import { metadata as graciasMetadata } from "./gracias/page";
+import { metadata as eliminacionMetadata } from "./eliminacion-datos/page";
 import sitemap from "./sitemap";
 import manifest from "./manifest";
 import { site } from "@/lib/site";
@@ -53,6 +54,11 @@ describe("páginas no indexables", () => {
 
   it("marca la página de agradecimiento como noindex", () => {
     expect(graciasMetadata.robots).toMatchObject({ index: false });
+  });
+
+  it("mantiene la eliminación de datos en noindex pese a ser rastreable por Meta", () => {
+    // Meta necesita leer la página (ver robots.test.ts), no que se indexe.
+    expect(eliminacionMetadata.robots).toMatchObject({ index: false });
   });
 });
 
