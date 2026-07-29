@@ -1,46 +1,33 @@
 import { describe, expect, it } from "vitest";
-import { GET, buildRobots, CACHE_CONTROL } from "./robots.txt/route";
+import { GET, CACHE_CONTROL } from "./robots.txt/route";
 
-describe("robots.txt", () => {
-  it("declara un único grupo `User-agent: *`", () => {
-    const body = buildRobots();
-    const userAgentLines = body.match(/^User-agent:/gim) ?? [];
-    expect(userAgentLines).toHaveLength(1);
-    expect(body).toMatch(/^User-agent: \*$/m);
+describe("robots.txt (prueba RFC 9309: 404)", () => {
+  it("responde HTTP 404", () => {
+    expect(GET().status).toBe(404);
   });
 
-  it("usa `Disallow:` vacío (acceso total)", () => {
-    expect(buildRobots()).toMatch(/^Disallow:\s*$/m);
+  it("no es una redirección ni un 401/403/429/5xx", () => {
+    const { status } = GET();
+    expect([301, 302, 303, 307, 308, 401, 403, 429]).not.toContain(status);
+    expect(status).toBeLessThan(500);
   });
 
-  it("no contiene `Disallow: /`", () => {
-    expect(buildRobots()).not.toMatch(/^Disallow:\s*\/\s*$/m);
-  });
-
-  it("no contiene ninguna directiva `Allow:`", () => {
-    expect(buildRobots()).not.toMatch(/^Allow:/m);
-  });
-
-  it("publica el Sitemap correcto", () => {
-    expect(buildRobots()).toContain("Sitemap: https://takto.online/sitemap.xml");
-  });
-
-  it("sirve el cuerpo exacto esperado", () => {
-    expect(buildRobots()).toBe(
-      "User-agent: *\nDisallow:\n\nSitemap: https://takto.online/sitemap.xml\n",
-    );
-  });
-
-  it("responde text/plain con Cache-Control sin almacenamiento", () => {
-    const res = GET();
-    expect(res.headers.get("content-type")).toContain("text/plain");
-    expect(res.headers.get("cache-control")).toBe(CACHE_CONTROL);
+  it("usa Cache-Control sin almacenamiento", () => {
+    expect(GET().headers.get("cache-control")).toBe(CACHE_CONTROL);
     expect(CACHE_CONTROL).toBe(
       "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0",
     );
   });
 
-  it("el GET sirve exactamente el cuerpo generado", async () => {
-    expect(await GET().text()).toBe(buildRobots());
+  it("responde text/plain con un cuerpo mínimo", () => {
+    expect(GET().headers.get("content-type")).toContain("text/plain");
+  });
+
+  it("no devuelve reglas robots ni Sitemap durante la prueba", async () => {
+    const body = await GET().text();
+    expect(body).not.toMatch(/User-agent/i);
+    expect(body).not.toMatch(/Disallow/i);
+    expect(body).not.toMatch(/Allow/i);
+    expect(body).not.toMatch(/Sitemap/i);
   });
 });
